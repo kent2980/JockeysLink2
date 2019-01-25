@@ -1,0 +1,701 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<link href="../css/danceTableGraph.css" rel="stylesheet">
+<link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
+<title>京阪杯</title>
+</head>
+<body>
+
+<!-- *****************************************************************************************
+     *****************************************************************************************
+     							レースデータを記述します
+     *****************************************************************************************
+     ***************************************************************************************** -->
+<div id="title">
+  <div class="roundData">
+  	  <span class="kaisai">2018年11月25日（日）</span>
+	  <span class="keibajo">京都</span>
+	  <span class="round">12R</span>
+  </div>
+  <div id="kyosomei">
+
+    <span class="kaiji">第63回</span>
+  	<span class="kyosomei">京阪杯</span>
+  </div>
+  <div class="data courseData">
+    <span>1200m</span>
+    <span>芝･右</span>
+    <span>16:15</span>
+  </div>
+  <div class="data raceData">
+  	<span>オープン
+</span>
+  	<span>サラ系3歳以上
+</span>
+  	<span>(国際)(特指)
+</span>
+  	<span>別定</span>
+  	<span>18頭</span>
+  </div>
+</div>
+
+<!-- *****************************************************************************************
+     ********************************ここからグラフを記述する*****************************************
+     ***************************************************************************************** -->
+
+        <!-- ①チャート描画先を設置 -->
+
+        <div id="Chart" width:"100%">
+        	<h2 class=title>タイムランク</h2>
+        	<canvas id="myChart" width="100" height="25"></canvas>
+		</div>
+
+        <!-- ②Chart.jsの読み込み -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+		<!-- ③チャート描画情報の作成 -->
+		<script>
+			window.onload = function() {
+			    ctx = document.getElementById("myChart").getContext("2d");
+			    window.myBar = new Chart(ctx, {
+			        type: 'bar',
+			        data: barChartData,
+			        options: complexChartOption
+			    });
+			};
+		</script>
+
+        <!-- ④チャートデータの作成 -->
+        <script>
+            var barChartData = {
+                	labels: ["13. ベステンダンク","10. カルヴァリオ","1. エスティタート","3. ダノンスマッシュ","16. ワンスインナムーン","12. オールポッシブル","15. ビップライブリー","18. ナガラフラワー","5. コウエイタケル","11. ダイメイフジ","6. ナインテイルズ","14. キングハート","17. アンヴァル","2. フミノムーン","7. グレイトチャーター","9. アサクサゲンキ","4. アレスバローズ","8. ダイアナヘイロー"],
+                    datasets: [
+                    {
+                    	type: 'bar',
+                        label: 'タイムランク',
+                    	data: [53.91,53.49,52.64,50.43,49.89,49.46,49.13,48.55,47.40,46.85,46.03,45.98,45.87,45.84,45.71,45.71,44.90,44.26],
+                    	backgroundColor : ['rgba(255, 57, 59, 0.8)','rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 57, 59, 0.8)','rgba(255, 57, 59, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 57, 59, 0.8)','rgba(57, 157, 255, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(57, 157, 255, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 57, 59, 0.8)'],
+                        borderWidth: 1
+                    },
+                    {
+                    	type: 'line',
+                    	label: 'トップスピード',
+                    	data: [50.22,54.09,53.97,50.87,52.32,48.62,52.77,58.43,52.60,53.96,51.53,52.52,57.05,57.19,59.03,58.51,58.29,52.08],
+                    	borderColor : 'rgba(54,164,235,0.5)',
+                        backgroundColor : 'rgba(54,164,235,0.5)'
+                    }
+                    ],
+            };
+		</script>
+
+		<!-- ⑤オプションの作成 -->
+
+		<script>
+		var complexChartOption = {
+                    scales: {
+                    	xAxes: [{
+                    		ticks: {
+                    			autoSkip: false,
+                    			fontSize: 13
+                    		},
+                    	}],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                min: 40,
+                                max: 60,
+                                fontSize: 14
+                            },
+                        }],
+                    }
+            };
+        </script>
+
+<!-- *****************************************************************************************
+     **********************************グラフ記述ここまで*******************************************
+     ***************************************************************************************** -->
+
+<!-- *****************************************************************************************
+*********************************							**********************************
+*********************************	テーブルを作成します(*´ω｀*)	**********************************
+*********************************							**********************************************************
+********************************************************************************************************************** -->
+
+	<div class="danceIndex">
+		<div class="tableTitle">
+		<h2>出馬表</h2>
+		<table class="danceTable">
+			<tr>
+				<th>印</th>
+				<th>枠番</th>
+				<th>馬番</th>
+				<th>馬名</th>
+				<th>性齢</th>
+				<th>脚質</th>
+				<th>平均距離</th>
+				<th>騎手</th>
+				<th>斤量</th>
+				<th>単勝人気</th>
+				<th>単勝オッズ</th>
+				<th>馬体重</th>
+				<th>調教師</th>
+				<th>毛色</th>
+			</tr>
+
+			<tr>
+
+				<td class="waku1" rowspan="2">1</td>
+
+				<td>1</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">エスティタート</td>
+				<td>牝5
+				<td>差し
+				<td>1350m
+				<td>藤岡康太</td>
+				<td>54.0
+</td>
+				<td>7
+</td>
+				<td>14.9</td>
+				<td>-</td>
+				<td class="left">（栗）松永幹夫</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>2</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">フミノムーン</td>
+				<td>牡6
+				<td>差し
+				<td>1200m
+				<td>国分優作</td>
+				<td>56.0
+</td>
+				<td>17
+</td>
+				<td>54.8</td>
+				<td>-</td>
+				<td class="left">（栗）西浦勝一</td>
+				<td>栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku2" rowspan="2">2</td>
+
+				<td>3</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ダノンスマッシュ</td>
+				<td>牡3
+				<td>先行
+				<td>1400m
+				<td>北村友一</td>
+				<td>55.0
+</td>
+				<td>1
+</td>
+				<td>4.9</td>
+				<td>-</td>
+				<td class="left">（栗）安田隆行</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>4</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">アレスバローズ</td>
+				<td>牡6
+				<td>差し
+				<td>1200m
+				<td>藤岡佑介</td>
+				<td>57.0
+</td>
+				<td>3
+</td>
+				<td>7.2</td>
+				<td>-</td>
+				<td class="left">（栗）角田晃一</td>
+				<td>黒鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku3" rowspan="2">3</td>
+
+				<td>5</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">コウエイタケル</td>
+				<td>牡7
+				<td>先行
+				<td>1400m
+				<td>小牧太</td>
+				<td>56.0
+</td>
+				<td>14
+</td>
+				<td>43.6</td>
+				<td>-</td>
+				<td class="left">（栗）山内研二</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>6</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ナインテイルズ</td>
+				<td>牡7
+				<td>逃げ
+				<td>1100m
+				<td>岩田康誠</td>
+				<td>56.0
+</td>
+				<td>16
+</td>
+				<td>51.5</td>
+				<td>-</td>
+				<td class="left">（栗）中村均</td>
+				<td>栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku4" rowspan="2">4</td>
+
+				<td>7</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">グレイトチャーター</td>
+				<td>牡6
+				<td>差し
+				<td>1200m
+				<td>福永祐一</td>
+				<td>56.0
+</td>
+				<td>4
+</td>
+				<td>7.6</td>
+				<td>-</td>
+				<td class="left">（栗）鮫島一歩</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>8</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ダイアナヘイロー</td>
+				<td>牝5
+				<td>逃げ
+				<td>1200m
+				<td>菱田裕二</td>
+				<td>55.0
+</td>
+				<td>11
+</td>
+				<td>30.0</td>
+				<td>-</td>
+				<td class="left">（栗）大根田裕之</td>
+				<td>黒鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku5" rowspan="2">5</td>
+
+				<td>9</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">アサクサゲンキ</td>
+				<td>牡3
+				<td>追込
+				<td>1200m
+				<td>吉原寛人</td>
+				<td>55.0
+</td>
+				<td>10
+</td>
+				<td>22.3</td>
+				<td>-</td>
+				<td class="left">（栗）音無秀孝</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>10</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">カルヴァリオ</td>
+				<td>ｾﾝ5
+				<td>先行
+				<td>1450m
+				<td>柴山雄一</td>
+				<td>56.0
+</td>
+				<td>6
+</td>
+				<td>10.1</td>
+				<td>-</td>
+				<td class="left">（美）大竹正博</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku6" rowspan="2">6</td>
+
+				<td>11</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ダイメイフジ</td>
+				<td>牡4
+				<td>差し
+				<td>1400m
+				<td>秋山真一郎</td>
+				<td>56.0
+</td>
+				<td>8
+</td>
+				<td>17.1</td>
+				<td>-</td>
+				<td class="left">（栗）森田直行</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>12</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">オールポッシブル</td>
+				<td>牝4
+				<td>逃げ
+				<td>1350m
+				<td>荻野極</td>
+				<td>54.0
+</td>
+				<td>12
+</td>
+				<td>39.6</td>
+				<td>-</td>
+				<td class="left">（栗）高橋亮</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku7" rowspan="3">7</td>
+
+				<td>13</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ベステンダンク</td>
+				<td>牡6
+				<td>逃げ
+				<td>1550m
+				<td>松山弘平</td>
+				<td>56.0
+</td>
+				<td>9
+</td>
+				<td>17.2</td>
+				<td>-</td>
+				<td class="left">（栗）安達昭夫</td>
+				<td>栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td>14</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">キングハート</td>
+				<td>牡5
+				<td>追込
+				<td>1250m
+				<td>浜中俊</td>
+				<td>56.0
+</td>
+				<td>15
+</td>
+				<td>46.2</td>
+				<td>-</td>
+				<td class="left">（美）星野忍</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>15</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ビップライブリー</td>
+				<td>牡5
+				<td>差し
+				<td>1300m
+				<td>四位洋文</td>
+				<td>56.0
+</td>
+				<td>18
+</td>
+				<td>58.4</td>
+				<td>-</td>
+				<td class="left">（栗）清水久詞</td>
+				<td>栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku8" rowspan="3">8</td>
+
+				<td>16</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ワンスインナムーン</td>
+				<td>牝5
+				<td>逃げ
+				<td>1250m
+				<td>大野拓弥</td>
+				<td>54.0
+</td>
+				<td>2
+</td>
+				<td>6.7</td>
+				<td>-</td>
+				<td class="left">（美）斎藤誠</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>17</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">アンヴァル</td>
+				<td>牝3
+				<td>差し
+				<td>1200m
+				<td>酒井学</td>
+				<td>53.0
+</td>
+				<td>5
+</td>
+				<td>8.2</td>
+				<td>-</td>
+				<td class="left">（栗）藤岡健一</td>
+				<td>鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>18</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left">ナガラフラワー</td>
+				<td>牝6
+				<td>差し
+				<td>1200m
+				<td>太宰啓介</td>
+				<td>54.0
+</td>
+				<td>13
+</td>
+				<td>40.8</td>
+				<td>-</td>
+				<td class="left">（栗）高橋亮</td>
+				<td>鹿毛</td>
+			</tr>
+
+		</table>
+		</div>
+		<div id="index">
+			<h2>展開予想</h2>
+      <div class="data">
+  			<h3>隊列</h3>
+  			<span>ショート</span>
+  			<h3>ペース</h3>
+  			<span>ハイペース</span>
+  			<h3>逃げ馬</h3>
+  			<span>
+  			ナインテイルズ、ダイアナヘイロー、オールポッシブル、ベステンダンク、ワンスインナムーン
+  			</span>
+  			<h3>先行馬</h3>
+  			<span>
+  			ダノンスマッシュ、コウエイタケル、カルヴァリオ
+  			</span>
+  			<h3>差し</h3>
+  			<span>
+  			エスティタート、フミノムーン、アレスバローズ、グレイトチャーター、ダイメイフジ、ビップライブリー、アンヴァル、ナガラフラワー
+  			</span>
+  			<h3>追込み</h3>
+  			<span>
+  			アサクサゲンキ、キングハート
+  			</span>
+      	</div>
+      </div>
+	</div>
+
+</body>
+</html>

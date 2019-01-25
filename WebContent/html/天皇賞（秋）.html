@@ -1,0 +1,522 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<link href="../css/danceTableGraph.css" rel="stylesheet">
+<link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
+<title>天皇賞（秋）</title>
+</head>
+<body>
+<!-- *****************************************************************************************
+     *****************************************************************************************
+     							レースデータを記述します
+     *****************************************************************************************
+     ***************************************************************************************** -->
+<div id="title">
+  
+  <a href="/JockeysLink/kaisaichedule?year=2019">
+  <div id="logo">
+    <!-- <img src="../picture/logo.jpg" alt="トップページへのリンク" class="logo"> -->
+    <img src="/JockeysLink/picture/logo.jpg" alt="トップページへのリンク" class="logo">
+    <span class="title">Jockeys->Link</span>
+  </div>
+  </a>
+  <div id="roundData">
+  	  <span class="kaisai">2018年10月28日（日）</span>
+	  <span class="keibajo">東京</span>
+	  <span class="round">11R</span>
+  </div>
+  <div id="kyosomei">
+  	
+    <span class="kaiji">第158回</span>
+  	<span class="kyosomei">天皇賞（秋）</span>
+  </div>
+  <div id="raceData">
+	  <div class="raceSelect">
+	  	<form name="fm">
+		  	<select name="s" class="raceSelect" onchange="urlJump()">
+		  		<option value="" hidden disabled selected></option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030601&mode=result">新潟 - 01R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030602&mode=result">新潟 - 02R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030603&mode=result">新潟 - 03R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030604&mode=result">新潟 - 04R　サラ障害3歳以上未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030605&mode=result">新潟 - 05R　2歳新馬</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030606&mode=result">新潟 - 06R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030607&mode=result">新潟 - 07R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030608&mode=result">新潟 - 08R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030609&mode=result">新潟 - 09R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030610&mode=result">新潟 - 10R　松浜特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030611&mode=result">新潟 - 11R　ルミエールオータムＤ</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102804030612&mode=result">新潟 - 12R　柏崎特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040901&mode=result">東京 - 01R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040902&mode=result">東京 - 02R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040903&mode=result">東京 - 03R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040904&mode=result">東京 - 04R　2歳新馬</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040905&mode=result">東京 - 05R　2歳新馬</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040906&mode=result">東京 - 06R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040907&mode=result">東京 - 07R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040908&mode=result">東京 - 08R　精進湖特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040909&mode=result">東京 - 09R　河口湖特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040910&mode=result">東京 - 10R　紅葉ステークス</option>
+		  		
+		  		<option selected value="/JockeysLink/DanceTableGraph?racecode=2018102805040911&mode=result">東京 - 11R　天皇賞（秋）</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102805040912&mode=result">東京 - 12R　三峰山特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040901&mode=result">京都 - 01R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040902&mode=result">京都 - 02R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040903&mode=result">京都 - 03R　2歳未勝利</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040904&mode=result">京都 - 04R　2歳新馬</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040905&mode=result">京都 - 05R　2歳新馬</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040906&mode=result">京都 - 06R　2歳500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040907&mode=result">京都 - 07R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040908&mode=result">京都 - 08R　3歳以上500万下</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040909&mode=result">京都 - 09R　鳴滝特別</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040910&mode=result">京都 - 10R　御陵ステークス</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040911&mode=result">京都 - 11R　カシオペアステークス</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018102808040912&mode=result">京都 - 12R　3歳以上1000万下</option>
+		  		
+		  	</select>
+	  	</form>
+	  </div>
+	  <div id="data">
+		  <div class="courseData desctop">
+		    <span>2000m</span>
+		    <span>芝･左</span>
+		    <span>15:40</span>
+		  </div>
+		  <div class="raceData desctop">
+		  	<span>オープン
+</span>
+		  	<span>サラ系3歳以上
+</span>
+		  	<span>(国際)(指定)
+</span>
+		  	<span>定量</span>
+		  	<span>13頭</span>
+		  	<!--  <span>＜＞</span> -->
+		  </div>
+	  </div>
+  </div>
+    <div id="menu">
+      <div>
+        <a href="/JockeysLink/DanceTableGraph?racecode=2018102805040911&mode=dance" class ="navi">出馬表</a>
+      </div>
+          <div>
+            <a href="https://ipat.netkeiba.com/?pid=ipat_input&rid=201805040911" target="_blank" class ="navi">IPAT</a>
+          </div>
+          <div>
+            <a href="/JockeysLink/DanceTableGraph?racecode=2018102805040911&mode=result" class ="navi">結果</a>
+          </div>
+  </div>
+</div>
+
+<!-- URLジャンプのJavaScript -->
+<script type="text/javascript">
+function urlJump() {
+    var browser = document.fm.s.value;
+    location.href = browser;
+}
+</script>
+<!-- *****************************************************************************************
+     ********************************ここからグラフを記述する*****************************************
+     ***************************************************************************************** -->
+
+        <!-- ①チャート描画先を設置 -->
+        
+        <div id="timeChart" class="Chart" width:"100%">
+        	<h2 class=title>タイムランク</h2>
+        	<canvas id="myChart" width="100" height="30"></canvas>
+		</div>
+
+        <!-- ②Chart.jsの読み込み -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+<!-- ********************** id(myChart)のセッティング **********************-->
+		
+
+		<!-- ③チャート描画情報の作成 -->
+		<script>
+			window.onload = function() {
+			    ctx = document.getElementById("myChart").getContext("2d");
+			    window.myBar = new Chart(ctx, {
+			        type: 'bar',
+			        data: barChartData,
+			        options: complexChartOption
+			    });
+			};
+		</script>
+
+        <!-- ④チャートデータの作成 -->
+        <script>
+            var barChartData = {
+                	labels: [["4. レイデオロ / 2人気", "（前走：2018／9／23）"],["9. サングレーザー / 4人気", "（前走：2018／8／19）"],["10. キセキ / 6人気", "（前走：2018／10／7）"],["7. アルアイン / 5人気", "（前走：2018／9／23）"],["11. ミッキーロケット / 8人気", "（前走：2018／6／24）"],["12. サクラアンプルール / 10人気", "（前走：2018／8／19）"],["6. マカヒキ / 3人気", "（前走：2018／8／19）"],["3. ヴィブロス / 7人気", "（前走：2018／6／24）"],["1. ステファノス / 9人気", "（前走：2018／10／7）"],["5. スワーヴリチャード / 1人気", "（前走：2018／6／3）"],["13. アクションスター / 12人気", "（前走：2018／10／7）"],["2. ブラックムーン / 11人気", "（前走：2018／7／22）"],["8. ダンビュライト / -人気", "（前走：2018／9／23）"]],
+                    datasets: [
+                    {
+                    	type: 'bar',
+                        label: 'タイムランク',
+                    	data: [54.80,57.50,54.41,52.94,52.85,52.18,52.78,53.59,50.74,56.44,37.22,51.04,54.93],
+                    	backgroundColor : ['rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 57, 59, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 57, 59, 0.8)','rgba(57, 157, 255, 0.8)','rgba(57, 157, 255, 0.8)','rgba(255, 140, 60, 0.8)'],
+                        borderWidth: 1
+                    },
+                    {
+                    	type: 'line',
+                    	label: 'トップスピード',
+                    	data: [49.11,57.75,50.78,46.12,47.13,57.64,49.42,51.57,45.56,52.90,43.27,54.02,48.96],
+                    	borderColor : 'rgba(54,164,235)',
+                        backgroundColor : 'rgba(54,164,235,0.5)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前タイムランク',
+                    	data: [56.40,55.71,55.63,56.40,59.45,53.02,55.71,56.17,52.93,59.42,39.42,43.71,53.12],
+                    	borderColor : 'rgba(254,164,65)',
+                        backgroundColor : 'rgba(254,164,65,0.1)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前RPCI',
+                    	data: [51.9,45.2,54.6,51.9,48.5,45.2,45.2,48.5,54.6,48.8,54.6,46.9,51.9],
+                    	borderColor : 'rgb(221, 226, 15)',
+                        backgroundColor : 'rgba(241, 252, 27,0.1)'
+                    }
+                    ],
+            };
+		</script>
+
+		<!-- ⑤オプションの作成 -->
+		
+		<script>
+		var complexChartOption = {
+				  tooltips: {
+				  },
+	              responsive: true,
+                    scales: {
+                    	xAxes: [{
+                    		ticks: {
+                    			autoSkip: false,
+                    			fontSize: 12,
+                    			minRotation: 20
+                    		},
+                    	}],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                min: 30,
+                                max: 70,
+                                fontSize: 13.5
+                            },
+                        }],
+                    }
+            };
+        </script>
+
+
+<!-- ****************** グラフ切り替えボタン ******************-->
+
+
+<!-- ***************************************************************************************
+     **********************				youtube埋め込み動画			************************
+     *************************************************************************************** -->
+
+<div id="youtube">
+<div class="youtube" data-video="https://www.youtube.com/embed?listType=search&list=2018-10-28 東京11R レイデオロ">
+	<iframe width="480" height="270" src="https://www.youtube.com/embed?listType=search&list=2018-10-28 東京11R レイデオロ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<!-- <img src="https://img.youtube.com/vi/動画ID/mqdefault.jpg" alt="" width="320" height="180" /> -->
+</div>
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.3.min.js"></script>
+<script>// <![CDATA[
+$('.youtube').click(function(){
+video = '<iframe src="'+ $(this).attr('data-video') +'" frameborder="0" width="480" height="270"></iframe>';
+$(this).replaceWith(video);
+});
+// ]]>
+</script>
+
+<!-- ***************************************************************************************
+     **********************					着順掲示板				************************
+     *************************************************************************************** -->
+     
+<div id="result">
+<table>
+	<tr>
+		<th>着順</th>
+		<th>枠番</th>
+		<th>馬番</th>
+		<th>馬名</th>
+		<th>性齢</th>
+		<th>斤量</th>
+		<th>騎手</th>
+		<th>人気</th>
+		<th>オッズ</th>
+		<th>後半3F</th>
+		<th>タイム</th>
+		<th>スピード指数</th>
+		<th>通過順位</th>
+		<th>調教師</th>
+	</tr>
+	
+	<tr>
+		<td>1</td>
+		<td class="waku4">4</td>
+		<td>4</td>
+		<td>レイデオロ</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>Ｃ．ルメール</td>
+		<td>2</td>
+		<td>3.1</td>
+		<td>33.6</td>
+		<td>1:56.8</td>
+		<td>1.778</td>
+		<td>6-5-5</td>
+		<td>（美）藤沢和雄</td>
+	</tr>
+	
+	<tr>
+		<td>2</td>
+		<td class="waku6">6</td>
+		<td>9</td>
+		<td>サングレーザー</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>Ｊ．モレイラ</td>
+		<td>4</td>
+		<td>9.6</td>
+		<td>33.4</td>
+		<td>1:57.0</td>
+		<td>1.472</td>
+		<td>7-7-7</td>
+		<td>（栗）浅見秀一</td>
+	</tr>
+	
+	<tr>
+		<td>3</td>
+		<td class="waku7">7</td>
+		<td>10</td>
+		<td>キセキ</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>川田将雅</td>
+		<td>6</td>
+		<td>12.8</td>
+		<td>34.7</td>
+		<td>1:57.0</td>
+		<td>1.472</td>
+		<td>1-1-1</td>
+		<td>（栗）中竹和也</td>
+	</tr>
+	
+	<tr>
+		<td>4</td>
+		<td class="waku5">5</td>
+		<td>7</td>
+		<td>アルアイン</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>北村友一</td>
+		<td>5</td>
+		<td>12.7</td>
+		<td>34.5</td>
+		<td>1:57.2</td>
+		<td>1.167</td>
+		<td>2-2-2</td>
+		<td>（栗）池江泰寿</td>
+	</tr>
+	
+	<tr>
+		<td>5</td>
+		<td class="waku7">7</td>
+		<td>11</td>
+		<td>ミッキーロケット</td>
+		<td>牡5</td>
+		<td>58.0</td>
+		<td>和田竜二</td>
+		<td>8</td>
+		<td>22.0</td>
+		<td>34.0</td>
+		<td>1:57.2</td>
+		<td>1.167</td>
+		<td>5-5-5</td>
+		<td>（栗）音無秀孝</td>
+	</tr>
+	
+	<tr>
+		<td>6</td>
+		<td class="waku8">8</td>
+		<td>12</td>
+		<td>サクラアンプルール</td>
+		<td>牡7</td>
+		<td>58.0</td>
+		<td>田辺裕信</td>
+		<td>10</td>
+		<td>135.2</td>
+		<td>33.8</td>
+		<td>1:57.6</td>
+		<td>0.558</td>
+		<td>9-8-8</td>
+		<td>（美）金成貴史</td>
+	</tr>
+	
+	<tr>
+		<td>7</td>
+		<td class="waku5">5</td>
+		<td>6</td>
+		<td>マカヒキ</td>
+		<td>牡5</td>
+		<td>58.0</td>
+		<td>武豊</td>
+		<td>3</td>
+		<td>7.0</td>
+		<td>33.7</td>
+		<td>1:57.7</td>
+		<td>0.406</td>
+		<td>10-10-9</td>
+		<td>（栗）友道康夫</td>
+	</tr>
+	
+	<tr>
+		<td>8</td>
+		<td class="waku3">3</td>
+		<td>3</td>
+		<td>ヴィブロス</td>
+		<td>牝5</td>
+		<td>56.0</td>
+		<td>福永祐一</td>
+		<td>7</td>
+		<td>17.4</td>
+		<td>34.7</td>
+		<td>1:57.7</td>
+		<td>0.406</td>
+		<td>2-3-3</td>
+		<td>（栗）友道康夫</td>
+	</tr>
+	
+	<tr>
+		<td>9</td>
+		<td class="waku1">1</td>
+		<td>1</td>
+		<td>ステファノス</td>
+		<td>牡7</td>
+		<td>58.0</td>
+		<td>Ｃ．オドノヒュー</td>
+		<td>9</td>
+		<td>71.0</td>
+		<td>35.2</td>
+		<td>1:58.1</td>
+		<td>-0.201</td>
+		<td>4-3-3</td>
+		<td>（栗）藤原英昭</td>
+	</tr>
+	
+	<tr>
+		<td>10</td>
+		<td class="waku4">4</td>
+		<td>5</td>
+		<td>スワーヴリチャード</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>Ｍ．デムーロ</td>
+		<td>1</td>
+		<td>2.5</td>
+		<td>34.1</td>
+		<td>1:58.3</td>
+		<td>-0.504</td>
+		<td>11-10-11</td>
+		<td>（栗）庄野靖志</td>
+	</tr>
+	
+	<tr>
+		<td>11</td>
+		<td class="waku8">8</td>
+		<td>13</td>
+		<td>アクションスター</td>
+		<td>牡8</td>
+		<td>58.0</td>
+		<td>大野拓弥</td>
+		<td>12</td>
+		<td>352.1</td>
+		<td>35.3</td>
+		<td>1:59.7</td>
+		<td>-2.616</td>
+		<td>11-12-12</td>
+		<td>（美）和田勇介</td>
+	</tr>
+	
+	<tr>
+		<td>12</td>
+		<td class="waku2">2</td>
+		<td>2</td>
+		<td>ブラックムーン</td>
+		<td>牡6</td>
+		<td>58.0</td>
+		<td>横山典弘</td>
+		<td>11</td>
+		<td>181.3</td>
+		<td>36.1</td>
+		<td>2:00.1</td>
+		<td>-3.216</td>
+		<td>8-8-9</td>
+		<td>（栗）西浦勝一</td>
+	</tr>
+	
+	<tr>
+		<td>-</td>
+		<td class="waku6">6</td>
+		<td>8</td>
+		<td>ダンビュライト</td>
+		<td>牡4</td>
+		<td>58.0</td>
+		<td>戸崎圭太</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td>競走除外</td>
+		<td></td>
+		<td></td>
+		<td>（栗）音無秀孝</td>
+	</tr>
+	
+</table>
+</div>
+</body>
+</html>
