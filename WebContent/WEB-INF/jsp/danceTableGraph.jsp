@@ -433,8 +433,14 @@ function urlJump() {
 				out.print(kakoKyosoTitle);
 				out.print(" ");
 				out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着");
-				out.print(" ");
-				out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
+				if(uma.getIjoKubun().length() == 0){
+					out.print(" ");
+					try{
+						out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
+					}catch(NullPointerException e){
+						out.print("**");
+					}
+				}
 				%></td>
 			<%
 				}catch(NullPointerException e){
