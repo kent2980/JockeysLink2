@@ -1,0 +1,572 @@
+﻿@charset "UTF-8";
+
+/*ページ全体のスタイル*/
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Rounded Mplus 1c";
+	background-image: url(backimage_003.png);
+	background-image: url(../picture/backimage_003.png);
+}
+
+/*********************************************************************************
+**********************************ヘッダー*****************************************
+**********************************************************************************/
+
+nav {
+	border-bottom: 5px solid #34589e;
+	background: #000000;
+}
+
+nav ui {
+	display: flex;
+	line-style: none;
+	margin: 0;
+	padding: 20px 10px 0 10px;
+}
+
+nav li {
+}
+
+nav li a {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+nav li a:hover {
+	background: #34589e;
+	border-radius: 10px 10px 0 0;
+}
+
+nav li a.current {
+	background: #34589e;
+}
+
+nav li.map {
+	margin-left: auto;
+}
+
+/**********************************************************************************
+*********************************タイトルバー***************************************
+***********************************************************************************/
+
+ header #headbar{
+	 top: 0;
+	 left: 0;
+	width: 100%;
+	position: fixed;
+	height: 10px;
+	background-color: #1d868a;
+	box-shadow: -2px -2px 2px #1da1a1 inset;
+	opacity: 0.8;
+	z-index: 2;
+}
+
+div.headbutton {
+	width:600px;
+	margin: 30px auto;
+}
+
+.headbutton a {
+position: relative;
+display: inline-block;
+padding: 4px 20px;
+text-decoration: none;
+background-color: #dfdfdf;
+color: #FFF;
+text-shadow: 2px 2px 4px #5e5e5e;
+border-bottom: solid 2px #6e6e6e;
+border-radius: 4px;
+box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 6px 6px 4px rgba(0,0,0,0,0.19);
+font-weight: 800;
+font-size:28px;
+}
+
+.headbutton .home a {
+	margin-right: 20px;
+	float: left;
+}
+
+.headbutton .schedule a {
+	margin-right: 20px;
+	float: left;
+}
+
+.headbutton .data a {
+	float: none;
+}
+.headbutton a:hover {
+	color: #424242;
+}
+
+.headbutton a:active {
+	color: #FFF;
+}
+
+#raceData .raceinfo {
+		font-weight: bold;
+		width: 1080px;
+		height: 160px;
+		margin: 20px auto;
+}
+
+/*【開催年月日・開催回次・競馬場・開催日次】*/
+
+#raceData .kaisaiJoho{
+	font-size: 18px;
+	margin 15-10-10-15;
+}
+
+/*【レース番号・競争名・グレード】*/
+
+#raceData .kyosoName {
+	font-size: 35px;
+}
+
+#raceData .kyosoName::before {
+ font-family: "Font Awesome 5 Free";
+	content: "\f075";
+	color: #dfeca6;
+	font-size: 60px;
+}
+
+/*【競争条件・競争記号・重量種別】*/
+
+#raceData .kyosoShubetsu{
+font-size: 16px;
+float: right;
+}
+
+/*【距離・トラック・発送時刻・天候・馬場状態】*/
+
+#raceData .kyosoJoho{
+	font-size: 16px;
+	text-align:right;
+}
+
+/************************出馬表テーブル********************************/
+
+/****テーブルの幅を設定する****/
+#raceData .umaData  {
+	font-size: 11px;
+	line-height: 1.6;
+	width: 1280px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	box-shadow: 1px 1px 8px #2a2a2a;
+	background-color: #e9f0f4;
+}
+
+/****ヘッダーの背景を設定する****/
+#raceData .umaData th {
+		background: #dadadb;
+		height: 30px;
+		border: 1px solid #ffffff;
+		box-shadow: 2px 2px 4px rgb(0,0,0);
+}
+
+/****左端のヘッダーセルを角丸にする****/
+#raceData .umaData th:first-child {
+	-moz-border-radius: 6px 0 0 0;
+	-webkit-border-radius: 6px 0 0 0;
+	border-radius: 6px 0 0 0;
+}
+
+/****右端のヘッダーセルを角丸にする****/
+#raceData .umaData th:last-child {
+	-moz-border-radius: 0 6px 0 0;
+	-webkit-border-radius: 0 6px 0 0;
+	border-radius: 0 6px 0 0;
+}
+
+/****セルの奇数行を設定する****/
+#raceData  tr:nth-child(odd)  {
+	background-color: #ffffff;
+}
+
+/****セルの偶数行を設定する****/
+#raceData .umaData tr:nth-child(even) td {
+
+}
+
+/****ホバー時の背景を設定する****/
+#raceData .umaData tr:hover {
+	background:  rgba(228, 130, 94, 0.62);
+	-o-transition: all 0.1s ease-in-out;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	transition:  all 0.1s ease-in-out;
+}
+
+/****セルのボーダーを設定する****/
+#raceData .umaData td {
+	height: 90px;
+	border: 0.5px solid rgb(0,0,0);
+}
+
+/*セルの幅を設定する*/
+
+#raceData .bango {
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+	width:28px;
+}
+
+#raceData .bamei {
+	width: 240px;
+	padding: 5px 5px 5px 5px;
+}
+
+#raceData .kakoso {
+	font-size: 11px;
+	line-height: 2;
+	padding-left: 5px;
+}
+
+/****セルの中身の設定****/
+
+#raceData .umaData .bamei .name {
+	font-size: 18px;
+	font-weight: 800;
+}
+
+#raceData .umaData .bamei .chakujun {
+	font-size: 16px;
+	font-weight: 600;
+	width: 40px;
+	padding-top: 5px;
+	color: #313333;
+	float: right;
+	text-align: right;
+}
+
+#raceData .umaData .kakoso .chakujun {
+	font-size: 15px;
+	font-weight: 600;
+	color: #313333;
+	padding-right: 3px;
+}
+
+#raceData .srun {
+	float: right;
+	width: auto;
+	text-align: right;
+	padding-top: 15px;
+	padding-right: 6px;
+	line-height: 0;
+	font-size: 17px;
+	font-weight: 800;
+	color: #313333;
+	text-shadow: 0 2px 6px #878786;
+}
+
+div.drun{
+	float: right;
+	font-size: auto;
+	color: #1d6fc6;
+	text-shadow: 1px 1px 2px #9ecfe7;
+	font-weight: 600;
+	background-color: #fff;
+	padding: 3px;
+	height: 12px;
+	width: 90px;
+	text-align: center;
+	box-shadow: 1px 1px 4px inset;
+}
+
+div.drun::after{
+	float: none;
+}
+/****枠番で色を設定する****/
+
+#raceData .umaData .wakuColor1 {
+}
+
+#raceData .umaData .wakuColor2 {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor3 {
+	background-color: #e74a24;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor4 {
+	background-color: #2671de;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor5 {
+	background-color: #ecf619;
+}
+
+#raceData .umaData .wakuColor6 {
+	background-color: #1de243;
+	color: #ffffff;
+}
+
+#raceData .umaData .wakuColor7 {
+	background-color: #e4b527;
+}
+
+#raceData .umaData .wakuColor8 {
+	background-color: #ed52a4;
+}
+
+/****srunの設定****/
+
+#raceData .srunSmall {
+	color: #f63737;
+	text-shadow: 0 2px 6px #e9998a;
+}
+
+/****未出走***/
+
+#raceData .kakosoError {
+	padding: auto auto auto auto;
+	text-align: center;
+	font-size: 20px;
+}
+
+/************Index.html************/
+
+/****競馬場表示****/
+
+#keibajo {
+	margin: 50px;
+}
+
+.keibajo0 {
+	width: 360px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+}
+
+.keibajo1 {
+	width: 360px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+}
+
+.keibajo2 {
+	width: 360px;
+	display: inline-block;
+padding: 0.5em 1em;
+text-decoration: none;
+background: #f7f7f7;
+border-left: solid 6px #2febc4;/*左線*/
+color: #585656;/*文字色*/
+font-weight: bold;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+}
+
+/****レースリスト****/
+
+.racebox {
+	clear: both;
+	z-index: 1;
+	width: 1205px;
+	margin: 20px auto;
+	height: 720px;
+	padding: 1vw 1vw;
+	background-color: #dfdfdf;
+	border-radius: 10px;
+	box-shadow: -2px -2px 10px #7e7e7e,4px 3px 10px;
+}
+
+.racebox a {
+	font-weight: 500;
+	color: #363636;
+	font-size: 16px;
+	line-height: 45px;
+	text-decoration: none;
+	text-shadow: 2px 2px 4px #dddddd inset;
+}
+
+.racebox a:hover {
+	color: #19599a;
+	font-weight: 800;
+	font-size: 17px;
+}
+
+.racebox a:active {
+	color: #363636;
+}
+
+.kaisai3 .racelist0 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	margin-right: 10px;
+	width: 375px;
+	float: left;
+}
+
+.kaisai3 .racelist1 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	margin-right: 10px;
+	width: 375px;
+	float: left;
+}
+
+.kaisai3 .racelist2 {
+	height: 700px;
+	background-color: #fff;
+	box-shadow: 2px 2px 8px inset;
+	padding-top: 20px;
+	padding-left: 20px;
+	width: 375px;
+	float: left;
+}
+
+.kyosoinfo {
+	font-size: 11px;
+	line-height: 2px;
+	margin-bottom: 10px;
+}
+
+/*****************************************************************************
+*************** ここから開催スケジュールのCSS *********************************
+******************************************************************************/
+
+#kaisaiSchedule {
+	font-size: 20px;
+	width: 1200px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+
+#kaisaiSchedule .kyosoTitle {
+	display: inline-block;
+	width: 180px;
+	font-size: 25px;
+}
+
+.keibajo {
+	display: inline-block;
+	font-size: 14px;
+	width: 80px;
+	padding:  10px 10px 0 20px;
+}
+
+.nengappi {
+	padding: 10px 0 10px 0;
+}
+
+/*日付のCSSデザイン*/
+/*円のデザイン*/
+.maru {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	flex-flow: column;
+	vertical-align: top;
+}
+.maru:hover {
+	background: rgb(255, 255, 255);
+}
+
+/*円の大きさ*/
+.normal {
+	width: 90px;
+	height: 80px;
+}
+
+/*文字のレタリング*/
+.letter3 {
+	font-size: 18px;
+	line-height: 20px;
+	text-decoration:none;
+	color:#585656;
+	text-shadow:#585656 1px 1px;
+}
+
+/*色ごとの設定*/
+.blue {
+	background: rgba(40, 148, 212, 0.22);
+	border: 4px solid rgba(48, 127, 214, 0.55);
+}
+.red {
+	background: rgba(255, 91, 91, 0.22);
+	border: 4px solid rgba(214, 48, 48, 0.55);
+}
+.green {
+	background: rgba(91, 255, 123, 0.22);
+	border: 4px solid rgba(39, 151, 26, 0.55);
+}
+.yellow {
+	background: rgba(218, 228, 107, 0.22);
+	border: 4px solid rgba(204, 134, 59, 0.55);
+}
+
+/*開催競馬場の詳細エリアのスタイル*/
+.kaisaikeibajo {
+	display: inline-flex;
+}
+
+/*四角デザイン*/
+.shikaku {
+width: 1000px;
+height: 100px;
+border-radius: 8px;
+}
+
+/*色データ*/
+.white {
+	background: rgba(232, 232, 232, 0.5);
+	border: 2px solid rgba(68, 68, 68, 0.45);
+}
+
+/*文字フォント*/
+.kaisaikeibajo.moji {
+	padding-top: 5px;
+}
+
+/*文字エリアのデザイン*/
+.jodata {
+	width: 300px;
+	height: 60px;
+}
+
+.jushodata {
+	display: inline-block;
+	padding-left: 1px;
+}
+
+/*詳細データのレイアウト*/
+.kyori {
+	padding-left: 20px;
+}
+
+/*小文字のレイアウト*/
+.small {
+	font-size: 11px;
+}

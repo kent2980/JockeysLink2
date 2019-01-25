@@ -1,0 +1,496 @@
+@charset "UTF-8";
+/*ページ全体のスタイル*/
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Rounded Mplus 1c";
+	background-image: url(backimage_003.png);
+	background-image: url(../picture/backimage_003.png);
+}
+
+/*******************************************
+*************タイトルバー********************
+********************************************/
+
+#title {
+	width: 100%;
+	display:flex;
+	padding-left: 2em;
+	background-color: rgb(255, 255, 255);
+	height: 7em;
+	box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.79);
+	border-radius: 0 0 16px 16px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+#roundData .kaisai {
+	display: block;
+	font-size: 0.6em;
+}
+
+#roundData {
+    font-size: 1.6em;
+    margin: 1.7em 0 0 0;
+    min-width: 7.2em;
+}
+
+#kyosomei {
+	margin-top: 1.3em;
+	min-width: 25em;
+	height: 4.5em;
+}
+
+#title .raceSelect {
+    height: 2em;
+    margin: 0.8em 0 0 15em;
+}
+
+#title .kaiji {
+	display: block;
+	font-size: 1.3em;
+	height: 1.4em;
+}
+
+#title .kyosomei {
+	font-size: 2.2em;
+	font-weight: bold;
+}
+
+#title #data {
+    margin-top: 1.5em;
+    font-size: 1.1em;
+    display: flex;
+}
+
+.raceData {
+	margin-left: 4em;
+}
+
+#logo {
+		display: flex;
+	    position: fixed;
+		padding-top: 0.5em;
+}
+
+#logo .logo {
+	height: 1.6em;
+	border: 1px solid rgba(77, 67, 67, 0.62);
+}
+
+#logo .title {
+	font-size: 1em;
+	color: rgba(40, 40, 40, 0.82);
+	padding: 0.2em 0 0 0.5em;
+	border-bottom: 1px solid rgba(70, 70, 70, 0.72);
+	width: 7.5em;
+}
+
+/************************************************************
+******************																			******************
+******************		ナビゲーションメニュー			 ******************
+******************																			******************
+*************************************************************/
+
+#menu {
+	margin: 5.3em 0 0 60%;;
+	font-size: 1.4em;
+	position: fixed;
+	display: flex;
+}
+
+.navi {
+	margin: 0 0.5em;
+  display: inline-block;
+  max-width: 180px;
+  text-align: left;
+  background-color: #293b6a;
+  font-size: 20px;
+  color: #FFF;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 4px 25px;
+  border: 1px dashed #FFF;
+  box-shadow: 0px 0px 0px 5px #293b6a;
+
+}
+
+.navi:hover {
+	border-style: solid;
+	font-size: 21px;
+		color: #fff;
+		text-decoration: none;
+		background-color: rgba(61, 93, 156, 0.89);
+}
+
+.navi:link {
+	color: #fff;
+	text-decoration: none;
+}
+
+.navi:visited {
+	color: #fff;
+	text-decoration: none;
+}
+
+.navi:active {
+	color: #fff;
+	text-decoration: none;
+}
+
+/********************************************************
+******************																******************
+******************		チャートスタイル			******************
+******************																******************
+*********************************************************/
+
+#Chart {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.31);
+	 margin: 8.5em 1.5em 0 1.5em;
+	 box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
+	 border-radius:10px 10px 10px 10px ;
+	 padding: 0 0 1em 0;
+}
+
+#Chart .title {
+	margin-left: 1em;
+	font-size: 1.8em;
+	position: absolute;
+}
+
+#myChart {
+	margin-top: 3em;
+}
+/********************************************************
+********	テーブル部のスタイルを作ります。(*^▽^*)		*********
+*********************************************************/
+
+
+table,tr {
+	border-collapse: collapse;
+	background-color: rgb(255, 255, 255);
+	box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
+}
+
+th,td {
+	border: 1px solid #b7b7b7;
+		text-align: center;
+}
+
+.danceIndex {
+	display: flex;
+	width: 100%;
+
+}
+
+.tableTitle {
+	margin: 0 0 2em 2em;
+		width: 180%;
+}
+
+.danceTable {
+	width: 100%;
+}
+
+.index {
+	padding-left: 20px;
+}
+
+table,th {
+	height: 2.4em;
+}
+
+table,td {
+	height: 4em;
+}
+
+table .left {
+	text-align: left;
+	padding-left: 1em;
+}
+
+/****枠番で色を設定する****/
+
+.waku1 {
+	box-shadow: 0 0 0 0;
+	background-color: rgb(255, 255, 255);
+}
+
+.waku2 {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+.waku3 {
+	background-color: #e74a24;
+	color: #ffffff;
+}
+
+.waku4 {
+	background-color: #2671de;
+	color: #ffffff;
+}
+
+.waku5 {
+	background-color: #ecf619;
+}
+
+.waku6 {
+	background-color: #1de243;
+	color: #ffffff;
+}
+
+.waku7 {
+	background-color: #e4b527;
+}
+
+.waku8 {
+	background-color: #ed52a4;
+}
+
+/****index部のstyle設定***/
+
+#index .data{
+	background-color: rgb(255,255,255);
+	padding: 0.2em 1em 2em 1em;
+	margin: 0  2em 0 0.2em;
+	box-shadow: 1px 1px 1px 1px rgb(83, 83, 83);
+}
+
+@media screen and (orientation: portrait) {
+    /*　縦画面で適用　*/
+
+		#title {
+    width: 100%;
+    display: flex;
+    padding-left: 0.6em;
+    background-color: rgb(255, 255, 255);
+    height: 10em;
+    box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.79);
+    border-radius: 0 0 16px 16px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+#roundData {
+    font-size: 2em;
+    margin: 0.8em 0 0 0;
+    min-width: 7.2em;
+}
+
+#kyosomei {
+    margin-top: 1.3em;
+    min-width: 25em;
+    height: 4.5em;
+}
+
+#title .kyosomei {
+font-size: 3.6em;
+    font-weight: bold;
+}
+
+#title .kaiji {
+    display: block;
+    font-size: 2em;
+    height: 1.4em;
+}
+
+#title #data {
+    margin-top: 6.8em;
+    font-size: 1em;
+		display: none;
+}
+
+#title .raceSelect {
+    height: 2em;
+}
+
+#raceData {
+	display: none;
+}
+
+#Chart {
+		/* display: none;*/
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.31);
+    margin: 12em 1.5em 0 1.5em;
+    box-shadow: 2px 2px 6px 1px rgba(17,17,16,0.41);
+    border-radius: 10px 10px 10px 10px;
+ 	 padding: 0 0 1em 0;
+}
+
+		.danceIndex {
+    display: block;
+    width: 100%;
+}
+
+.tableTitle {
+    margin: 0 2em 2em 2em;
+    width: auto;
+}
+
+table {
+	font-size: 1.2em;
+}
+
+table,td {
+	font-size: 1.5em;
+	height: 6em;
+}
+
+.shirushi {
+    font-size: 1.4em;
+}
+
+#index {
+	display: none;
+    margin: 0 2em;
+}
+
+#menu {
+    margin: 7.4em 0 0 20em;
+    position: fixed;
+    display: flex;
+}
+
+.navi {
+    margin: 0 0.5em;
+    display: inline-block;
+    text-align: left;
+    background-color: #293b6a;
+    font-size: 1.3em;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 25px;
+    border: 1px dashed #FFF;
+    box-shadow: 0px 0px 0px 5px #293b6a;
+}
+
+.desctop {
+	display: none;
+}
+  }
+
+@media screen and (min-width: 500px) and (max-width: 999px) and (orientation: landscape) {
+	/*　画面サイズ 500pxから999pxまで適用　*/
+	#title {
+	    width: 100%;
+	    display: flex;
+	    padding-left: 2em;
+	    background-color: rgb(255, 255, 255);
+	    height: 5em;
+	    box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.79);
+	    border-radius: 0 0 16px 16px;
+	    position: fixed;
+	    top: 0;
+	    width: 100%;
+	    z-index: 10000;
+	}
+
+	#Chart {
+		background-color: rgba(255, 255, 255, 0.8);
+		border: 1px solid rgba(0, 0, 0, 0.31);
+		 margin: 6.5em 1.5em 0 1.5em;
+		 box-shadow:2px 2px 6px 1px rgba(17,17,16,0.41);
+		 border-radius:10px 10px 10px 10px ;
+		 padding: 0 0 1em 0;
+	}
+
+	table {
+		width: 70em;
+		font-size: 0.8em;
+	}
+
+	table, td {
+		font-size: 0.8em;
+    height: 5em;
+}
+
+.shirushi {
+    font-size: 1.4em;
+}
+
+#roundData {
+    font-size: 1.2em;
+    width: 7em;
+    margin: 1.1em 1em 0 0;
+}
+
+#title .kaisai {
+    display: block;
+    font-size: 0.6em;
+}
+
+#kyosomei {
+    margin-top: 1.2em;
+    min-width: 16em;
+    height: 50px;
+}
+
+#title .kaiji {
+    font-size: 1em;
+    height: 22px;
+    margin-bottom: 1px;
+    display: block;
+}
+
+#title .kyosomei {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+#title #data {
+    margin-top: 1.3em;
+    font-size: 0.7em;
+    display: flex;
+}
+
+.raceData {
+    margin-left: 2em;
+}
+
+#title .raceSelect {
+    height: 2em;
+}
+
+#title .raceSelect {
+    height: 2em;
+    margin: 0.5em 0 0 7em;
+}
+
+#index .data {
+    background-color: rgb(255,255,255);
+    font-size: 0.8em;
+    padding: 0.2em 1em 2em 1em;
+    margin: 0 2em 0 0.2em;
+    box-shadow: 1px 1px 1px 1px rgb(83, 83, 83);
+}
+
+#menu {
+    margin: 2.7em 0 0 18em;
+    font-size: 2em;
+    position: fixed;
+    display: flex;
+}
+
+}
+
+
+@media screen and (min-width:1000px) {
+	/*　画面サイズ 1000px以上から適用　*/
+	table .shirushi {
+		font-size: 1.4em;
+	}
+
+	table {
+		width: 70em;
+		font-size: 1em;
+	}
+}
