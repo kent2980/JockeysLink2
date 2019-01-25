@@ -438,7 +438,7 @@ function urlJump() {
 					try{
 						out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
 					}catch(NullPointerException e){
-						out.print("**");
+						out.print("****");
 					}
 				}
 				%></td>
