@@ -361,6 +361,10 @@ function urlJump() {
         <th>馬番</th>
         <th>印</th>
         <th>馬名</th>
+        <th>1走前</th>
+        <th>2走前</th>
+        <th>3走前</th>
+        <th>4走前</th>
       </tr>
       			<% for(int i = 0; i < umaNowData.size(); i++){
 					int umaban = i + 1;
@@ -390,13 +394,16 @@ function urlJump() {
 				<%
 					if(wakuHantei == false){
 				%>
+				<!-- 枠番 -->
 				<td class="waku<% out.print(data.getWakuban()); %>"<% out.print(key); %>><% out.print(data.getWakuban()==0?"仮":data.getWakuban()); %></td>
 				<%
 					}else{
 						out.print(data.getWakuban()==0?"<td>仮</td>":"");
 					}
 				%>
+				<!-- 馬番 -->
 				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
+				<!-- 馬印 -->
 				<td>
 					<select name="shirushi" class="shirushi">
 						<option selected></option>
@@ -407,7 +414,35 @@ function urlJump() {
 						<option value="star">★</option>
 					</select>
 				</td>
+				<!-- 馬名 -->
 				<td class="left"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<!-- 1走前 -->
+				<%
+		for(int t = 0; t<umaKakoData.size();t++){
+			UmagotoDataSet uma = umaKakoData.get(t).get(data.getKettoTorokuBango());
+			if(t==0){
+				uma.toString();	//nullの場合は"初出走"
+			}
+			//t回前の過去走が存在しないときの例外処理
+			try{
+				String kakoKyosoTitle = uma.getKyosomeiRyakusho6().length()>0
+										?uma.getKyosomeiRyakusho6()
+										:uma.getKyosoShubetsu().substring(uma.getKyosoShubetsu().indexOf("系")+1, uma.getKyosoShubetsu().length()) + uma.getKyosoJoken();
+			%>
+				<td><% 
+				out.print(kakoKyosoTitle);
+				out.print(" ");
+				out.print(uma.getKakuteiChakujun() + "着");
+				out.print(" ");
+				out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
+				%></td>
+			<%
+				}catch(NullPointerException e){
+					out.print("</td>");
+				}
+		}
+		
+				%>
 				</tr>
 				<%} %>
     </table>
