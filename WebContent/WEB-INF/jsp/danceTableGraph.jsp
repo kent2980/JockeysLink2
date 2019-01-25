@@ -421,7 +421,11 @@ function urlJump() {
 		for(int t = 0; t<umaKakoData.size();t++){
 			UmagotoDataSet uma = umaKakoData.get(t).get(data.getKettoTorokuBango());
 			if(t==0){
-				uma.toString();	//nullの場合は"初出走"
+				try{
+					uma.toString();	//nullの場合は"初出走"
+				}catch(NullPointerException e){
+					break;
+				}
 			}
 			//t回前の過去走が存在しないときの例外処理
 			try{
