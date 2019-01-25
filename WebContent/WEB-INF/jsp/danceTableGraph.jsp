@@ -360,11 +360,11 @@ function urlJump() {
         <th>枠番</th>
         <th>馬番</th>
         <th>印</th>
-        <th>馬名</th>
-        <th>1走前</th>
-        <th>2走前</th>
-        <th>3走前</th>
-        <th>4走前</th>
+        <th class="bamei">馬名</th>
+        <th colspan="3">1走前</th>
+        <th colspan="3">2走前</th>
+        <th colspan="3">3走前</th>
+        <th colspan="3">4走前</th>
       </tr>
       			<% for(int i = 0; i < umaNowData.size(); i++){
 					int umaban = i + 1;
@@ -415,7 +415,7 @@ function urlJump() {
 					</select>
 				</td>
 				<!-- 馬名 -->
-				<td class="left"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<td class="left bamei"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<!-- 1走前 -->
 				<%
 		for(int t = 0; t<umaKakoData.size();t++){
@@ -429,12 +429,43 @@ function urlJump() {
 										?uma.getKyosomeiRyakusho6()
 										:uma.getKyosoShubetsu().substring(uma.getKyosoShubetsu().indexOf("系")+1, uma.getKyosoShubetsu().length()) + uma.getKyosoJoken();
 			%>
-				<td><% 
-				out.print(kakoKyosoTitle);
-				out.print(" ");
-				out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着");
+			
+			<!-- **** < 競争名 > **** -->
+			<% if(uma.getGrade().replace("特別競走", "").length() == 0){ %>
+				<td class="kyosomei">
+			<%
+			}else{ %>
+				<td class="left kyosomei">
+			<%
+			}
+			String fontColor = "";
+			switch(uma.getGrade().replace("特別競走", "")){
+			case "ＧⅠ":
+				fontColor = " chaRed";
+				break;
+			case "Ｊ･ＧⅠ":
+				fontColor = " chaRed";
+				break;
+			case "ＧⅡ":
+				fontColor = " chaBlue";
+				break;
+			case "Ｊ･ＧⅡ":
+				fontColor = " chaBlue";
+				break;
+			case "ＧⅢ":
+				fontColor = " chaGreen";
+				break;
+			case "Ｊ･ＧⅢ":
+				fontColor = " chaGreen";
+				break;
+			}
+				%>
+				<span class="grade<% out.print(fontColor); %>"><% out.print(uma.getGrade().replace("特別競走", "")); %></span> <% out.print(kakoKyosoTitle); %></td>
+			<!-- **** < 着順 > **** -->
+				<td><% out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着"); %></td>
+			<!-- **** < SRun > **** -->
+				<td><%
 				if(uma.getIjoKubun().length() == 0){
-					out.print(" ");
 					try{
 						out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP));
 					}catch(NullPointerException e){
