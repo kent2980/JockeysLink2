@@ -484,7 +484,13 @@ $(this).replaceWith(video);
 		<td><% out.print(ijoFlag==false?dataSet.getTanshoOdds():""); %></td>
 		<td><% out.print(ijoFlag==false?dataSet.getKohan3F():""); %></td>
 		<td><% out.print(ijoFlag==false?dataSet.getSohaTimeValue():dataSet.getIjoKubun()); %></td>
-		<td><% out.print(ijoFlag==false?dataSet.getSrun():""); %></td>
+		<td><% 
+		try{
+			out.print(ijoFlag==false?dataSet.getSrun().add(BigDecimal.valueOf(12).multiply(BigDecimal.valueOf(4.5))).setScale(2, BigDecimal.ROUND_HALF_UP):"");
+		}catch(NullPointerException e){
+			out.print("****");
+		}
+		 %></td>
 		<td><% out.print(ijoFlag==false?tsukaJuni.toString():""); %></td>
 		<td><% out.print("（" + dataSet.getTozaiShozoku().substring(0, 1) + "）" + dataSet.getChokyoshi().replace("　", "")); %></td>
 	</tr>
