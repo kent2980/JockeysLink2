@@ -448,6 +448,7 @@ function urlJump() {
 			}
 			String baba = "";
 			String fontColor = "";
+			String chakujunColor = "";
 			switch(uma.getGrade().replace("特別競走", "")){
 			case "ＧⅠ":
 				fontColor = " chaRed";
@@ -469,6 +470,18 @@ function urlJump() {
 				break;
 			}
 			
+			switch(uma.getKakuteiChakujun()){
+			case 1:
+				chakujunColor = " chaRed";
+				break;
+			case 2:
+				chakujunColor = " chaBlue";
+				break;
+			case 3:
+				chakujunColor = " chaGreen";
+				break;
+			}
+			
 			switch(uma.getBaba()){
 			case "芝":
 				baba = "turf";
@@ -486,8 +499,8 @@ function urlJump() {
 			kaisai = ld.format(dtf);
 				%>
 				<div class="sideBy subTitle">
-              		<div><% out.print("'" + kaisai); %></div>
 			       	<span class="<% out.print(baba); %>"></span>
+              		<div><% out.print("'" + kaisai); %></div>
               		<div><% out.print(uma.getKeibajo()); %></div>
              		<div><% out.print(uma.getKyori()); %>m</div>
                 	<div><% out.print(baba=="turf"?uma.getShibaBabaJotai():uma.getDirtBabaJotai()); %></div>
@@ -497,7 +510,7 @@ function urlJump() {
         		</div>
         		</td>
 			<!-- **** < 着順 > **** -->
-				<td><% out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着"); %></td>
+				<td class="chakujun<% out.print(chakujunColor); %>"><% out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着"); %></td>
 			<!-- **** < SRun > **** -->
 				<td><%
 				if(uma.getIjoKubun().length() == 0){
