@@ -18,6 +18,7 @@
    		 import="java.util.HashMap"
    		 import="java.util.ArrayList"
    		 import="java.time.LocalDate"
+   		 import="java.time.LocalDateTime"
    		 import="java.time.format.DateTimeFormatter"
 %>
 <%
@@ -476,10 +477,20 @@ function urlJump() {
 				baba = "dirt";
 				break;
 			}
+			//開催年月日を整形します
+			String kaisai = uma.getKaisaiNenGappi();
+			System.out.println(kaisai);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+			LocalDate ld = LocalDate.parse(kaisai, dtf);
+			dtf = DateTimeFormatter.ofPattern("yy MM/dd");
+			kaisai = ld.format(dtf);
 				%>
-				<div class="sideBy">
-			       	<div class="<% out.print(baba); %>"></div>
-             		<div class="kyori"><% out.print(uma.getKyori()); %>m</div>
+				<div class="sideBy subTitle">
+              		<div><% out.print("'" + kaisai); %></div>
+			       	<span class="<% out.print(baba); %>"></span>
+              		<div><% out.print(uma.getKeibajo()); %></div>
+             		<div><% out.print(uma.getKyori()); %>m</div>
+                	<div><% out.print(baba=="turf"?uma.getShibaBabaJotai():uma.getDirtBabaJotai()); %></div>
         		</div>
         		<div class="title">        			
 					<div><span class="grade<% out.print(fontColor); %>"><% out.print(uma.getGrade().replace("特別競走", "")); %></span><% out.print(kakoKyosoTitle); %></div>

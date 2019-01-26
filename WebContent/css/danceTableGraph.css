@@ -315,24 +315,28 @@ table .center {
 }
 
 #dance table.text.kako4sou .grade {
-    font-size: 10.5px;
     font-weight: 600;
 		margin-top: 0.2em;
 		margin-right: 0.2em;
 }
 /****テーブルセル内側の設定****/
+
+#dance table .subTitle {
+    font-size: 10.5px;
+}
+
 td.bamei {
 	padding-left: 1em;
 }
 #kako4sou .turf {
-	width: 0.5em;
-	height: 0.5em;
+	width: 8px;
+	height: 8px;
 	background-color: rgb(24, 212, 43);
 	margin: 0.3em;
 }
 #kako4sou .dirt {
-	width: 0.5em;
-	height: 0.5em;
+	width: 8px;
+	height: 8px;
 	background-color: rgb(167, 57, 16);
 	margin: 0.3em;
 }
@@ -344,6 +348,10 @@ td.bamei {
 
 #kako4sou .title {
 	padding-left: 1em;
+}
+
+#dance table .subTitle > div {
+		margin: 0 2px;
 }
 
 /****枠番で色を設定する****/
