@@ -355,7 +355,7 @@ function urlJump() {
   <input type="radio" id="a" name="btn" checked="checked"><label for="a">出馬表</label>
   <input type="radio" id="b" name="btn"><label for="b">過去4走</label>
   
-  <table class="text kako4sou">
+  <table class="text kako4sou" id="kako4sou">
       <tr>
         <th>枠番</th>
         <th>馬番</th>
@@ -435,13 +435,17 @@ function urlJump() {
 			%>
 			
 			<!-- **** < 競争名 > **** -->
-			<% if(uma.getGrade().replace("特別競走", "").length() == 0){ %>
-				<td class="kyosomei">
+			<% 
+			String textAlign = "";
+			if(uma.getGrade().replace("特別競走", "").length() == 0){ 
+				textAlign = " center";%>
+				<td class="center kyosomei">
 			<%
 			}else{ %>
 				<td class="left kyosomei">
 			<%
 			}
+			String baba = "";
 			String fontColor = "";
 			switch(uma.getGrade().replace("特別競走", "")){
 			case "ＧⅠ":
@@ -463,8 +467,24 @@ function urlJump() {
 				fontColor = " chaGreen";
 				break;
 			}
+			
+			switch(uma.getBaba()){
+			case "芝":
+				baba = "turf";
+				break;
+			case "ダート":
+				baba = "dirt";
+				break;
+			}
 				%>
-				<span class="grade<% out.print(fontColor); %>"><% out.print(uma.getGrade().replace("特別競走", "")); %></span> <% out.print(kakoKyosoTitle); %></td>
+				<div class="sideBy">
+			       	<div class="<% out.print(baba); %>"></div>
+             		<div class="kyori"><% out.print(uma.getKyori()); %>m</div>
+        		</div>
+        		<div class="title">        			
+					<div><span class="grade<% out.print(fontColor); %>"><% out.print(uma.getGrade().replace("特別競走", "")); %></span><% out.print(kakoKyosoTitle); %></div>
+        		</div>
+        		</td>
 			<!-- **** < 着順 > **** -->
 				<td><% out.print(uma.getIjoKubun().length()>0?uma.getIjoKubun():uma.getKakuteiChakujun() + "着"); %></td>
 			<!-- **** < SRun > **** -->
@@ -556,7 +576,7 @@ function urlJump() {
 						<option value="star">★</option>
 					</select>
 				</td>
-				<td class="left"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<td class="left bamei"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<td><% out.print(data.getSeibetsu() + data.getBarei()); %>
 				<td class="desctop"><% out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango)); %>
 				<td class="desctop"><% out.print(indexLoad.getAverageKyori(kettoTorokuBango)==0?"-":indexLoad.getAverageKyori(kettoTorokuBango) + "m"); %>
