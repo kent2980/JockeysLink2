@@ -367,26 +367,31 @@ function urlJump() {
   <table class="text kakoResult" id="kakoResult">
   <%
   List<ViewRaceShosai> resultList;
-  try(RaceShosaiReader reader = new RaceShosaiReader();){
-	  //フィールド
-	  String kyosomei = raceData.getKyosomeiHondai();
-	  SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日");
-	  Date kaisai = f.parse(raceData.getKaisaiNenGappi());
-	  ViewRaceShosaiExample ex = reader.getExample();
-	  ViewRaceShosaiMapper map = reader.getMapper();
-	  //Where句
-	  String tokubetsu = raceData.getTokubetsuTorokuBango();
-	  if(tokubetsu.equals("0000")){
-		  ex.createCriteria().andKyosomeiHondaiEqualTo(kyosomei);
-	  }else {
-		  ex.createCriteria().andTokubetsuKyosoBangoEqualTo(tokubetsu);
+  if(raceData.getKyosomeiHondai().length() > 0){
+	  try(RaceShosaiReader reader = new RaceShosaiReader();){
+		  //フィールド
+		  String kyosomei = raceData.getKyosomeiHondai();
+		  SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日");
+		  Date kaisai = f.parse(raceData.getKaisaiNenGappi());
+		  ViewRaceShosaiExample ex = reader.getExample();
+		  ViewRaceShosaiMapper map = reader.getMapper();
+		  //Where句
+		  String tokubetsu = raceData.getTokubetsuTorokuBango();
+		  if(tokubetsu.equals("0000")){
+			  ex.createCriteria().andKyosomeiHondaiEqualTo(kyosomei);
+		  }else {
+			  ex.createCriteria().andTokubetsuKyosoBangoEqualTo(tokubetsu);
+		  }
+		  ex.setOrderByClause("kaisai_nengappi desc");
+		  resultList = map.selectByExample(ex);
+	  	  resultList = resultList.stream()
+	  			  				 .filter(s -> s.getKaisaiNengappi().before(kaisai))
+	  			  				 .collect(Collectors.toList());
 	  }
-	  ex.setOrderByClause("kaisai_nengappi desc");
-	  resultList = map.selectByExample(ex);
-  	  resultList = resultList.stream()
-  			  				 .filter(s -> s.getKaisaiNengappi().before(kaisai))
-  			  				 .collect(Collectors.toList());
+  }else {
+	  resultList = new ArrayList<>();
   }
+
   %>
   	<tr>
       <th>開催日</th>
@@ -672,3 +677,4 @@ function urlJump() {
 </div>
 </body>
 </html>
+				
