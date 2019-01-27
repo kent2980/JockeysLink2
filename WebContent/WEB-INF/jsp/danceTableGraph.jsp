@@ -382,7 +382,7 @@ function urlJump() {
 		  }else {
 			  ex.createCriteria().andTokubetsuKyosoBangoEqualTo(tokubetsu);
 		  }
-		  ex.setOrderByClause("kaisai_nengappi desc");
+		  ex.setOrderByClause("kaisai_nengappi desc limit 10");
 		  resultList = map.selectByExample(ex);
 	  	  resultList = resultList.stream()
 	  			  				 .filter(s -> s.getKaisaiNengappi().before(kaisai))
