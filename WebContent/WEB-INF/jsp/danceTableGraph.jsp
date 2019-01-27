@@ -15,11 +15,18 @@
          import="java.math.BigDecimal"
          import="java.lang.IndexOutOfBoundsException"
    		 import="java.time.LocalDate"
+   		 import="java.util.Date"
+   		 import="java.text.SimpleDateFormat"
    		 import="java.util.HashMap"
    		 import="java.util.ArrayList"
    		 import="java.time.LocalDate"
    		 import="java.time.LocalDateTime"
    		 import="java.time.format.DateTimeFormatter"
+		 import="com.example.entity.ViewRaceShosai"
+   		 import="com.example.entity.ViewRaceShosaiExample"
+		 import="com.example.entity.ViewRaceShosaiMapper"
+		 import="com.view.racedata.RaceShosaiReader"
+		 import="java.util.stream.Collectors"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -351,11 +358,58 @@ function urlJump() {
 	<div class="danceIndex">
 		<div class="tableTitle">
 		<h2>出馬表</h2>
-		
+
 <div class="hidden_box">
   <input type="radio" id="a" name="btn" checked="checked"><label for="a">出馬表</label>
   <input type="radio" id="b" name="btn"><label for="b">過去4走</label>
-  
+  <input type="radio" id="c" name="btn"><label for="c">過去結果</label>
+
+  <table class="text kakoResult" id="kakoResult">
+  <%
+  List<ViewRaceShosai> resultList;
+  try(RaceShosaiReader reader = new RaceShosaiReader();){
+	  //フィールド
+	  String kyosomei = raceData.getKyosomeiHondai();
+	  SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日");
+	  Date kaisai = f.parse(raceData.getKaisaiNenGappi());
+	  ViewRaceShosaiExample ex = reader.getExample();
+	  ViewRaceShosaiMapper map = reader.getMapper();
+	  //Where句
+	  String tokubetsu = raceData.getTokubetsuTorokuBango();
+	  if(tokubetsu.equals("0000")){
+		  ex.createCriteria().andKyosomeiHondaiEqualTo(kyosomei);
+	  }else {
+		  ex.createCriteria().andTokubetsuKyosoBangoEqualTo(tokubetsu);
+	  }
+	  ex.setOrderByClause("kaisai_nengappi desc");
+	  resultList = map.selectByExample(ex);
+  	  resultList = resultList.stream()
+  			  				 .filter(s -> s.getKaisaiNengappi().before(kaisai))
+  			  				 .collect(Collectors.toList());
+  }
+  %>
+  	<tr>
+      <th>開催日</th>
+      <th>レース名</th>
+      <th>勝ち馬</th>
+      <th>Ave3f</th>
+      <th>RPCI</th>
+    </tr>
+    <%
+    for(ViewRaceShosai result : resultList) {
+    	String kaisai = new SimpleDateFormat("yyyy年MM月dd日").format(result.getKaisaiNengappi());
+    %>
+    <tr>
+
+      <td><% out.print(kaisai); %></td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=<% out.print(result.getRaceCode()); %>&mode=result"><% out.print(result.getKyosomeiHondai()); %></a></td>
+      <td><% out.print(result.getKachiumaBamei()); %></td>
+      <td><% out.print(result.getAve3f()); %></td>
+      <td><% out.print(result.getRpci()); %></td>
+    </tr>
+    <%} %>
+  </table>
+
   <table class="text kako4sou" id="kako4sou">
       <tr>
         <th>枠番</th>
@@ -434,11 +488,11 @@ function urlJump() {
 										?uma.getKyosomeiRyakusho6()
 										:uma.getKyosoShubetsu().substring(uma.getKyosoShubetsu().indexOf("系")+1, uma.getKyosoShubetsu().length()) + uma.getKyosoJoken();
 			%>
-			
+
 			<!-- **** < 競争名 > **** -->
-			<% 
+			<%
 			String textAlign = "";
-			if(uma.getGrade().replace("特別競走", "").length() == 0){ 
+			if(uma.getGrade().replace("特別競走", "").length() == 0){
 				textAlign = " center";%>
 				<td class="center kyosomei">
 			<%
@@ -469,7 +523,7 @@ function urlJump() {
 				fontColor = " chaGreen";
 				break;
 			}
-			
+
 			switch(uma.getKakuteiChakujun()){
 			case 1:
 				chakujunColor = " chaRed";
@@ -481,7 +535,7 @@ function urlJump() {
 				chakujunColor = " chaGreen";
 				break;
 			}
-			
+
 			switch(uma.getBaba()){
 			case "芝":
 				baba = "turf";
@@ -492,7 +546,6 @@ function urlJump() {
 			}
 			//開催年月日を整形します
 			String kaisai = uma.getKaisaiNenGappi();
-			System.out.println(kaisai);
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
 			LocalDate ld = LocalDate.parse(kaisai, dtf);
 			dtf = DateTimeFormatter.ofPattern("yy MM/dd");
@@ -505,7 +558,7 @@ function urlJump() {
              		<div><% out.print(uma.getKyori()); %>m</div>
                 	<div><% out.print(baba=="turf"?uma.getShibaBabaJotai():uma.getDirtBabaJotai()); %></div>
         		</div>
-        		<div class="title">        			
+        		<div class="title">
 					<div><span class="grade<% out.print(fontColor); %>"><% out.print(uma.getGrade().replace("特別競走", "")); %></span><% out.print(kakoKyosoTitle); %></div>
         		</div>
         		</td>
@@ -526,7 +579,7 @@ function urlJump() {
 					out.print("</td>");
 				}
 		}
-		
+
 				%>
 				</tr>
 				<%} %>
