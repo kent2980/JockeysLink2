@@ -51,7 +51,8 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	String netkeibaRaceCode = raceData.getRaceCode().substring(0, 4) + raceData.getRaceCode().substring(8, 16);
 	String netkeiba = "http://race.netkeiba.com/?pid=race&id=c" + netkeibaRaceCode + "&mode=result";
 	String netkeibaOdds = "https://ipat.netkeiba.com/?pid=ipat_input&rid=" + netkeibaRaceCode;
-	String netkeibaHorse = "https://db.netkeiba.com/horse/";//-> 血統登録番号で指定する
+	String netkeibaHorse = "https://db.netkeiba.com/horse/";   //-> 血統登録番号で指定する
+  String jrdbUmaData = "http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=";  //8桁の血統登録番号で指定する
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -475,7 +476,7 @@ function urlJump() {
 					</select>
 				</td>
 				<!-- 馬名 -->
-				<td class="left bamei"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<td class="left bamei"><a href="<% out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10)); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<!-- 1走前 -->
 				<%
 		for(int t = 0; t<umaKakoData.size();t++){
@@ -658,7 +659,7 @@ function urlJump() {
 						<option value="star">★</option>
 					</select>
 				</td>
-				<td class="left bamei"><a href="<% out.print(netkeibaHorse + data.getKettoTorokuBango()); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<td class="left bamei"><a href="<% out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10)); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<td><% out.print(data.getSeibetsu() + data.getBarei()); %>
 				<td class="desctop"><% out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango)); %>
 				<td class="desctop"><% out.print(indexLoad.getAverageKyori(kettoTorokuBango)==0?"-":indexLoad.getAverageKyori(kettoTorokuBango) + "m"); %>
@@ -677,4 +678,3 @@ function urlJump() {
 </div>
 </body>
 </html>
-				
