@@ -1,0 +1,2221 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<link href="../css/danceTableGraph.css" rel="stylesheet">
+<link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/pop.js"></script>
+<script type="text/javascript" src="/JockeysLink/js/pop.js"></script>
+<title>根岸ステークス</title>
+</head>
+<body id="dance">
+
+<!-- *****************************************************************************************
+     *****************************************************************************************
+     							レースデータを記述します
+     *****************************************************************************************
+     ***************************************************************************************** -->
+<div id="title">
+
+  <a href="/JockeysLink/kaisaichedule?year=2019">
+  <div id="logo">
+    <!-- <img src="../picture/logo.jpg" alt="トップページへのリンク" class="logo"> -->
+    <img src="/JockeysLink/picture/logo.jpg" alt="トップページへのリンク" class="logo">
+    <span class="title">Jockeys->Link</span>
+  </div>
+  </a>
+  <div id="roundData">
+  	  <span class="kaisai">2019年01月27日（日）</span>
+	  <span class="keibajo">東京</span>
+	  <span class="round">11R</span>
+  </div>
+  <div id="kyosomei">
+
+    <span class="kaiji">第33回</span>
+  	<span class="kyosomei">根岸ステークス</span>
+  </div>
+  <div id="raceData">
+	  <div class="raceSelect">
+	  	<form name="fm">
+		  	<select name="s" class="raceSelect" onchange="urlJump()">
+		  		<option value="" hidden disabled selected></option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010201&mode=dance">東京 - 01R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010202&mode=dance">東京 - 02R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010203&mode=dance">東京 - 03R　3歳新馬</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010204&mode=dance">東京 - 04R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010205&mode=dance">東京 - 05R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010206&mode=dance">東京 - 06R　3歳新馬</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010207&mode=dance">東京 - 07R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010208&mode=dance">東京 - 08R　4歳以上1000万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010209&mode=dance">東京 - 09R　セントポーリア賞</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010210&mode=dance">東京 - 10R　早春ステークス</option>
+
+		  		<option selected value="/JockeysLink/DanceTableGraph?racecode=2019012705010211&mode=dance">東京 - 11R　根岸ステークス</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012705010212&mode=dance">東京 - 12R　4歳以上1000万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010401&mode=dance">中京 - 01R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010402&mode=dance">中京 - 02R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010403&mode=dance">中京 - 03R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010404&mode=dance">中京 - 04R　サラ障害4歳以上未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010405&mode=dance">中京 - 05R　サラ障害4歳以上未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010406&mode=dance">中京 - 06R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010407&mode=dance">中京 - 07R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010408&mode=dance">中京 - 08R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010409&mode=dance">中京 - 09R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010410&mode=dance">中京 - 10R　熱田特別</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010411&mode=dance">中京 - 11R　伊勢特別</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012707010412&mode=dance">中京 - 12R　蒲郡特別</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020201&mode=dance">京都 - 01R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020202&mode=dance">京都 - 02R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020203&mode=dance">京都 - 03R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020204&mode=dance">京都 - 04R　3歳500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020205&mode=dance">京都 - 05R　3歳未勝利</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020206&mode=dance">京都 - 06R　3歳新馬</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020207&mode=dance">京都 - 07R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020208&mode=dance">京都 - 08R　4歳以上500万下</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020209&mode=dance">京都 - 09R　若菜賞</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020210&mode=dance">京都 - 10R　飛鳥ステークス</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020211&mode=dance">京都 - 11R　シルクロードＳ</option>
+
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2019012708020212&mode=dance">京都 - 12R　4歳以上1000万下</option>
+
+		  	</select>
+	  	</form>
+	  </div>
+	  <div id="data">
+		  <div class="courseData desctop">
+		    <span>1400m</span>
+		    <span>ダート･左</span>
+		    <span>15:45</span>
+		  </div>
+		  <div class="raceData desctop">
+		  	<span>オープン
+</span>
+		  	<span>サラ系4歳以上
+</span>
+		  	<span>(国際)(指定)
+</span>
+		  	<span>別定</span>
+		  	<span>16頭</span>
+		  	<!--  <span>＜＞</span> -->
+		  </div>
+	  </div>
+  </div>
+    <div id="menu">
+      <div>
+        <span class ="navi">分析</span>
+      </div>
+          <div>
+            <a href="https://ipat.netkeiba.com/?pid=ipat_input&rid=201905010211" target="_blank" class ="navi">IPAT</a>
+          </div>
+          <div>
+            <a href="/JockeysLink/DanceTableGraph?racecode=2019012705010211&mode=result" class ="navi">結果</a>
+          </div>
+  </div>
+</div>
+
+<!-- URLジャンプのJavaScript -->
+<script type="text/javascript">
+function urlJump() {
+    var browser = document.fm.s.value;
+    location.href = browser;
+}
+</script>
+<!-- *****************************************************************************************
+     ********************************ここからグラフを記述する*****************************************
+     ***************************************************************************************** -->
+
+        <!-- ①チャート描画先を設置 -->
+
+        <div id="timeChart" class="Chart" width:"100%">
+        	<h2 class=title>タイムランク</h2>
+        	<canvas id="myChart" width="100" height="30"></canvas>
+		</div>
+
+        <!-- ②Chart.jsの読み込み -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+		<!-- ③チャート描画情報の作成 -->
+		<script>
+			window.onload = function() {
+			    ctx = document.getElementById("myChart").getContext("2d");
+			    window.myBar = new Chart(ctx, {
+			        type: 'bar',
+			        data: barChartData,
+			        options: complexChartOption
+			    });
+			};
+		</script>
+
+        <!-- ④チャートデータの作成 -->
+        <script>
+            var barChartData = {
+                	labels: [["6. モーニン / 5人気", "（前走：2018／11／4）"],["16. マテラスカイ / 4人気", "（前走：2018／11／4）"],["2. ユラノト / 3人気", "（前走：2018／12／23）"],["3. サトノファンタシー / 8人気", "（前走：2018／11／18）"],["8. ヤマニンアンプリメ / 11人気", "（前走：2019／1／5）"],["9. ワンダーリーデル / 13人気", "（前走：2019／1／14）"],["12. サンライズノヴァ / 1人気", "（前走：2018／12／2）"],["4. ケイアイノーテック / 7人気", "（前走：2018／12／22）"],["5. ラブバレット / 16人気", "（前走：2018／11／4）"],["11. コパノキッキング / 2人気", "（前走：2018／12／9）"],["15. キタサンミカヅキ / 9人気", "（前走：2018／12／9）"],["7. クロスケ / 14人気", "（前走：2019／1／13）"],["14. ノボバカラ / 15人気", "（前走：2018／12／9）"],["10. レッドゲルニカ / 12人気", "（前走：2019／1／14）"],["1. クインズサターン / 6人気", "（前走：2018／12／8）"],["13. メイショウウタゲ / 9人気", "（前走：2018／11／10）"]],
+                    datasets: [
+                    {
+                    	type: 'bar',
+                        label: 'タイムランク',
+                    	data: [54.35,54.31,52.35,52.09,50.40,49.96,49.79,49.53,48.91,48.03,47.99,47.21,46.96,43.85,42.61,41.90],
+                    	backgroundColor : ['rgba(57, 157, 255, 0.8)','rgba(255, 57, 59, 0.8)','rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(57, 157, 255, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 57, 59, 0.8)','rgba(246, 255, 69, 0.8)','rgba(57, 157, 255, 0.8)','rgba(57, 157, 255, 0.8)','rgba(255, 140, 60, 0.8)','rgba(57, 157, 255, 0.8)','rgba(246, 255, 69, 0.8)'],
+                        borderWidth: 1
+                    },
+                    {
+                    	type: 'line',
+                    	label: 'トップスピード',
+                    	data: [57.02,52.13,56.53,53.03,53.09,52.89,54.90,51.78,47.05,55.82,51.30,56.56,54.87,46.39,50.36,52.52],
+                    	borderColor : 'rgba(54,164,235)',
+                        backgroundColor : 'rgba(54,164,235,0.5)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前タイムランク',
+                    	data: [57.31,62.86,55.25,51.96,52.99,53.33,37.90,45.60,56.67,50.02,49.68,47.21,38.83,51.31,40.58,47.30],
+                    	borderColor : 'rgba(254,164,65)',
+                        backgroundColor : 'rgba(254,164,65,0.1)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前RPCI',
+                    	data: [41.8,41.8,45.7,43.5,45.1,38.9,53.3,49.3,41.8,40.8,40.8,43.1,40.8,38.9,50.3,47.4],
+                    	borderColor : 'rgb(221, 226, 15)',
+                        backgroundColor : 'rgba(241, 252, 27,0.1)'
+                    }
+                    ],
+            };
+		</script>
+
+		<!-- ⑤オプションの作成 -->
+
+		<script>
+		var complexChartOption = {
+				  tooltips: {
+				  },
+	              responsive: true,
+                    scales: {
+                    	xAxes: [{
+                    		ticks: {
+                    			autoSkip: false,
+                    			fontSize: 12,
+                    			minRotation: 20
+                    		},
+                    	}],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                min: 40,
+                                max: 70,
+                                fontSize: 13.5
+                            },
+                        }],
+                    }
+            };
+        </script>
+
+<!-- *****************************************************************************************
+     **********************************グラフ記述ここまで*******************************************
+     ***************************************************************************************** -->
+
+<!-- *****************************************************************************************
+*********************************							**********************************
+*********************************	テーブルを作成します(*´ω｀*)	**********************************
+*********************************							**********************************************************
+********************************************************************************************************************** -->
+
+	<div class="danceIndex">
+		<div class="tableTitle">
+		<h2>出馬表</h2>
+
+<div class="hidden_box">
+  <input type="radio" id="a" name="btn" checked="checked"><label for="a">出馬表</label>
+  <input type="radio" id="b" name="btn"><label for="b">過去4走</label>
+
+  <table class="text kako4sou" id="kako4sou">
+      <tr>
+        <th>枠番</th>
+        <th>馬番</th>
+        <th>印</th>
+        <th class="bamei">馬名</th>
+        <th colspan="3">1走前</th>
+        <th colspan="3">2走前</th>
+        <th colspan="3">3走前</th>
+        <th colspan="3">4走前</th>
+      </tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku1" rowspan="2">1</td>
+
+				<!-- 馬番 -->
+				<td>1</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013104246" target="_blank">クインズサターン</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy subTitle">
+              <div>'18 8/21</div>
+			       	<span class="dirt"></span>
+              <div>東京</div>
+             		<div>1800m</div>
+                <div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>師走Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>40.58</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>武蔵野Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>2着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.18</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">2000m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>シリウスＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>9着</td>
+			<!-- **** < SRun > **** -->
+				<td>34.74</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1800m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ラジオ日本賞</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>4着</td>
+			<!-- **** < SRun > **** -->
+				<td>41.95</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>2</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014105482" target="_blank">ユラノト</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ギャラクシー</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>2着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.25</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>武蔵野Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>4着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.97</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1700m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>マリーンＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.34</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>麦秋Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.86</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku2" rowspan="2">2</td>
+
+				<!-- 馬番 -->
+				<td>3</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013100358" target="_blank">サトノファンタシー</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>霜月Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.96</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>室町Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>8着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.62</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>天保山Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>9着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.80</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>欅ステークス</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.96</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>4</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015100344" target="_blank">ケイアイノーテック</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>阪神カップ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>6着</td>
+			<!-- **** < SRun > **** -->
+				<td>45.60</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>マイルＣＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>11着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.75</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1800m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>毎日王冠</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>5着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.50</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＮＨＫマイル</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.28</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku3" rowspan="2">3</td>
+
+				<!-- 馬番 -->
+				<td>5</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2011105881" target="_blank">ラブバレット</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＪＢＣスプリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>10着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.67</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>根岸Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>9着</td>
+			<!-- **** < SRun > **** -->
+				<td>42.20</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>根岸Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>10着</td>
+			<!-- **** < SRun > **** -->
+				<td>47.86</td>
+			</td>
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>6</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2012110091" target="_blank">モーニン</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＪＢＣスプリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>4着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.31</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>コーラルＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.94</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>阪急杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>16着</td>
+			<!-- **** < SRun > **** -->
+				<td>****</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>阪神カップ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>6着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.79</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku4" rowspan="2">4</td>
+
+				<!-- 馬番 -->
+				<td>7</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015100106" target="_blank">クロスケ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ニューイヤー</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>13着</td>
+			<!-- **** < SRun > **** -->
+				<td>47.21</td>
+			</td></td></td>
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>8</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014104002" target="_blank">ヤマニンアンプリメ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>門松Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.99</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>御影Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>2着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.35</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>貴船Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>4着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.49</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>藤森Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>2着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.79</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku5" rowspan="2">5</td>
+
+				<!-- 馬番 -->
+				<td>9</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013102815" target="_blank">ワンダーリーデル</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ジャニュアリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.33</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ＡリーフＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.26</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>グリーンＣＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>12着</td>
+			<!-- **** < SRun > **** -->
+				<td>40.27</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>天保山Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>5着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.99</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>10</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013105808" target="_blank">レッドゲルニカ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ジャニュアリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>7着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.31</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ギャラクシー</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>14着</td>
+			<!-- **** < SRun > **** -->
+				<td>40.36</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>欅ステークス</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>14着</td>
+			<!-- **** < SRun > **** -->
+				<td>39.02</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ポラリスＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>9着</td>
+			<!-- **** < SRun > **** -->
+				<td>44.71</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku6" rowspan="2">6</td>
+
+				<!-- 馬番 -->
+				<td>11</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015110078" target="_blank">コパノキッキング</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>カペラＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.02</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>ＡリーフＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.75</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>藤森Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>47.09</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>大阪スポ杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>4着</td>
+			<!-- **** < SRun > **** -->
+				<td>44.28</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>12</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014106474" target="_blank">サンライズノヴァ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1800m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>チャンピオン</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>6着</td>
+			<!-- **** < SRun > **** -->
+				<td>37.90</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>武蔵野Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.31</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>グリーンＣＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.35</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>アハルテケＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.61</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku7" rowspan="2">7</td>
+
+				<!-- 馬番 -->
+				<td>13</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2011104831" target="_blank">メイショウウタゲ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1600m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>武蔵野Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>10着</td>
+			<!-- **** < SRun > **** -->
+				<td>47.30</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>エニフＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.67</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1800m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>名鉄杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>14着</td>
+			<!-- **** < SRun > **** -->
+				<td>30.02</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1900m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>平安Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>10着</td>
+			<!-- **** < SRun > **** -->
+				<td>36.63</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>14</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2012102452" target="_blank">ノボバカラ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>カペラＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>15着</td>
+			<!-- **** < SRun > **** -->
+				<td>38.83</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＪＢＣスプリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>12着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.84</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>函館ＳＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>12着</td>
+			<!-- **** < SRun > **** -->
+				<td>47.77</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="turf"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京王杯ＳＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>16着</td>
+			<!-- **** < SRun > **** -->
+				<td>45.40</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 枠番 -->
+				<td class="waku8" rowspan="2">8</td>
+
+				<!-- 馬番 -->
+				<td>15</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2010100960" target="_blank">キタサンミカヅキ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>カペラＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.68</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＪＢＣスプリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>3着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.14</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>天保山Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>12着</td>
+			<!-- **** < SRun > **** -->
+				<td>40.83</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>欅ステークス</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>8着</td>
+			<!-- **** < SRun > **** -->
+				<td>43.31</td>
+
+				</tr>
+
+			<tr>
+
+				<!-- 馬番 -->
+				<td>16</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014110060" target="_blank">マテラスカイ</a></td>
+				<!-- 1走前 -->
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ＪＢＣスプリ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>2着</td>
+			<!-- **** < SRun > **** -->
+				<td>62.86</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="left kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1400m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>プロキオンＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.20</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>花のみちＳ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.80</td>
+
+
+			<!-- **** < 競争名 > **** -->
+
+				<td class="center kyosomei">
+
+				<div class="sideBy">
+			       	<div class="dirt"></div>
+             		<div class="kyori">1200m</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>橿原Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td>1着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.37</td>
+
+				</tr>
+
+    </table>
+
+<!-- ******************************************************************************************
+************************************************************************************************
+********************************		出馬表ここから		****************************************
+************************************************************************************************
+************************************************************************************************ -->
+
+		<table class="text danceTable">
+			<tr>
+				<th>枠番</th>
+				<th>馬番</th>
+				<th>印</th>
+				<th>馬名</th>
+				<th>性齢</th>
+				<th class="desctop">脚質</th>
+				<th class="desctop">平均距離</th>
+				<th>騎手</th>
+				<th class="desctop">斤量</th>
+				<th>人気</th>
+				<th class="desctop">ｵｯｽﾞ</th>
+				<th class="desctop">馬体重</th>
+				<th class="desctop">調教師</th>
+				<th class="desctop">毛色</th>
+			</tr>
+
+			<tr>
+
+				<td class="waku1" rowspan="2">1</td>
+
+				<td>1</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013104246" target="_blank">クインズサターン</a></td>
+				<td>牡6
+				<td class="desctop">追込
+				<td class="desctop">1800m
+				<td>四位洋文</td>
+				<td class="desctop">56.0
+</td>
+				<td>6
+</td>
+				<td class="desctop">12.9</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）野中賢二</td>
+				<td class="desctop">芦毛</td>
+			</tr>
+
+			<tr>
+
+				<td>2</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014105482" target="_blank">ユラノト</a></td>
+				<td>牡5
+				<td class="desctop">先行
+				<td class="desctop">1525m
+				<td>Ｃ．ルメール</td>
+				<td class="desctop">56.0
+</td>
+				<td>3
+</td>
+				<td class="desctop">5.8</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）松田国英</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku2" rowspan="2">2</td>
+
+				<td>3</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013100358" target="_blank">サトノファンタシー</a></td>
+				<td>牡6
+				<td class="desctop">差し
+				<td class="desctop">1350m
+				<td>岩田康誠</td>
+				<td class="desctop">56.0
+</td>
+				<td>8
+</td>
+				<td class="desctop">23.0</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）松田国英</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>4</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015100344" target="_blank">ケイアイノーテック</a></td>
+				<td>牡4
+				<td class="desctop">差し
+				<td class="desctop">1600m
+				<td>藤岡佑介</td>
+				<td class="desctop">58.0
+</td>
+				<td>7
+</td>
+				<td class="desctop">13.0</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）平田修</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku3" rowspan="2">3</td>
+
+				<td>5</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2011105881" target="_blank">ラブバレット</a></td>
+				<td>牡8
+				<td class="desctop">先行
+				<td class="desctop">1333m
+				<td>大野拓弥</td>
+				<td class="desctop">56.0
+</td>
+				<td>16
+</td>
+				<td class="desctop">230.9</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（美）加藤和宏</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>6</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2012110091" target="_blank">モーニン</a></td>
+				<td>牡7
+				<td class="desctop">追込
+				<td class="desctop">1350m
+				<td>和田竜二</td>
+				<td class="desctop">58.0
+</td>
+				<td>5
+</td>
+				<td class="desctop">12.5</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）石坂正</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku4" rowspan="2">4</td>
+
+				<td>7</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015100106" target="_blank">クロスケ</a></td>
+				<td>牡4
+				<td class="desctop">追込
+				<td class="desctop">1600m
+				<td>田辺裕信</td>
+				<td class="desctop">55.0
+</td>
+				<td>14
+</td>
+				<td class="desctop">114.3</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（美）水野貴広</td>
+				<td class="desctop">青鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>8</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014104002" target="_blank">ヤマニンアンプリメ</a></td>
+				<td>牝5
+				<td class="desctop">差し
+				<td class="desctop">1300m
+				<td>内田博幸</td>
+				<td class="desctop">54.0
+</td>
+				<td>11
+</td>
+				<td class="desctop">45.1</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）中村均</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku5" rowspan="2">5</td>
+
+				<td>9</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013102815" target="_blank">ワンダーリーデル</a></td>
+				<td>牡6
+				<td class="desctop">差し
+				<td class="desctop">1300m
+				<td>柴田大知</td>
+				<td class="desctop">56.0
+</td>
+				<td>13
+</td>
+				<td class="desctop">87.0</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）沖芳夫</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>10</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2013105808" target="_blank">レッドゲルニカ</a></td>
+				<td>ｾﾝ6
+				<td class="desctop">先行
+				<td class="desctop">1350m
+				<td>蛯名正義</td>
+				<td class="desctop">56.0
+</td>
+				<td>12
+</td>
+				<td class="desctop">77.0</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（美）藤沢和雄</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku6" rowspan="2">6</td>
+
+				<td>11</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2015110078" target="_blank">コパノキッキング</a></td>
+				<td>ｾﾝ4
+				<td class="desctop">逃げ
+				<td class="desctop">1250m
+				<td>Ｏ．マーフィー</td>
+				<td class="desctop">56.0
+</td>
+				<td>2
+</td>
+				<td class="desctop">4.5</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）村山明</td>
+				<td class="desctop">黒鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>12</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014106474" target="_blank">サンライズノヴァ</a></td>
+				<td>牡5
+				<td class="desctop">追込
+				<td class="desctop">1600m
+				<td>戸崎圭太</td>
+				<td class="desctop">57.0
+</td>
+				<td>1
+</td>
+				<td class="desctop">3.1</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）音無秀孝</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku7" rowspan="2">7</td>
+
+				<td>13</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2011104831" target="_blank">メイショウウタゲ</a></td>
+				<td>牡8
+				<td class="desctop">差し
+				<td class="desctop">1675m
+				<td>酒井学</td>
+				<td class="desctop">56.0
+</td>
+				<td>9
+</td>
+				<td class="desctop">37.7</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）安達昭夫</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td>14</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2012102452" target="_blank">ノボバカラ</a></td>
+				<td>牡7
+				<td class="desctop">追込
+				<td class="desctop">1250m
+				<td>Ｆ．ミナリク</td>
+				<td class="desctop">56.0
+</td>
+				<td>15
+</td>
+				<td class="desctop">171.1</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）森秀行</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+			<tr>
+
+				<td class="waku8" rowspan="2">8</td>
+
+				<td>15</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2010100960" target="_blank">キタサンミカヅキ</a></td>
+				<td>牡9
+				<td class="desctop">差し
+				<td class="desctop">1300m
+				<td>森泰斗</td>
+				<td class="desctop">58.0
+</td>
+				<td>9
+</td>
+				<td class="desctop">37.7</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（地）佐藤賢二</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+
+			<tr>
+
+				<td>16</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="https://db.netkeiba.com/horse/2014110060" target="_blank">マテラスカイ</a></td>
+				<td>牡5
+				<td class="desctop">逃げ
+				<td class="desctop">1250m
+				<td>武豊</td>
+				<td class="desctop">57.0
+</td>
+				<td>4
+</td>
+				<td class="desctop">6.6</td>
+				<td class="desctop">-</td>
+				<td class="left desctop">（栗）森秀行</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+
+		</table>
+		</div>
+
+</div>
+</body>
+</html>

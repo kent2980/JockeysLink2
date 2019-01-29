@@ -400,6 +400,7 @@ function urlJump() {
       <th>勝ち馬</th>
       <th>Ave3f</th>
       <th>RPCI</th>
+      <th>SRun</th>
     </tr>
     <%
     for(ViewRaceShosai result : resultList) {
@@ -412,6 +413,7 @@ function urlJump() {
       <td><% out.print(result.getKachiumaBamei()); %></td>
       <td><% out.print(result.getAve3f()); %></td>
       <td><% out.print(result.getRpci()); %></td>
+      <td><% out.print(result.getSrunRow()); %></td>
     </tr>
     <%} %>
   </table>
