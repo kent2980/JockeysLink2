@@ -559,6 +559,20 @@ function urlJump() {
 			dtf = DateTimeFormatter.ofPattern("yy MM/dd");
 			kaisai = ld.format(dtf);
 				%>
+				<%
+				StringBuilder lap = new StringBuilder();
+				for(BigDecimal lapTime: uma.getLap()){
+					if(lapTime.equals(BigDecimal.valueOf(0.0))){
+						break;
+					}
+					lap.append(lapTime);
+					lap.append("-");
+				}
+				lap.delete(lap.length()-1, lap.length());
+				%>
+				<div class="lapTime">
+  				<p><% out.print(lap.toString()); %></p>
+        		</div>				
 				<div class="sideBy subTitle">
 			       	<span class="<% out.print(baba); %>"></span>
               		<div><% out.print("'" + kaisai); %></div>
