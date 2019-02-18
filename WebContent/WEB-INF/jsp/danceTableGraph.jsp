@@ -568,10 +568,17 @@ function urlJump() {
 					lap.append(lapTime);
 					lap.append("-");
 				}
-				lap.delete(lap.length()-1, lap.length());
+				System.out.println(lap.length());
+				String lapTime;
+				if(lap.length()==0){
+					lapTime = "***";
+				}else{
+					lap.delete(lap.length()-1, lap.length());
+					lapTime = lap.toString();
+				}					
 				%>
 				<div class="lapTime">
-  				<p><% out.print(lap.toString()); %></p>
+  				<p><% out.print(lapTime); %></p>
         		</div>				
 				<div class="sideBy subTitle">
 			       	<span class="<% out.print(baba); %>"></span>
