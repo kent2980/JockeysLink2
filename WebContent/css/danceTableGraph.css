@@ -18,13 +18,16 @@ body {
 ********************************************/
 
 .chaRed{
-	color: rgb(231, 27, 27);
+	color: rgb(251, 27, 27);
 }
 .chaBlue{
 	color: rgb(33, 104, 223);
 }
 .chaGreen{
 	color: rgb(39, 223, 74);
+}
+.chaDarkRed{
+	color: rgb(210, 22, 22);
 }
 
 /*******************************************
@@ -435,6 +438,7 @@ border-style: solid;
 border-width: 1px;
 border-color: #dedede #666666 #666666 #dedede;
 font-size: 14px;
+font-weight: 600;
 		}
 @media screen and (orientation: portrait) {
     /*　縦画面で適用　*/

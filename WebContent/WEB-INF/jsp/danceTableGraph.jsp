@@ -565,10 +565,20 @@ function urlJump() {
 					if(lapTime.equals(BigDecimal.valueOf(0.0))){
 						break;
 					}
+					boolean flag = false;
+					if(lapTime.compareTo(BigDecimal.valueOf(11.5)) < 0){
+						flag = true;
+						lap.append("<span class=\"chaRed\">");
+					}else if(lapTime.compareTo(BigDecimal.valueOf(12)) < 0){
+						flag = true;
+						lap.append("<span class=\"chaDarkRed\">");
+					}
 					lap.append(lapTime);
+					if(flag == true){
+						lap.append("</span>");
+					}
 					lap.append("-");
 				}
-				System.out.println(lap.length());
 				String lapTime;
 				if(lap.length()==0){
 					lapTime = "***";
