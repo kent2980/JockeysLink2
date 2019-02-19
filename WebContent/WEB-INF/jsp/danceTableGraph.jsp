@@ -27,6 +27,7 @@
 		 import="com.example.entity.ViewRaceShosaiMapper"
 		 import="com.view.racedata.RaceShosaiReader"
 		 import="java.util.stream.Collectors"
+		 import="java.util.Collections"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -586,8 +587,47 @@ function urlJump() {
 					lap.delete(lap.length()-1, lap.length());
 					lapTime = lap.toString();
 				}					
+				StringBuilder cornerJuni = new StringBuilder();
+				if(uma.getCorner1Juni() != 0){
+					cornerJuni.append(uma.getCorner1Juni());
+				}
+				if(uma.getCorner2Juni() != 0){
+					if(uma.getCorner1Juni() != 0)
+					cornerJuni.append("-");
+					cornerJuni.append(uma.getCorner2Juni());
+				}
+				if(uma.getCorner3Juni() != 0){
+					if(uma.getCorner2Juni() != 0)
+					cornerJuni.append("-");
+					cornerJuni.append(uma.getCorner3Juni());
+				}
+				if(uma.getCorner4Juni() != 0){
+					if(uma.getCorner3Juni() != 0)
+					cornerJuni.append("-");
+					cornerJuni.append(uma.getCorner4Juni());
+				}
+				List<BigDecimal> rk3f = uma.getLap();
+				Collections.reverse(rk3f);
+				BigDecimal raceKohan3f = BigDecimal.valueOf(0.0);
+				for(int x = 0; x < rk3f.size(); x++){
+					if(rk3f.get(x).equals(BigDecimal.valueOf(0.0))){
+						rk3f.remove(x--);
+					}
+				}
+				for(int x = 0; x < 3; x++){
+					raceKohan3f = rk3f.get(x).add(raceKohan3f);
+				}
 				%>
 				<div class="lapTime">
+				<p>
+					<span><% out.print(uma.getKyakushitsu()); %></span>
+					<span><% out.print(cornerJuni.toString()); %></span>
+					<span><% out.print("RPCI：" + uma.getRPCI()); %></span>
+				</p>
+				<p>
+					<span><% out.print("レース上がり3F：" + raceKohan3f); %></span>
+					<span><% out.print("上がり3F：" + uma.getKohan3F()); %></span>
+				</p>
   				<p><% out.print(lapTime); %></p>
         		</div>				
 				<div class="sideBy subTitle">
