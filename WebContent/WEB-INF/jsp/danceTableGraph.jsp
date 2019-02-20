@@ -8,6 +8,7 @@
          import="com.pckeiba.analysis.UmagotoAnalysis"
          import="com.pckeiba.schedule.RaceListLoad"
          import="com.pckeiba.racedata.RaceDataDefault"
+         import="com.pckeiba.list.LapList"
          import="java.util.List"
          import="java.util.Map"
          import="java.io.PrintWriter"
@@ -617,6 +618,7 @@ function urlJump() {
 				for(int x = 0; x < 3; x++){
 					raceKohan3f = rk3f.get(x).add(raceKohan3f);
 				}
+				LapList lapList = uma.getLap();
 				%>
 				<div class="lapTime">
 				<p>
@@ -625,8 +627,12 @@ function urlJump() {
 					<span><% out.print("RPCI：" + uma.getRPCI()); %></span>
 				</p>
 				<p>
-					<span><% out.print("レース上がり3F：" + raceKohan3f); %></span>
+					<span><% out.print("レース上がり3F：" + lapList.getRaceKohan3f()); %></span>
 					<span><% out.print("上がり3F：" + uma.getKohan3F()); %></span>
+				</p>
+				<p>
+					<span><% out.print("最も速いのは" + lapList.getHiSpeedPoint()*200 + "m地点"); %></span>
+					<span><% out.print("最も加速したのは" + lapList.getSpeedUpperPoint()*200 + "m地点"); %></span>
 				</p>
   				<p><% out.print(lapTime); %></p>
         		</div>				
