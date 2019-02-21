@@ -1,6 +1,8 @@
 package com.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -81,8 +83,17 @@ public class RaceDataLoader implements Serializable{
 		umaList = umaLoad.getList().stream().filter(s -> s.getUmaID()==1).collect(Collectors.toList());
 		umaMapList = new ArrayList<>();
 		drunSortList = new UmagotoDrunLoad(raceCode).getDrunSortList();
-		for(int i=2; i<=hit;i++) {
-			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(i));
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+		LocalDate kaisaibi = LocalDate.parse(rds.getKaisaiNenGappi(), dtf);
+		int bango;
+		if(today.compareTo(kaisaibi) < 0) {
+			bango = 1;
+		}else {
+			bango = 2;
+		}
+		for(; bango <= hit; bango++) {
+			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(bango));
 		}
 		indexLoad = new UmagotoDataIndexLoad(raceCode, 4);
 	}
