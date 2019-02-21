@@ -29,6 +29,7 @@
 		 import="com.view.racedata.RaceShosaiReader"
 		 import="java.util.stream.Collectors"
 		 import="java.util.Collections"
+		 import="java.util.Comparator"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -431,7 +432,15 @@ function urlJump() {
         <th colspan="3">3走前</th>
         <th colspan="3">4走前</th>
       </tr>
-      			<% for(int i = 0; i < umaNowData.size(); i++){
+      			<%
+      			Comparator<UmagotoDataSet> comparator = new Comparator<UmagotoDataSet>() {
+      	            @Override
+      	            public int compare(UmagotoDataSet o1, UmagotoDataSet o2) {
+      	                return Integer.valueOf(o1.getUmaban()).compareTo(Integer.valueOf(o2.getUmaban()));
+      	            }
+      	        };
+      	        Collections.sort(umaNowData, comparator);
+      			for(int i = 0; i < umaNowData.size(); i++){
 					int umaban = i + 1;
 					UmagotoDataSet data = umaNowData.get(i);
 					String kettoTorokuBango = data.getKettoTorokuBango();
