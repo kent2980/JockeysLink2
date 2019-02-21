@@ -339,7 +339,7 @@ function urlJump() {
                         yAxes: [{
                             ticks: {
                                 beginAtZero:true,
-                                min: <% out.print(minYscale); %>,
+                                min: 30,
                                 max: 70,
                                 fontSize: 13.5
                             },
@@ -614,9 +614,6 @@ function urlJump() {
 					if(rk3f.get(x).equals(BigDecimal.valueOf(0.0))){
 						rk3f.remove(x--);
 					}
-				}
-				for(int x = 0; x < 3; x++){
-					raceKohan3f = rk3f.get(x).add(raceKohan3f);
 				}
 				LapList lapList = uma.getLap();
 				%>
