@@ -425,6 +425,7 @@ function urlJump() {
       <tr>
         <th>枠番</th>
         <th>馬番</th>
+        <th>着順</th>
         <th>印</th>
         <th class="bamei">馬名</th>
         <th colspan="3">1走前</th>
@@ -477,6 +478,8 @@ function urlJump() {
 				%>
 				<!-- 馬番 -->
 				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
+				<!-- 着順 -->
+				<td><% out.print(data.getKakuteiChakujun() + "着"); %></td>
 				<!-- 馬印 -->
 				<td>
 					<select name="shirushi" class="shirushi">
