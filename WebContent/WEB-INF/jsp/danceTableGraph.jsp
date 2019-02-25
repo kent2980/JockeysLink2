@@ -425,7 +425,7 @@ function urlJump() {
       <tr>
         <th>枠番</th>
         <th>馬番</th>
-        <th>着順</th>
+        <th class="chakujun">着順</th>
         <th>印</th>
         <th class="bamei">馬名</th>
         <th colspan="3">1走前</th>
@@ -464,6 +464,19 @@ function urlJump() {
 					}
 					String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\"" : wakuban == nextWakuban ? " rowspan=\"2\"" : "";
 					boolean wakuHantei = wakuban == previousWakuban;
+		        	
+					//着順ごとに色を指定します
+		        	String chakujunColor = "";
+		        	switch(data.getKakuteiChakujun()){
+		        	case 1:
+		        		chakujunColor = "chaRed";
+		        		break;
+		        	case 2:
+		        		chakujunColor = "chaBlue";
+		        		break;
+		        	case 3:
+		        		chakujunColor = "chaGreen";
+		        	}
 			%>
 			<tr>
 				<%
@@ -479,7 +492,7 @@ function urlJump() {
 				<!-- 馬番 -->
 				<td><% out.print(data.getUmaban()==0 ? umaban : data.getUmaban()); %></td>
 				<!-- 着順 -->
-				<td><% out.print(data.getKakuteiChakujun() + "着"); %></td>
+				<td class="<% out.print(chakujunColor); %>"><% out.print(data.getKakuteiChakujun() + "着"); %></td>
 				<!-- 馬印 -->
 				<td>
 					<select name="shirushi" class="shirushi">
@@ -524,7 +537,7 @@ function urlJump() {
 			}
 			String baba = "";
 			String fontColor = "";
-			String chakujunColor = "";
+			chakujunColor = "";
 			switch(uma.getGrade().replace("特別競走", "")){
 			case "ＧⅠ":
 				fontColor = " chaRed";

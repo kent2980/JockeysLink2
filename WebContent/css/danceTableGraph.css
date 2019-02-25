@@ -24,7 +24,7 @@ body {
 	color: rgb(33, 104, 223);
 }
 .chaGreen{
-	color: rgb(39, 223, 74);
+	color: rgb(17, 143, 46);
 }
 .chaDarkRed{
 	color: rgb(210, 22, 22);
@@ -357,6 +357,11 @@ td.bamei {
 #dance table .subTitle > div {
 		margin: 0 1px;
 }
+
+		/****テーブルの幅を調整する****/
+				th.chakujun {
+					width: 3em;
+				}
 
 /****枠番で色を設定する****/
 
