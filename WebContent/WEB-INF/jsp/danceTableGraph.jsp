@@ -647,6 +647,7 @@ function urlJump() {
 					<span><% out.print(uma.getKyakushitsu()); %></span>
 					<span><% out.print(cornerJuni.toString()); %></span>
 					<span><% out.print("RPCI：" + uma.getRPCI()); %></span>
+					<span><% out.print(lapList.getLapType()); %></span>
 				</p>
 				<p>
 					<span><% out.print("レース上がり3F：" + lapList.getRaceKohan3f()); %></span>
