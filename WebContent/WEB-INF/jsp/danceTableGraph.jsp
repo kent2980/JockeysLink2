@@ -469,13 +469,13 @@ function urlJump() {
 		        	String chakujunColor = "";
 		        	switch(data.getKakuteiChakujun()){
 		        	case 1:
-		        		chakujunColor = "chaRed";
+		        		chakujunColor = "chaRed bold";
 		        		break;
 		        	case 2:
-		        		chakujunColor = "chaBlue";
+		        		chakujunColor = "chaBlue bold";
 		        		break;
 		        	case 3:
-		        		chakujunColor = "chaGreen";
+		        		chakujunColor = "chaGreen bold";
 		        	}
 			%>
 			<tr>
