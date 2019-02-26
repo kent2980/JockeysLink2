@@ -502,7 +502,7 @@ function urlJump() {
 						<option value="maru">〇</option>
 						<option value="kurosankaku">▲</option>
 						<option value="sankaku">△</option>
-						<option value="star">★</option>
+						<option value="star">×</option>
 					</select>
 				</td>
 				<!-- 馬名 -->
