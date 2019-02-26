@@ -1,0 +1,2788 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
+<link href="../css/danceTableGraph.css" rel="stylesheet">
+<link href="/JockeysLink/css/danceTableGraph.css" rel="stylesheet">
+<link rel="shortcut icon" href="/JockeysLink/icon/kyosoba_3.ico">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/pop.js"></script>
+<script type="text/javascript" src="/JockeysLink/js/pop.js"></script>
+<title>有馬記念</title>
+</head>
+<body id="dance">
+
+<!-- *****************************************************************************************
+     *****************************************************************************************
+     							レースデータを記述します
+     *****************************************************************************************
+     ***************************************************************************************** -->
+<div id="title">
+  
+  <a href="/JockeysLink/kaisaichedule?year=2019">
+  <div id="logo">
+    <!-- <img src="../picture/logo.jpg" alt="トップページへのリンク" class="logo"> -->
+    <img src="/JockeysLink/picture/logo.jpg" alt="トップページへのリンク" class="logo">
+    <span class="title">Jockeys->Link</span>
+  </div>
+  </a>
+  <div id="roundData">
+  	  <span class="kaisai">2018年12月23日（祝）</span>
+	  <span class="keibajo">中山</span>
+	  <span class="round">11R</span>
+  </div>
+  <div id="kyosomei">
+  	
+    <span class="kaiji">第63回</span>
+  	<span class="kyosomei">有馬記念</span>
+  </div>
+  <div id="raceData">
+	  <div class="raceSelect">
+	  	<form name="fm">
+		  	<select name="s" class="raceSelect" onchange="urlJump()">
+		  		<option value="" hidden disabled selected></option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122306050808&mode=dance">中山 - 08R　キャンドルライト賞</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122306050809&mode=dance">中山 - 09R　グッドラックハンデ</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122306050810&mode=dance">中山 - 10R　フェアウェルＳ</option>
+		  		
+		  		<option selected value="/JockeysLink/DanceTableGraph?racecode=2018122306050811&mode=dance">中山 - 11R　有馬記念</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122306050812&mode=dance">中山 - 12R　クリスマスカップ</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122309050809&mode=dance">阪神 - 09R　千両賞</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122309050810&mode=dance">阪神 - 10R　クリスマスキャロル賞</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122309050811&mode=dance">阪神 - 11R　サンタクロースＳ</option>
+		  		
+		  		<option value="/JockeysLink/DanceTableGraph?racecode=2018122309050812&mode=dance">阪神 - 12R　ギャラクシーＳ</option>
+		  		
+		  	</select>
+	  	</form>
+	  </div>
+	  <div id="data">
+		  <div class="courseData desctop">
+		    <span>2500m</span>
+		    <span>芝･右</span>
+		    <span>15:25</span>
+		  </div>
+		  <div class="raceData desctop">
+		  	<span>オープン
+</span>
+		  	<span>サラ系3歳以上
+</span>
+		  	<span>(国際)(指定)
+</span>
+		  	<span>定量</span>
+		  	<span>16頭</span>
+		  	<!--  <span>＜＞</span> -->
+		  </div>
+	  </div>
+  </div>
+    <div id="menu">
+      <div>
+        <span class ="navi">分析</span>
+      </div>
+          <div>
+            <a href="https://ipat.netkeiba.com/?pid=ipat_input&rid=201806050811" target="_blank" class ="navi">IPAT</a>
+          </div>
+          <div>
+            <a href="/JockeysLink/DanceTableGraph?racecode=2018122306050811&mode=result" class ="navi">結果</a>
+          </div>
+  </div>
+</div>
+
+<!-- URLジャンプのJavaScript -->
+<script type="text/javascript">
+function urlJump() {
+    var browser = document.fm.s.value;
+    location.href = browser;
+}
+</script>
+<!-- *****************************************************************************************
+     ********************************ここからグラフを記述する*****************************************
+     ***************************************************************************************** -->
+
+        <!-- ①チャート描画先を設置 -->
+        
+        <div id="timeChart" class="Chart" width:"100%">
+        	<h2 class=title>タイムランク</h2>
+        	<canvas id="myChart" width="100" height="35"></canvas>
+		</div>
+
+        <!-- ②Chart.jsの読み込み -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+		<!-- ③チャート描画情報の作成 -->
+		<script>
+			window.onload = function() {
+			    ctx = document.getElementById("myChart").getContext("2d");
+			    window.myBar = new Chart(ctx, {
+			        type: 'bar',
+			        data: barChartData,
+			        options: complexChartOption
+			    });
+			};
+		</script>
+
+        <!-- ④チャートデータの作成 -->
+        <script>
+            var barChartData = {
+                	labels: [["14. キセキ / 2人気", "（前走：2018／11／25）"],["12. レイデオロ / 1人気", "（前走：2018／10／28）"],["8. ブラストワンピース / 3人気", "（前走：2018／10／21）"],["15. シュヴァルグラン / 9人気", "（前走：2018／11／25）"],["6. サトノダイヤモンド / 6人気", "（前走：2018／11／25）"],["11. ミッキーロケット / 8人気", "（前走：2018／10／28）"],["4. マカヒキ / 12人気", "（前走：2018／10／28）"],["5. パフォーマプロミス / 7人気", "（前走：2018／11／4）"],["16. サクラアンプルール / 15人気", "（前走：2018／10／28）"],["10. ミッキースワロー / 10人気", "（前走：2018／11／25）"],["13. スマートレイアー / 16人気", "（前走：2018／11／11）"],["2. クリンチャー / 11人気", "（前走：2018／4／29）"],["3. モズカッチャン / 4人気", "（前走：2018／11／11）"],["9. リッジマン / 13人気", "（前走：2018／12／1）"],["7. サウンズオブアース / 14人気", "（前走：2018／11／25）"],["1. オジュウチョウサン / 5人気", "（前走：2018／11／3）"]],
+                    datasets: [
+                    {
+                    	type: 'bar',
+                        label: 'タイムランク',
+                    	data: [59.13,57.81,57.55,56.75,56.63,55.67,55.52,55.11,54.92,54.11,54.02,53.74,53.22,49.24,47.29,44.28],
+                    	backgroundColor : ['rgba(255, 57, 59, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 140, 60, 0.8)','rgba(57, 157, 255, 0.8)','rgba(246, 255, 69, 0.8)','rgba(246, 255, 69, 0.8)','rgba(57, 157, 255, 0.8)','rgba(255, 140, 60, 0.8)','rgba(255, 140, 60, 0.8)','rgba(57, 157, 255, 0.8)','rgba(255, 140, 60, 0.8)','rgba(246, 255, 69, 0.8)','rgba(255, 140, 60, 0.8)'],
+                        borderWidth: 1
+                    },
+                    {
+                    	type: 'line',
+                    	label: 'トップスピード',
+                    	data: [48.67,50.21,49.62,46.77,48.64,48.75,49.98,56.98,56.22,50.00,49.05,46.58,50.65,47.37,48.94,45.11],
+                    	borderColor : 'rgba(54,164,235)',
+                        backgroundColor : 'rgba(54,164,235,0.5)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前タイムランク',
+                    	data: [62.67,63.35,57.31,58.80,56.23,60.60,57.18,57.89,57.86,56.23,51.13,58.71,53.08,51.23,35.15,54.97],
+                    	borderColor : 'rgba(254,164,65)',
+                        backgroundColor : 'rgba(254,164,65,0.1)'
+                    },
+                    {
+                    	type: 'line',
+                    	label: '1走前RPCI',
+                    	data: [52.9,52.2,61.0,52.9,52.9,52.2,52.2,64.2,52.2,52.9,56.3,53.0,56.3,54.8,52.9,54.0],
+                    	borderColor : 'rgb(221, 226, 15)',
+                        backgroundColor : 'rgba(241, 252, 27,0.1)'
+                    }
+                    ],
+            };
+		</script>
+
+		<!-- ⑤オプションの作成 -->
+		
+		<script>
+		var complexChartOption = {
+				  tooltips: {
+				  },
+	              responsive: true,
+                    scales: {
+                    	xAxes: [{
+                    		ticks: {
+                    			autoSkip: false,
+                    			fontSize: 12,
+                    			minRotation: 20
+                    		},
+                    	}],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                min: 40,
+                                max: 70,
+                                fontSize: 13.5
+                            },
+                        }],
+                    }
+            };
+        </script>
+
+<!-- *****************************************************************************************
+     **********************************グラフ記述ここまで*******************************************
+     ***************************************************************************************** -->
+
+<!-- *****************************************************************************************
+*********************************							**********************************
+*********************************	テーブルを作成します(*´ω｀*)	**********************************
+*********************************							**********************************************************
+********************************************************************************************************************** -->
+
+	<div class="danceIndex">
+		<div class="tableTitle">
+		<h2>出馬表</h2>
+
+<div class="hidden_box">
+  <input type="radio" id="a" name="btn" checked="checked"><label for="a">出馬表</label>
+  <input type="radio" id="b" name="btn"><label for="b">過去4走</label>
+  <input type="radio" id="c" name="btn"><label for="c">過去結果</label>
+
+  <table class="text kakoResult" id="kakoResult">
+  
+  	<tr>
+      <th>開催日</th>
+      <th>レース名</th>
+      <th>勝ち馬</th>
+      <th>Ave3f</th>
+      <th>RPCI</th>
+      <th>SRun</th>
+    </tr>
+    
+    <tr>
+
+      <td>2017年12月24日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2017122406050811&mode=result">有馬記念</a></td>
+      <td>キタサンブラック</td>
+      <td>37.4</td>
+      <td>56.2</td>
+      <td>58.83</td>
+    </tr>
+    
+    <tr>
+
+      <td>2016年12月25日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2016122506050910&mode=result">有馬記念</a></td>
+      <td>サトノダイヤモンド</td>
+      <td>36.9</td>
+      <td>52.7</td>
+      <td>57.08</td>
+    </tr>
+    
+    <tr>
+
+      <td>2015年12月27日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2015122706050810&mode=result">有馬記念</a></td>
+      <td>ゴールドアクター</td>
+      <td>37.3</td>
+      <td>56.5</td>
+      <td>59.54</td>
+    </tr>
+    
+    <tr>
+
+      <td>2014年12月28日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2014122806040810&mode=result">有馬記念</a></td>
+      <td>ジェンティルドンナ</td>
+      <td>38.1</td>
+      <td>60.2</td>
+      <td>52.29</td>
+    </tr>
+    
+    <tr>
+
+      <td>2013年12月22日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2013122206050810&mode=result">有馬記念</a></td>
+      <td>オルフェーヴル</td>
+      <td>36.5</td>
+      <td>49.5</td>
+      <td>62.33</td>
+    </tr>
+    
+    <tr>
+
+      <td>2012年12月23日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2012122306050810&mode=result">有馬記念</a></td>
+      <td>ゴールドシップ</td>
+      <td>36.6</td>
+      <td>51.7</td>
+      <td>59.15</td>
+    </tr>
+    
+    <tr>
+
+      <td>2011年12月25日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2011122506050810&mode=result">有馬記念</a></td>
+      <td>オルフェーヴル</td>
+      <td>38.5</td>
+      <td>63.3</td>
+      <td>50.49</td>
+    </tr>
+    
+    <tr>
+
+      <td>2010年12月26日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2010122606050810&mode=result">有馬記念</a></td>
+      <td>ヴィクトワールピサ</td>
+      <td>37.3</td>
+      <td>57.7</td>
+      <td>58.83</td>
+    </tr>
+    
+    <tr>
+
+      <td>2007年12月23日</td>
+      <td><a href="/JockeysLink/DanceTableGraph?racecode=2007122306050809&mode=result">有馬記念</a></td>
+      <td>マツリダゴッホ</td>
+      <td>37.0</td>
+      <td>51.7</td>
+      <td>null</td>
+    </tr>
+    
+  </table>
+
+  <table class="text kako4sou" id="kako4sou">
+      <tr>
+        <th>枠番</th>
+        <th>馬番</th>
+        <th>印</th>
+        <th class="bamei">馬名</th>
+        <th colspan="3">1走前</th>
+        <th colspan="3">2走前</th>
+        <th colspan="3">3走前</th>
+        <th colspan="3">4走前</th>
+      </tr>
+      			
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku1" rowspan="2">1</td>
+				
+				<!-- 馬番 -->
+				<td>1</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11101125" target="_blank">オジュウチョウサン</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="center kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaDarkRed">11.9</span>-12.7-12.9-12.5-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.6</span>-12.2-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.9</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/03</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>南武特別</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.97</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="center kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.4</span>-12.2-12.7-12.6-12.4-13.0-12.9-12.6-12.3-12.2-12.3-12.7</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 07/07</div>
+              		<div>福島</div>
+             		<div>2600m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>開成山特別</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.53</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>***</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class=""></span>
+              		<div>'18 04/14</div>
+              		<div>中山</div>
+             		<div>4250m</div>
+                	<div></div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">Ｊ･ＧⅠ</span>中山ＧＪ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>****</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>***</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class=""></span>
+              		<div>'17 12/23</div>
+              		<div>中山</div>
+             		<div>4100m</div>
+                	<div></div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">Ｊ･ＧⅠ</span>中山大障害</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>****</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>2</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14100656" target="_blank">クリンチャー</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-<span class="chaRed">11.4</span>-12.0-12.5-12.3-12.0-13.2-12.6-12.6-12.8-12.6-12.1-12.1-<span class="chaRed">11.4</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/29</div>
+              		<div>京都</div>
+             		<div>3200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（春）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.71</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-12.4-12.3-12.6-13.3-12.8-12.3-12.0-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.9</span>-12.0-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 03/18</div>
+              		<div>阪神</div>
+             		<div>3000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>阪神大賞典</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.73</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaDarkRed">11.5</span>-13.3-13.0-12.7-12.6-12.2-12.2-12.2-<span class="chaDarkRed">11.8</span>-12.3</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 02/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.84</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.2-12.6-12.0-13.1-13.2-13.5-14.5-14.3-13.5-13.0-13.1-12.9-13.4-12.7-13.9</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'17 10/22</div>
+              		<div>京都</div>
+             		<div>3000m</div>
+                	<div>不良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>菊花賞</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.69</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku2" rowspan="2">2</td>
+				
+				<!-- 馬番 -->
+				<td>3</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14102565" target="_blank">モズカッチャン</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.3-<span class="chaRed">11.2</span>-12.9-12.7-12.3-12.5-12.5-12.0-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.7</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>エリザベス杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.08</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">10.4</span>-<span class="chaDarkRed">11.5</span>-12.1-12.6-12.4-12.0-12.6-12.5-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 08/19</div>
+              		<div>札幌</div>
+             		<div>2000m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>札幌記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.06</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaDarkRed">11.5</span>-13.3-13.0-12.7-12.6-12.2-12.2-12.2-<span class="chaDarkRed">11.8</span>-12.3</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 02/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.91</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">11.3</span>-12.7-12.8-12.7-12.8-12.9-12.2-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'17 11/12</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>エリザベス杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>53.84</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>4</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13105788" target="_blank">マカヒキ</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">10.9</span>-<span class="chaDarkRed">11.6</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/28</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">7着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.18</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">10.4</span>-<span class="chaDarkRed">11.5</span>-12.1-12.6-12.4-12.0-12.6-12.5-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 08/19</div>
+              		<div>札幌</div>
+             		<div>2000m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>札幌記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.06</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-12.1-12.1-<span class="chaDarkRed">11.8</span>-12.1-12.3-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.8</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'17 11/26</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.10</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.2-12.5-12.9-12.5-13.1-13.0-12.4-12.0-12.7-14.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'17 10/29</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>不良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">5着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.74</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku3" rowspan="2">3</td>
+				
+				<!-- 馬番 -->
+				<td>5</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=12104503" target="_blank">パフォーマプロミス</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p><span class="chaRed">7.2</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.8</span>-12.9-12.9-12.6-13.3-13.0-12.6-12.3-<span class="chaRed">11.1</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.2</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/04</div>
+              		<div>東京</div>
+             		<div>2500m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>アルゼンチン</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.89</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.8</span>-<span class="chaRed">11.4</span>-12.7-12.3-12.0-<span class="chaDarkRed">11.8</span>-12.1-12.2-<span class="chaDarkRed">11.7</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 06/24</div>
+              		<div>阪神</div>
+             		<div>2200m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>宝塚記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">9着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.26</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p><span class="chaRed">7.3</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.5</span>-12.7-12.4-12.0-12.0-12.1-12.0-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 05/27</div>
+              		<div>東京</div>
+             		<div>2500m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>目黒記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.58</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.7</span>-13.0-13.0-12.6-12.3-12.5-12.3-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 01/14</div>
+              		<div>京都</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>日経新春杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.70</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>6</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13106101" target="_blank">サトノダイヤモンド</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">10.8</span>-12.2-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.4</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/25</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">6着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.23</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">11.1</span>-<span class="chaDarkRed">11.7</span>-12.7-12.8-12.3-12.2-12.6-12.0-12.1-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/08</div>
+              		<div>京都</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都大賞典</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>61.86</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.8</span>-<span class="chaRed">11.4</span>-12.7-12.3-12.0-<span class="chaDarkRed">11.8</span>-12.1-12.2-<span class="chaDarkRed">11.7</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 06/24</div>
+              		<div>阪神</div>
+             		<div>2200m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>宝塚記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">6着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.56</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.3</span>-12.4-12.4-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.2</span>-<span class="chaRed">11.1</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/01</div>
+              		<div>阪神</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>大阪杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">7着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.88</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku4" rowspan="2">4</td>
+				
+				<!-- 馬番 -->
+				<td>7</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11104377" target="_blank">サウンズオブアース</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">10.8</span>-12.2-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.4</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/25</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">14着</td>
+			<!-- **** < SRun > **** -->
+				<td>35.15</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.0</span>-<span class="chaDarkRed">11.5</span>-12.0-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">10.9</span>-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.7</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/07</div>
+              		<div>東京</div>
+             		<div>1800m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>毎日王冠</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">9着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.28</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">10.4</span>-<span class="chaDarkRed">11.5</span>-12.1-12.6-12.4-12.0-12.6-12.5-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 08/19</div>
+              		<div>札幌</div>
+             		<div>2000m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>札幌記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.39</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p><span class="chaRed">7.3</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.5</span>-12.7-12.4-12.0-12.0-12.1-12.0-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 05/27</div>
+              		<div>東京</div>
+             		<div>2500m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>目黒記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">12着</td>
+			<!-- **** < SRun > **** -->
+				<td>48.36</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>8</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=15104882" target="_blank">ブラストワンピース</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaDarkRed">11.9</span>-12.5-12.9-12.6-12.4-13.3-13.0-12.8-12.7-12.8-12.2-12.2-<span class="chaRed">10.7</span>-<span class="chaRed">11.3</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/21</div>
+              		<div>京都</div>
+             		<div>3000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>菊花賞</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.31</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">11.1</span>-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.9</span>-<span class="chaDarkRed">11.9</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">10.7</span>-12.2</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 09/02</div>
+              		<div>新潟</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>新潟記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>61.04</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.7-<span class="chaRed">11.0</span>-12.3-12.4-12.4-12.3-12.2-12.0-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.2</span>-<span class="chaRed">11.2</span>-12.2</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 05/27</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>東京優駿</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">5着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.07</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.5</span>-12.0-12.3-12.1-<span class="chaDarkRed">11.5</span>-<span class="chaRed">11.1</span>-<span class="chaDarkRed">11.5</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 03/24</div>
+              		<div>阪神</div>
+             		<div>1800m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>毎日杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.77</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku5" rowspan="2">5</td>
+				
+				<!-- 馬番 -->
+				<td>9</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13103569" target="_blank">リッジマン</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-12.0-13.7-12.4-12.0-12.9-12.8-12.9-12.8-12.8-13.4-12.7-12.4-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-12.6</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 12/01</div>
+              		<div>中山</div>
+             		<div>3600m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>ステイヤーズ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.23</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="center kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.3-12.0-12.2-12.4-12.2-12.5-12.6-12.6-12.5-12.0-12.7-12.7-12.9</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 09/02</div>
+              		<div>札幌</div>
+             		<div>2600m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>丹頂Ｓ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.62</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p><span class="chaRed">7.3</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.5</span>-12.7-12.4-12.0-12.0-12.1-12.0-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 05/27</div>
+              		<div>東京</div>
+             		<div>2500m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>目黒記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">14着</td>
+			<!-- **** < SRun > **** -->
+				<td>39.64</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="center kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.2-<span class="chaDarkRed">11.6</span>-12.3-12.6-12.6-12.2-12.6-<span class="chaDarkRed">11.9</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 05/05</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade"></span>メトロポリタ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">8着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.49</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>10</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14106160" target="_blank">ミッキースワロー</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">10.8</span>-12.2-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.4</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/25</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">5着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.23</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">10.4</span>-<span class="chaDarkRed">11.5</span>-12.1-12.6-12.4-12.0-12.6-12.5-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 08/19</div>
+              		<div>札幌</div>
+             		<div>2000m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>札幌記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">13着</td>
+			<!-- **** < SRun > **** -->
+				<td>45.70</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.3</span>-12.4-12.4-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.2</span>-<span class="chaRed">11.1</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/01</div>
+              		<div>阪神</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>大阪杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">5着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.27</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.2</span>-12.3-12.5-12.5-12.0-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.8</span>-12.1-12.1</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 01/21</div>
+              		<div>中山</div>
+             		<div>2200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>ＡＪＣＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.26</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku6" rowspan="2">6</td>
+				
+				<!-- 馬番 -->
+				<td>11</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13106099" target="_blank">ミッキーロケット</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">10.9</span>-<span class="chaDarkRed">11.6</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/28</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">5着</td>
+			<!-- **** < SRun > **** -->
+				<td>60.60</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.8</span>-<span class="chaRed">11.4</span>-12.7-12.3-12.0-<span class="chaDarkRed">11.8</span>-12.1-12.2-<span class="chaDarkRed">11.7</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 06/24</div>
+              		<div>阪神</div>
+             		<div>2200m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>宝塚記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>60.80</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-<span class="chaRed">11.4</span>-12.0-12.5-12.3-12.0-13.2-12.6-12.6-12.8-12.6-12.1-12.1-<span class="chaRed">11.4</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/29</div>
+              		<div>京都</div>
+             		<div>3200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（春）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.13</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaDarkRed">11.5</span>-13.3-13.0-12.7-12.6-12.2-12.2-12.2-<span class="chaDarkRed">11.8</span>-12.3</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 02/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">7着</td>
+			<!-- **** < SRun > **** -->
+				<td>43.15</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>12</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14106201" target="_blank">レイデオロ</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">10.9</span>-<span class="chaDarkRed">11.6</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/28</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>63.35</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.6-<span class="chaRed">10.6</span>-12.7-12.3-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.9</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 09/23</div>
+              		<div>中山</div>
+             		<div>2200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>オールカマー</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaRed">1着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.75</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaDarkRed">11.5</span>-13.3-13.0-12.7-12.6-12.2-12.2-12.2-<span class="chaDarkRed">11.8</span>-12.3</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 02/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>50.26</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-12.1-12.1-<span class="chaDarkRed">11.8</span>-12.1-12.3-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.3</span>-<span class="chaDarkRed">11.8</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'17 11/26</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>59.86</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku7" rowspan="2">7</td>
+				
+				<!-- 馬番 -->
+				<td>13</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=10102459" target="_blank">スマートレイアー</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.3-<span class="chaRed">11.2</span>-12.9-12.7-12.3-12.5-12.5-12.0-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.7</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/11</div>
+              		<div>京都</div>
+             		<div>2200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>エリザベス杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">9着</td>
+			<!-- **** < SRun > **** -->
+				<td>51.13</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">11.1</span>-<span class="chaDarkRed">11.7</span>-12.7-12.8-12.3-12.2-12.6-12.0-12.1-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/08</div>
+              		<div>京都</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都大賞典</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">8着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.90</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.8</span>-<span class="chaRed">11.4</span>-12.7-12.3-12.0-<span class="chaDarkRed">11.8</span>-12.1-12.2-<span class="chaDarkRed">11.7</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 06/24</div>
+              		<div>阪神</div>
+             		<div>2200m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>宝塚記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">10着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.26</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-<span class="chaRed">11.4</span>-12.0-12.5-12.3-12.0-13.2-12.6-12.6-12.8-12.6-12.1-12.1-<span class="chaRed">11.4</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/29</div>
+              		<div>京都</div>
+             		<div>3200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（春）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">7着</td>
+			<!-- **** < SRun > **** -->
+				<td>55.79</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>14</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14101976" target="_blank">キセキ</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">10.8</span>-12.2-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.4</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/25</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>62.67</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">10.9</span>-<span class="chaDarkRed">11.6</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/28</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>61.97</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.0</span>-<span class="chaDarkRed">11.5</span>-12.0-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">10.9</span>-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.7</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/07</div>
+              		<div>東京</div>
+             		<div>1800m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>毎日王冠</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>56.98</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.8</span>-<span class="chaRed">11.4</span>-12.7-12.3-12.0-<span class="chaDarkRed">11.8</span>-12.1-12.2-<span class="chaDarkRed">11.7</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 06/24</div>
+              		<div>阪神</div>
+             		<div>2200m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>宝塚記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">8着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.91</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 枠番 -->
+				<td class="waku8" rowspan="2">8</td>
+				
+				<!-- 馬番 -->
+				<td>15</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=12104759" target="_blank">シュヴァルグラン</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">10.8</span>-12.2-12.3-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.7</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.4</span>-<span class="chaRed">11.0</span>-<span class="chaRed">11.4</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 11/25</div>
+              		<div>東京</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>ジャパンＣ</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>58.80</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaRed">11.1</span>-<span class="chaDarkRed">11.7</span>-12.7-12.8-12.3-12.2-12.6-12.0-12.1-<span class="chaRed">11.2</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/08</div>
+              		<div>京都</div>
+             		<div>2400m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>京都大賞典</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">4着</td>
+			<!-- **** < SRun > **** -->
+				<td>59.41</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>13.0-<span class="chaRed">11.2</span>-<span class="chaRed">11.4</span>-12.0-12.5-12.3-12.0-13.2-12.6-12.6-12.8-12.6-12.1-12.1-<span class="chaRed">11.4</span>-12.4</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/29</div>
+              		<div>京都</div>
+             		<div>3200m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（春）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>59.30</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.8-<span class="chaRed">11.3</span>-12.4-12.4-12.2-<span class="chaDarkRed">11.8</span>-<span class="chaRed">11.2</span>-<span class="chaRed">11.1</span>-<span class="chaRed">11.4</span>-<span class="chaDarkRed">11.6</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 04/01</div>
+              		<div>阪神</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>大阪杯</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">13着</td>
+			<!-- **** < SRun > **** -->
+				<td>49.49</td>
+			
+				</tr>
+				
+			<tr>
+				
+				<!-- 馬番 -->
+				<td>16</td>
+				<!-- 馬印 -->
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<!-- 馬名 -->
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11102151" target="_blank">サクラアンプルール</a></td>
+				<!-- 1走前 -->
+				
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.9-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.8</span>-<span class="chaDarkRed">11.5</span>-<span class="chaDarkRed">11.7</span>-<span class="chaDarkRed">11.6</span>-<span class="chaRed">11.3</span>-<span class="chaRed">10.9</span>-<span class="chaDarkRed">11.6</span>-12.0</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 10/28</div>
+              		<div>東京</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaRed">ＧⅠ</span>天皇賞（秋）</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">6着</td>
+			<!-- **** < SRun > **** -->
+				<td>57.86</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.5-<span class="chaRed">10.4</span>-<span class="chaDarkRed">11.5</span>-12.1-12.6-12.4-12.0-12.6-12.5-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 08/19</div>
+              		<div>札幌</div>
+             		<div>2000m</div>
+                	<div>稍重</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>札幌記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun">6着</td>
+			<!-- **** < SRun > **** -->
+				<td>54.37</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p>12.2-<span class="chaRed">10.9</span>-12.0-12.6-12.6-12.4-12.1-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.6</span>-<span class="chaDarkRed">11.8</span></p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 07/15</div>
+              		<div>函館</div>
+             		<div>2000m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaGreen">ＧⅢ</span>函館記念</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaBlue">2着</td>
+			<!-- **** < SRun > **** -->
+				<td>52.54</td>
+			
+
+			<!-- **** < 競争名 > **** -->
+			
+				<td class="left kyosomei">
+			
+				
+				<div class="lapTime">
+  				<p><span class="chaRed">7.1</span>-12.1-<span class="chaDarkRed">11.8</span>-12.4-12.7-13.3-12.2-<span class="chaDarkRed">11.9</span>-12.0-12.4-<span class="chaDarkRed">11.9</span>-<span class="chaDarkRed">11.6</span>-12.5</p>
+        		</div>				
+				<div class="sideBy subTitle">
+			       	<span class="turf"></span>
+              		<div>'18 03/24</div>
+              		<div>中山</div>
+             		<div>2500m</div>
+                	<div>良</div>
+        		</div>
+        		<div class="title">
+					<div><span class="grade chaBlue">ＧⅡ</span>日経賞</div>
+        		</div>
+        		</td>
+			<!-- **** < 着順 > **** -->
+				<td class="chakujun chaGreen">3着</td>
+			<!-- **** < SRun > **** -->
+				<td>****</td>
+			
+				</tr>
+				
+    </table>
+
+<!-- ******************************************************************************************
+************************************************************************************************
+********************************		出馬表ここから		****************************************
+************************************************************************************************
+************************************************************************************************ -->
+
+		<table class="text danceTable">
+			<tr>
+				<th>枠番</th>
+				<th>馬番</th>
+				<th>印</th>
+				<th>馬名</th>
+				<th>性齢</th>
+				<th class="desctop">脚質</th>
+				<th class="desctop">平均距離</th>
+				<th>騎手</th>
+				<th class="desctop">斤量</th>
+				<th>人気</th>
+				<th class="desctop">ｵｯｽﾞ</th>
+				<th class="desctop">馬体重</th>
+				<th class="desctop">調教師</th>
+				<th class="desctop">毛色</th>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku1" rowspan="2">1</td>
+				
+				<td>1</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11101125" target="_blank">オジュウチョウサン</a></td>
+				<td>牡7
+				<td class="desctop">先行
+				<td class="desctop">2200m
+				<td>武豊</td>
+				<td class="desctop">57.0
+</td>
+				<td>5
+</td>
+				<td class="desctop">9.2</td>
+				<td class="desctop">514kg</td>
+				<td class="left desctop">（美）和田正一郎</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>2</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14100656" target="_blank">クリンチャー</a></td>
+				<td>牡4
+				<td class="desctop">先行
+				<td class="desctop">2850m
+				<td>福永祐一</td>
+				<td class="desctop">57.0
+</td>
+				<td>11
+</td>
+				<td class="desctop">32.2</td>
+				<td class="desctop">490kg</td>
+				<td class="left desctop">（栗）宮本博</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku2" rowspan="2">2</td>
+				
+				<td>3</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14102565" target="_blank">モズカッチャン</a></td>
+				<td>牝4
+				<td class="desctop">追込
+				<td class="desctop">2150m
+				<td>Ｍ．デムーロ</td>
+				<td class="desctop">55.0
+</td>
+				<td>4
+</td>
+				<td class="desctop">9.1</td>
+				<td class="desctop">486kg</td>
+				<td class="left desctop">（栗）鮫島一歩</td>
+				<td class="desctop">黒鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>4</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13105788" target="_blank">マカヒキ</a></td>
+				<td>牡5
+				<td class="desctop">追込
+				<td class="desctop">2100m
+				<td>岩田康誠</td>
+				<td class="desctop">57.0
+</td>
+				<td>12
+</td>
+				<td class="desctop">42.5</td>
+				<td class="desctop">504kg</td>
+				<td class="left desctop">（栗）友道康夫</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku3" rowspan="2">3</td>
+				
+				<td>5</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=12104503" target="_blank">パフォーマプロミス</a></td>
+				<td>牡6
+				<td class="desctop">差し
+				<td class="desctop">2400m
+				<td>Ｃ．デムーロ</td>
+				<td class="desctop">57.0
+</td>
+				<td>7
+</td>
+				<td class="desctop">20.6</td>
+				<td class="desctop">464kg</td>
+				<td class="left desctop">（栗）藤原英昭</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>6</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13106101" target="_blank">サトノダイヤモンド</a></td>
+				<td>牡5
+				<td class="desctop">先行
+				<td class="desctop">2250m
+				<td>Ｂ．アヴドゥラ</td>
+				<td class="desctop">57.0
+</td>
+				<td>6
+</td>
+				<td class="desctop">18.1</td>
+				<td class="desctop">506kg</td>
+				<td class="left desctop">（栗）池江泰寿</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku4" rowspan="2">4</td>
+				
+				<td>7</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11104377" target="_blank">サウンズオブアース</a></td>
+				<td>牡7
+				<td class="desctop">差し
+				<td class="desctop">2175m
+				<td>藤岡佑介</td>
+				<td class="desctop">57.0
+</td>
+				<td>14
+</td>
+				<td class="desctop">144.2</td>
+				<td class="desctop">504kg</td>
+				<td class="left desctop">（栗）藤岡健一</td>
+				<td class="desctop">黒鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>8</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=15104882" target="_blank">ブラストワンピース</a></td>
+				<td>牡3
+				<td class="desctop">先行
+				<td class="desctop">2300m
+				<td>池添謙一</td>
+				<td class="desctop">55.0
+</td>
+				<td>3
+</td>
+				<td class="desctop">8.9</td>
+				<td class="desctop">534kg</td>
+				<td class="left desctop">（美）大竹正博</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku5" rowspan="2">5</td>
+				
+				<td>9</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13103569" target="_blank">リッジマン</a></td>
+				<td>牡5
+				<td class="desctop">先行
+				<td class="desctop">2775m
+				<td>蛯名正義</td>
+				<td class="desctop">57.0
+</td>
+				<td>13
+</td>
+				<td class="desctop">117.2</td>
+				<td class="desctop">446kg</td>
+				<td class="left desctop">（栗）庄野靖志</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>10</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14106160" target="_blank">ミッキースワロー</a></td>
+				<td>牡4
+				<td class="desctop">追込
+				<td class="desctop">2150m
+				<td>横山典弘</td>
+				<td class="desctop">57.0
+</td>
+				<td>10
+</td>
+				<td class="desctop">28.8</td>
+				<td class="desctop">480kg</td>
+				<td class="left desctop">（美）菊沢隆徳</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku6" rowspan="2">6</td>
+				
+				<td>11</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=13106099" target="_blank">ミッキーロケット</a></td>
+				<td>牡5
+				<td class="desctop">先行
+				<td class="desctop">2400m
+				<td>Ｏ．マーフィー</td>
+				<td class="desctop">57.0
+</td>
+				<td>8
+</td>
+				<td class="desctop">22.5</td>
+				<td class="desctop">472kg</td>
+				<td class="left desctop">（栗）音無秀孝</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>12</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14106201" target="_blank">レイデオロ</a></td>
+				<td>牡4
+				<td class="desctop">差し
+				<td class="desctop">2200m
+				<td>Ｃ．ルメール</td>
+				<td class="desctop">57.0
+</td>
+				<td>1
+</td>
+				<td class="desctop">2.2</td>
+				<td class="desctop">490kg</td>
+				<td class="left desctop">（美）藤沢和雄</td>
+				<td class="desctop">鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku7" rowspan="2">7</td>
+				
+				<td>13</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=10102459" target="_blank">スマートレイアー</a></td>
+				<td>牝8
+				<td class="desctop">先行
+				<td class="desctop">2500m
+				<td>戸崎圭太</td>
+				<td class="desctop">55.0
+</td>
+				<td>16
+</td>
+				<td class="desctop">196.6</td>
+				<td class="desctop">460kg</td>
+				<td class="left desctop">（栗）大久保龍志</td>
+				<td class="desctop">芦毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>14</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=14101976" target="_blank">キセキ</a></td>
+				<td>牡4
+				<td class="desctop">逃げ
+				<td class="desctop">2100m
+				<td>川田将雅</td>
+				<td class="desctop">57.0
+</td>
+				<td>2
+</td>
+				<td class="desctop">5.9</td>
+				<td class="desctop">506kg</td>
+				<td class="left desctop">（栗）中竹和也</td>
+				<td class="desctop">黒鹿毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td class="waku8" rowspan="2">8</td>
+				
+				<td>15</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=12104759" target="_blank">シュヴァルグラン</a></td>
+				<td>牡6
+				<td class="desctop">先行
+				<td class="desctop">2500m
+				<td>Ｈ．ボウマン</td>
+				<td class="desctop">57.0
+</td>
+				<td>9
+</td>
+				<td class="desctop">22.7</td>
+				<td class="desctop">470kg</td>
+				<td class="left desctop">（栗）友道康夫</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+			
+			<tr>
+				
+				<td>16</td>
+				<td>
+					<select name="shirushi" class="shirushi">
+						<option selected></option>
+						<option value="marumaru">◎</option>
+						<option value="maru">〇</option>
+						<option value="kurosankaku">▲</option>
+						<option value="sankaku">△</option>
+						<option value="star">★</option>
+					</select>
+				</td>
+				<td class="left bamei"><a href="http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=11102151" target="_blank">サクラアンプルール</a></td>
+				<td>牡7
+				<td class="desctop">差し
+				<td class="desctop">2125m
+				<td>田辺裕信</td>
+				<td class="desctop">57.0
+</td>
+				<td>15
+</td>
+				<td class="desctop">147.0</td>
+				<td class="desctop">486kg</td>
+				<td class="left desctop">（美）金成貴史</td>
+				<td class="desctop">栗毛</td>
+			</tr>
+			
+		</table>
+		</div>
+
+</div>
+</body>
+</html>
