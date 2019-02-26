@@ -30,6 +30,7 @@
 		 import="java.util.stream.Collectors"
 		 import="java.util.Collections"
 		 import="java.util.Comparator"
+		 import="java.util.NoSuchElementException"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -465,7 +466,7 @@ function urlJump() {
 					}
 					String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\"" : wakuban == nextWakuban ? " rowspan=\"2\"" : "";
 					boolean wakuHantei = wakuban == previousWakuban;
-		        	
+
 					//着順ごとに色を指定します
 		        	String chakujunColor = "";
 		        	switch(data.getKakuteiChakujun()){
@@ -509,7 +510,18 @@ function urlJump() {
 				<td class="left bamei"><a href="<% out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10)); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<!-- 1走前 -->
 				<%
-		List<BigDecimal> srunList = new ArrayList<>();
+		class SrunList extends ArrayList<BigDecimal>{
+			@Override
+			public boolean add(BigDecimal deci){
+				if(deci == null){
+					return false;
+				}else{
+					super.add(deci);
+					return true;
+				}
+			}
+		}
+		List<BigDecimal> srunList = new SrunList();
 		for(int t = 0; t<umaKakoData.size();t++){
 			UmagotoDataSet uma = umaKakoData.get(t).get(data.getKettoTorokuBango());
 			srunList.add(uma.getSrun());
@@ -615,7 +627,7 @@ function urlJump() {
 				}else{
 					lap.delete(lap.length()-1, lap.length());
 					lapTime = lap.toString();
-				}					
+				}
 				StringBuilder cornerJuni = new StringBuilder();
 				if(uma.getCorner1Juni() != 0){
 					cornerJuni.append(uma.getCorner1Juni());
@@ -661,7 +673,7 @@ function urlJump() {
 					<span><% out.print("最も加速したのは" + lapList.getSpeedUpperPoint()*200 + "m地点"); %></span>
 				</p>
   				<p><% out.print(lapTime); %></p>
-        		</div>				
+        		</div>
 				<div class="sideBy subTitle">
 			       	<span class="<% out.print(baba); %>"></span>
               		<div><% out.print("'" + kaisai); %></div>
@@ -690,13 +702,22 @@ function urlJump() {
 					out.print("</td>");
 				}
 		}
-		BigDecimal bestSrun = srunList.stream()
-									  .max((a,b) -> a.compareTo(b))
-									  .get();
-		bestSrun = bestSrun.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
-		
-				%>
+		BigDecimal bestSrun;
+		try{
+			bestSrun = srunList.stream()
+					.max((a,b) -> a.compareTo(b))
+					.get();
+			bestSrun = bestSrun.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
+			%>
 					<td><% out.print(bestSrun); %></td>
+			<%
+		}catch(NoSuchElementException e){
+			%>
+					<td>***</td>
+			<%
+		}
+
+				%>
 				</tr>
 				<%} %>
     </table>
