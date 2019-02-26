@@ -509,7 +509,18 @@ function urlJump() {
 				<td class="left bamei"><a href="<% out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10)); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
 				<!-- 1走前 -->
 				<%
-		List<BigDecimal> srunList = new ArrayList<>();
+		class SrunList extends ArrayList<BigDecimal>{
+			@Override
+			public boolean add(BigDecimal deci){
+				if(deci == null){
+					return false;
+				}else{
+					super.add(deci);
+					return true;
+				}
+			}
+		}
+		List<BigDecimal> srunList = new SrunList();
 		for(int t = 0; t<umaKakoData.size();t++){
 			UmagotoDataSet uma = umaKakoData.get(t).get(data.getKettoTorokuBango());
 			srunList.add(uma.getSrun());
