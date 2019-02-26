@@ -30,6 +30,7 @@
 		 import="java.util.stream.Collectors"
 		 import="java.util.Collections"
 		 import="java.util.Comparator"
+		 import="java.util.NoSuchElementException"
 %>
 <%
 RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
@@ -701,13 +702,22 @@ function urlJump() {
 					out.print("</td>");
 				}
 		}
-		BigDecimal bestSrun = srunList.stream()
-									  .max((a,b) -> a.compareTo(b))
-									  .get();
-		bestSrun = bestSrun.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
+		BigDecimal bestSrun;
+		try{
+			bestSrun = srunList.stream()
+					.max((a,b) -> a.compareTo(b))
+					.get();
+			bestSrun = bestSrun.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
+			%>
+					<td><% out.print(bestSrun); %></td>
+			<%
+		}catch(NoSuchElementException e){
+			%>
+					<td>***</td>
+			<%
+		}
 
 				%>
-					<td><% out.print(bestSrun); %></td>
 				</tr>
 				<%} %>
     </table>
