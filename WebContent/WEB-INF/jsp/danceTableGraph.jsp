@@ -195,11 +195,16 @@ function urlJump() {
                     		String kettoBango = indexList.get(i).getKettoTorokuBango();
                 			UmagotoDataSet zenso = umaKakoData.get(0).get(kettoBango);
                 			//開催年月日をフォーマットする
-                			String kaisaiNenGappi = zenso.getKaisaiNenGappi();
-                			DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
-                			DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("y／M／d");
-                			LocalDate ld = LocalDate.parse(kaisaiNenGappi, dtf1);
-                			kaisaiNenGappi = dtf2.format(ld);
+                			String kaisaiNenGappi;
+                			try{
+                    			kaisaiNenGappi = zenso.getKaisaiNenGappi();
+                    			DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
+                    			DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("y／M／d");
+                    			LocalDate ld = LocalDate.parse(kaisaiNenGappi, dtf1);
+                    			kaisaiNenGappi = dtf2.format(ld);
+                			}catch(NullPointerException e){
+                				kaisaiNenGappi = "初出走";
+                			}
                 			//ラベルを出力します
 							out.print("[\"" + umaban + ". " + uma1.getBamei() + " / " + uma1.getTanshoNinkijun() + "人気\", \"（前走：" + kaisaiNenGappi + "）\"]");
 							if(i + 1 < indexList.size()){
@@ -523,8 +528,11 @@ function urlJump() {
 		}
 		List<BigDecimal> srunList = new SrunList();
 		for(int t = 0; t<umaKakoData.size();t++){
+			//4走目までを取得します
+			if(t > 3){
+				break;
+			}
 			UmagotoDataSet uma = umaKakoData.get(t).get(data.getKettoTorokuBango());
-			srunList.add(uma.getSrun());
 			if(t==0){
 				try{
 					uma.toString();	//nullの場合は"初出走"
@@ -537,6 +545,8 @@ function urlJump() {
 				String kakoKyosoTitle = uma.getKyosomeiRyakusho6().length()>0
 										?uma.getKyosomeiRyakusho6()
 										:uma.getKyosoShubetsu().substring(uma.getKyosoShubetsu().indexOf("系")+1, uma.getKyosoShubetsu().length()) + uma.getKyosoJoken();
+
+				srunList.add(uma.getSrun());
 			%>
 
 			<!-- **** < 競争名 > **** -->
