@@ -3,6 +3,7 @@
 <%@ page import="com.pckeiba.racedata.RaceDataSet"
          import="com.pckeiba.umagoto.UmagotoDataSet"
          import="com.pckeiba.umagoto.UmagotoDrunSet"
+         import="com.pckeiba.umagoto.UmagotoDataLoad"
          import="com.pckeiba.umagoto.UmagotoDataIndexLoad"
          import="com.pckeiba.umagoto.UmagotoDataIndexSet"
          import="com.pckeiba.analysis.UmagotoAnalysis"
@@ -41,6 +42,7 @@ UmagotoDataIndexLoad indexLoad = UtilClass.AutoCast(request.getAttribute("index"
 List<UmagotoDataIndexSet> indexList = indexLoad.getIndexList();
 UmagotoAnalysis analysis = (UmagotoAnalysis) request.getAttribute("analysis");
 RaceListLoad raceList = UtilClass.AutoCast(request.getAttribute("raceList"));
+UmagotoDataLoad umaLoad = UtilClass.AutoCast(request.getAttribute("umaLoad"));
 PrintWriter pw = response.getWriter();
 String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 				?raceData.getKyosomeiRyaku10()
@@ -58,6 +60,55 @@ String kyosoTitle = raceData.getKyosomeiHondai().length()>0
 	String netkeibaHorse = "https://db.netkeiba.com/horse/";   //-> 血統登録番号で指定する
   String jrdbUmaData = "http://wdb.jrdb.com/awahana/ijrdv/ijvu.php?kettonum=";  //8桁の血統登録番号で指定する
 
+/************************<データの整形を行います>****************************
+* １．2走前から4走前までのSRunの平均を求めます
+***************************************************************/
+class UmaSrunUpper{
+	String kettoTorokuBango;
+	boolean hantei;
+	int ninki;
+	public UmaSrunUpper(String kettoTorokuBango, boolean hantei, int ninki){
+		this.kettoTorokuBango = kettoTorokuBango;
+		this.hantei = hantei;
+		this.ninki = ninki;
+	}
+	public String getKettoTorokuBango(){
+		return kettoTorokuBango;
+	}
+	public boolean getHantei(){
+		return hantei;
+	}
+	public int getNinki(){
+		return ninki;
+	}
+}
+Map<String, Boolean> srunMapper = new HashMap<>();
+List<UmaSrunUpper> upperList = new ArrayList<>();
+for(UmagotoDataSet nowData: umaNowData){
+	String kettoTorokuBango = nowData.getKettoTorokuBango();
+	try{
+		BigDecimal aveSrun = umaLoad.getAverageSrun(kettoTorokuBango, 3, 4, 5);
+		BigDecimal zenso = umaKakoData.get(0).get(kettoTorokuBango).getSrun();
+		BigDecimal zenzenso = umaKakoData.get(1).get(kettoTorokuBango).getSrun();
+		boolean hantei = zenso.compareTo(aveSrun) > 0;
+		if(hantei == true)
+		hantei = zenso.compareTo(zenzenso) > 0;
+		srunMapper.put(kettoTorokuBango, hantei);
+		UmaSrunUpper upper = new UmaSrunUpper(kettoTorokuBango, hantei, nowData.getTanshoNinkijun());
+		upperList.add(upper);
+	}catch(NullPointerException e){
+		srunMapper.put(kettoTorokuBango, false);
+	}
+}
+int ninkiMin = upperList.stream()
+							   .mapToInt(s -> s.getNinki())
+							   .min()
+							   .getAsInt();
+String popularUpper = upperList.stream()
+							   .filter(s -> s.getNinki() == ninkiMin)
+							   .map(s -> s.getKettoTorokuBango())
+							   .findFirst()
+							   .get();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -503,12 +554,41 @@ function urlJump() {
 				<!-- 馬印 -->
 				<td>
 					<select name="shirushi" class="shirushi">
+						<%
+						if(srunMapper.get(data.getKettoTorokuBango())==true){
+						%>
+						<option></option>
+						<%
+						}else{
+						%>
 						<option selected></option>
+						<%
+						}
+						if(popularUpper.equals(data.getKettoTorokuBango())){
+						%>
+						<option value="marumaru" selected>◎</option>
+						<%
+						}else{
+						%>
 						<option value="marumaru">◎</option>
+						<%
+						}
+						%>
 						<option value="maru">〇</option>
 						<option value="kurosankaku">▲</option>
 						<option value="sankaku">△</option>
-						<option value="star">×</option>
+						<%
+						if(srunMapper.get(data.getKettoTorokuBango())==true & !popularUpper.equals(data.getKettoTorokuBango())){
+						%>
+						<option value="star" selected>★</option>
+						<%
+						}else{
+						%>
+						<option value="star">★</option>
+						<%
+						}
+						%>
+						
 					</select>
 				</td>
 				<!-- 馬名 -->

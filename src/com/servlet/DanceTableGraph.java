@@ -17,6 +17,7 @@ import com.pckeiba.analysis.UmagotoAnalysis;
 import com.pckeiba.racedata.RaceDataSet;
 import com.pckeiba.schedule.RaceListLoad;
 import com.pckeiba.umagoto.UmagotoDataIndexLoad;
+import com.pckeiba.umagoto.UmagotoDataLoad;
 import com.pckeiba.umagoto.UmagotoDataSet;
 import com.pckeiba.umagoto.UmagotoDrunSet;
 
@@ -56,6 +57,7 @@ public class DanceTableGraph extends HttpServlet {
 		List<UmagotoDrunSet> drunList = loader.getDrunSortList();
 		UmagotoAnalysis analysis = new UmagotoAnalysis(loader.getUmaLoad());
 		UmagotoDataIndexLoad indexList = loader.getIndexLoad();
+		UmagotoDataLoad umaLoad = loader.getUmaLoad();
 
 		//各レース詳細オブジェクトをフォワードする
 		request.setAttribute("drunList", drunList);
@@ -65,6 +67,7 @@ public class DanceTableGraph extends HttpServlet {
 		request.setAttribute("analysis", analysis);
 		request.setAttribute("index", indexList);
 		request.setAttribute("raceList", raceList);
+		request.setAttribute("umaLoad", umaLoad);
 
 		//フォワード
 		RequestDispatcher di = null;
