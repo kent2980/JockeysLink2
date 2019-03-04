@@ -79,20 +79,15 @@ public class RaceDataLoader implements Serializable{
 
 		//馬毎データをダウンロードする
 		drunList = new UmagotoDrunLoad(raceCode).getDrunList();
-		umaLoad = new UmagotoDataLoad(raceCode,hit);
+		umaLoad = new UmagotoDataLoad(raceCode,hit+1);
 		umaList = umaLoad.getList().stream().filter(s -> s.getUmaID()==1).collect(Collectors.toList());
 		umaMapList = new ArrayList<>();
 		drunSortList = new UmagotoDrunLoad(raceCode).getDrunSortList();
 		LocalDate today = LocalDate.now();
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日");
 		LocalDate kaisaibi = LocalDate.parse(rds.getKaisaiNenGappi(), dtf);
-		int bango;
-		if(today.compareTo(kaisaibi) < 0) {
-			bango = 1;
-		}else {
-			bango = 2;
-		}
-		for(; bango <= hit; bango++) {
+
+		for(int bango = 2; bango <= hit; bango++) {
 			umaMapList.add(umaLoad.getMapFromKettoTorokuBango(bango));
 		}
 		indexLoad = new UmagotoDataIndexLoad(raceCode, 4);
