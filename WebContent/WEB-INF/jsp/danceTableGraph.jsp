@@ -101,6 +101,7 @@ for(UmagotoDataSet nowData: umaNowData){
 	}
 }
 int ninkiMin = upperList.stream()
+							   .filter(s -> s.getNinki() > 0)
 							   .mapToInt(s -> s.getNinki())
 							   .min()
 							   .getAsInt();
@@ -588,7 +589,7 @@ function urlJump() {
 						<%
 						}
 						%>
-						
+
 					</select>
 				</td>
 				<!-- 馬名 -->
