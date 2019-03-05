@@ -67,10 +67,12 @@ class UmaSrunUpper{
 	String kettoTorokuBango;
 	boolean hantei;
 	int ninki;
-	public UmaSrunUpper(String kettoTorokuBango, boolean hantei, int ninki){
+	BigDecimal srunAve;
+	public UmaSrunUpper(String kettoTorokuBango, boolean hantei, int ninki, BigDecimal srunAve){
 		this.kettoTorokuBango = kettoTorokuBango;
 		this.hantei = hantei;
 		this.ninki = ninki;
+		this.srunAve = srunAve;
 	}
 	public String getKettoTorokuBango(){
 		return kettoTorokuBango;
@@ -81,12 +83,16 @@ class UmaSrunUpper{
 	public int getNinki(){
 		return ninki;
 	}
+	public BigDecimal getSrunAve(){
+		return srunAve;
+	}
 }
 Map<String, Boolean> srunMapper = new HashMap<>();
 List<UmaSrunUpper> upperList = new ArrayList<>();
 for(UmagotoDataSet nowData: umaNowData){
 	String kettoTorokuBango = nowData.getKettoTorokuBango();
 	try{
+		BigDecimal allSrunAve = umaLoad.getAverageSrun(kettoTorokuBango, 2, 3, 4, 5);
 		BigDecimal aveSrun = umaLoad.getAverageSrun(kettoTorokuBango, 3, 4, 5);
 		BigDecimal zenso = umaKakoData.get(0).get(kettoTorokuBango).getSrun();
 		BigDecimal zenzenso = umaKakoData.get(1).get(kettoTorokuBango).getSrun();
@@ -94,7 +100,7 @@ for(UmagotoDataSet nowData: umaNowData){
 		if(hantei == true)
 		hantei = zenso.compareTo(zenzenso) > 0;
 		srunMapper.put(kettoTorokuBango, hantei);
-		UmaSrunUpper upper = new UmaSrunUpper(kettoTorokuBango, hantei, nowData.getTanshoNinkijun());
+		UmaSrunUpper upper = new UmaSrunUpper(kettoTorokuBango, hantei, nowData.getTanshoNinkijun(), allSrunAve);
 		upperList.add(upper);
 	}catch(NullPointerException e){
 		srunMapper.put(kettoTorokuBango, false);
@@ -102,6 +108,7 @@ for(UmagotoDataSet nowData: umaNowData){
 }
 int ninkiMin = upperList.stream()
 							   .filter(s -> s.getNinki() > 0)
+							   .filter(s -> s.getHantei() == true)
 							   .mapToInt(s -> s.getNinki())
 							   .min()
 							   .getAsInt();
@@ -486,6 +493,7 @@ function urlJump() {
         <th class="chakujun">着順</th>
         <th>印</th>
         <th class="bamei">馬名</th>
+        <th>人気</th>
         <th colspan="3">1走前</th>
         <th colspan="3">2走前</th>
         <th colspan="3">3走前</th>
@@ -594,6 +602,8 @@ function urlJump() {
 				</td>
 				<!-- 馬名 -->
 				<td class="left bamei"><a href="<% out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10)); %>" target="_blank"><% out.print(data.getBamei()); %></a></td>
+				<!-- 人気 -->
+				<td><% out.print(data.getTanshoNinkijun()); %></td>
 				<!-- 1走前 -->
 				<%
 		class SrunList extends ArrayList<BigDecimal>{
@@ -799,8 +809,15 @@ function urlJump() {
 					.max((a,b) -> a.compareTo(b))
 					.get();
 			bestSrun = bestSrun.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
+			BigDecimal srunAve = upperList.stream()
+										  .filter(s -> s.getKettoTorokuBango().equals(data.getKettoTorokuBango()))
+										  .map(s -> s.getSrunAve())
+										  .findFirst()
+										  .get();
+			srunAve = srunAve.add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5)).setScale(2, BigDecimal.ROUND_HALF_UP);
+			BigDecimal srunFactor = srunAve.divide(bestSrun, 2, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100)).setScale(0);
 			%>
-					<td><% out.print(bestSrun); %></td>
+					<td><% out.print(srunFactor); %>% / <% out.print(bestSrun); %></td>
 			<%
 		}catch(NoSuchElementException e){
 			%>
