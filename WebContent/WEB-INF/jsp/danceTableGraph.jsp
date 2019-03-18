@@ -476,6 +476,9 @@
 	<!-- *****************************************************************************************
      **********************************グラフ記述ここまで*******************************************
      ***************************************************************************************** -->
+<div id="raceComment">
+	<textarea name="example" style="width:100%" rows="10"></textarea>
+</div>
 
 	<!-- *****************************************************************************************
 *********************************							**********************************
@@ -615,21 +618,22 @@
 							} catch (IndexOutOfBoundsException e) {
 								nextWakuban = 0;
 							}
-							String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\""
-									: wakuban == nextWakuban ? " rowspan=\"2\"" : "";
+							String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"6\""
+									: wakuban == nextWakuban ? " rowspan=\"4\"" : " rowspan=\"2\"";
 							boolean wakuHantei = wakuban == previousWakuban;
 
 							//着順ごとに色を指定します
 							String chakujunColor = "";
 							switch (data.getKakuteiChakujun()) {
 							case 1:
-								chakujunColor = "chaRed bold";
+								chakujunColor = "class=\"chaRed bold\"";
 								break;
 							case 2:
-								chakujunColor = "chaBlue bold";
+								chakujunColor = "class=\"chaBlue bold\"";
 								break;
 							case 3:
-								chakujunColor = "chaGreen bold";
+								chakujunColor = "class=\"chaGreen bold\"";
+								break;
 							}
 					%>
 					<tr>
@@ -645,23 +649,29 @@
 						</td>
 						<%
 							} else {
-									out.print(data.getWakuban() == 0 ? "<td>仮</td>" : "");
+									out.print(data.getWakuban() == 0 ? "<td rowspan=\"2\">仮</td>" : "");
 								}
 						%>
 						<!-- 馬番 -->
-						<td>
+						<td class="bottom" rowspan="2">
 							<%
 								out.print(data.getUmaban() == 0 ? umaban : data.getUmaban());
 							%>
 						</td>
 						<!-- 着順 -->
-						<td class="<%out.print(chakujunColor);%>">
+						<td class="bottom" rowspan="2" <%out.print(chakujunColor);%>>
 							<%
-								out.print(data.getKakuteiChakujun() + "着");
+								switch(data.getKakuteiChakujun()){
+								case 0:
+									out.print("-");
+									break;
+								default:
+									out.print(data.getKakuteiChakujun() + "着");
+								}
 							%>
 						</td>
 						<!-- 馬印 -->
-						<td><select name="shirushi" class="shirushi">
+						<td class="bottom" rowspan="2"><select name="shirushi" class="shirushi">
 								<%
 									if (srunMapper.get(data.getKettoTorokuBango()) == true) {
 								%>
@@ -700,7 +710,7 @@
 
 						</select></td>
 						<!-- 馬名 -->
-						<td class="left bamei"><a
+						<td class="bottom" rowspan="2" class="left bamei"><a
 							href="<%out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10));%>"
 							target="_blank">
 								<%
@@ -708,7 +718,7 @@
 								%>
 						</a></td>
 						<!-- 人気 -->
-						<td>
+						<td class="bottom" rowspan="2">
 							<%
 								out.print(data.getTanshoNinkijun());
 							%>
@@ -955,6 +965,7 @@
 									</span>
 									<%
 										out.print(kakoKyosoTitle);
+										out.print(" " + uma.getKyakushitsu());
 									%>
 								</div>
 							</div>
@@ -1012,6 +1023,13 @@
 						<%
 							}
 						%>
+					</tr>
+					<tr class="bottom">
+						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
+						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
+						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
+						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
+						<td></td>
 					</tr>
 					<%
 						}
@@ -1158,6 +1176,7 @@
 						}
 					%>
 				</table>
+				</div>
 			</div>
 
 		</div>
