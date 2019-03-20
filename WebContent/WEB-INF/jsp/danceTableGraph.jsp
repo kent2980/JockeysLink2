@@ -884,6 +884,34 @@
  					}
  				}
  				LapList lapList = uma.getLap();
+ 				//平均ラップを記述します******************************************
+ 				StringBuilder lapAveTime = new StringBuilder();
+ 				//前半1000m
+ 				if(lapList.getZenhan1000mAverageLap().compareTo(BigDecimal.valueOf(12)) < 0){
+ 					lapAveTime.append("<span class=\"chaRed\">");
+ 				}else{
+ 					lapAveTime.append("<span>");
+ 				}
+ 				lapAveTime.append(lapList.getZenhan1000mAverageLap().toString());
+ 				lapAveTime.append("</span>");
+ 				lapAveTime.append("-");
+ 				//コーナーラップ
+ 				if(lapList.getCornerAverageLap().compareTo(BigDecimal.valueOf(12)) < 0){
+ 					lapAveTime.append("<span class=\"chaRed\">");
+ 				}else{
+ 					lapAveTime.append("<span>");
+ 				}
+ 				lapAveTime.append(lapList.getCornerAverageLap().toString());
+ 				lapAveTime.append("</span>");
+ 				lapAveTime.append("-");
+ 				//後半3fラップ
+ 				if(lapList.getKohan3fAverageLap().compareTo(BigDecimal.valueOf(12)) < 0){
+ 					lapAveTime.append("<span class=\"chaRed\">");
+ 				}else{
+ 					lapAveTime.append("<span>");
+ 				}
+ 				lapAveTime.append(lapList.getKohan3fAverageLap().toString());
+ 				lapAveTime.append("</span>");
  %>
 							<div class="lapTime">
 								<p>
@@ -930,6 +958,11 @@
 								<p>
 									<%
 										out.print(lapTime);
+									%>
+								</p>
+								<p>
+									<%
+									out.print(lapAveTime.toString());
 									%>
 								</p>
 							</div>
