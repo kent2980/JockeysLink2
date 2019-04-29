@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.pckeiba.racedata.RaceDataSet"
+	import="com.pckeiba.racedata.RaceDataLoad"
 	import="com.pckeiba.umagoto.UmagotoDataSet"
 	import="com.pckeiba.umagoto.UmagotoDrunSet"
 	import="com.pckeiba.umagoto.UmagotoDataLoad"
@@ -22,8 +23,16 @@
 	import="com.example.entity.ViewRaceShosaiExample"
 	import="com.example.entity.ViewRaceShosaiMapper"
 	import="com.view.racedata.RaceShosaiReader"
-	import="java.util.stream.Collectors" import="java.util.Collections"
-	import="java.util.Comparator" import="java.util.NoSuchElementException"%>
+	import="java.util.stream.Collectors"
+	import="java.util.Collections"
+	import="java.util.Comparator"
+	import="java.util.NoSuchElementException"
+	import="com.details.UmaNowChakujunBetsu"
+	import="java.util.Set"
+	import="java.util.TreeSet"
+	import="com.collections.ChakuBetsuTreeSet"
+	import="com.pckeiba.analysis.HomestretchAnalysis"
+	%>
 <%
 	RaceDataSet raceData = (RaceDataSet) request.getAttribute("raceData");
 	List<UmagotoDataSet> umaNowData = UtilClass.AutoCast(request.getAttribute("umaList"));
@@ -66,6 +75,7 @@
 			this.ninki = ninki;
 			this.srunAve = srunAve;
 		}
+
 		public String getKettoTorokuBango() {
 			return kettoTorokuBango;
 		}
@@ -216,13 +226,23 @@
 				<div class="courseData desctop">
 					<span>
 						<%
+							out.print("RPCI:" + raceData.getRPCI());
+						%>
+					</span>
+					-
+					<span>
+						<%
 							out.print(raceData.getKyori() + "m");
 						%>
-					</span> <span>
+					</span>
+					-
+					<span>
 						<%
 							out.print(raceData.getTrackCode());
 						%>
-					</span> <span>
+					</span>
+					-
+					<span>
 						<%
 							out.print(raceData.getHassoJikoku());
 						%>
@@ -476,9 +496,333 @@
 	<!-- *****************************************************************************************
      **********************************グラフ記述ここまで*******************************************
      ***************************************************************************************** -->
-<div id="raceComment">
-	<textarea name="example" style="width:100%" rows="10"></textarea>
-</div>
+
+<%
+	int dataKubun;
+	try{
+		dataKubun = Integer.valueOf(raceData.getDataKubun());
+	}catch(NumberFormatException e){
+		dataKubun = 0;
+	}
+	if(dataKubun > 2){
+%>
+	<div class="datails">
+		<h1>Racing Result Details</h1>
+		<p>このレース結果の詳細からデータによる分析をおこなっていきましょう</p>
+		<h2>着順から</h2>
+			<%
+				//変数を宣言します
+				ChakuBetsuTreeSet chakuBetsuList = new ChakuBetsuTreeSet();
+				//今走の出馬表からループを開始します
+				for(UmagotoDataSet dataSet: umaNowData){
+					String kettoTorokuBango = dataSet.getKettoTorokuBango();	//血統登録番号
+					int kakuteiChakujun = dataSet.getKakuteiChakujun();		//確定着順
+					UmaNowChakujunBetsu chakuBetsu = new UmaNowChakujunBetsu(kettoTorokuBango, kakuteiChakujun);	//着順ごとのデータを収納する
+					chakuBetsu.setKakoKyakushitsu(analysis.getPredictionKyakushitsu(kettoTorokuBango));		//過去脚質
+					chakuBetsu.SetNinki(dataSet.getTanshoNinkijun());	//単勝人気
+					chakuBetsu.setUmaban(dataSet.getUmaban());		//馬番
+					chakuBetsu.setNowKyakushitsu(dataSet.getKyakushitsu());		//今走の脚質
+					chakuBetsu.setKohan3f(dataSet.getKohan3F());		//後半3F
+					chakuBetsu.setWakuban(dataSet.getWakuban());		//枠番
+					for(UmagotoDataIndexSet indexSet : indexList){
+						if(indexSet.getKettoTorokuBango().equals(kettoTorokuBango)){
+							chakuBetsu.setDRun(indexSet.getDrun());		//DRun
+						}
+					}
+					//ツリーセットに格納します
+					if(kakuteiChakujun > 0){
+						chakuBetsuList.add(chakuBetsu);
+					}
+				}
+				//HomestretchAnalysisを取得します
+				List<HomestretchAnalysis> analysisList = new ArrayList<>();
+				for(UmagotoDataSet uma : umaNowData){
+					HomestretchAnalysis stretch = new HomestretchAnalysis(uma, raceData);
+					analysisList.add(stretch);
+				}
+
+			%>
+		<table>
+			<tr>
+				<th class="title">項目</th>
+			<% for(int i = 1; i <= 18; i++){ %>
+				<th class="cell"><% out.print(i + "st"); %></th>
+			<% } %>
+			</tr>
+			<tr>
+				<th>馬番</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+				%>
+					<td><span class="waku waku<% out.print(data.getWakuban()); %>"><% out.print(data.getUmaban()); %></span></td>
+				<%
+				}
+				%>
+			</tr>
+			<tr>
+				<th>人気</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					if(data.getNinki() == chakuBetsuList.getSelectRankNinki(1)){
+					%>
+						<td><span class="ninki backRed bold"><% out.print(data.getNinki()); %></span></td>
+					<%
+					}else if(data.getNinki() == chakuBetsuList.getSelectRankNinki(2)){
+					%>
+						<td><span class="ninki backBlue bold"><% out.print(data.getNinki()); %></span></td>
+					<%
+					}else if(data.getNinki() == chakuBetsuList.getSelectRankNinki(3)){
+					%>
+						<td><span class="ninki backGreen bold"><% out.print(data.getNinki()); %></span></td>
+					<%
+					}else{
+				%>
+					<td><% out.print(data.getNinki()); %></td>
+				<%
+					}
+				}
+				%>
+			</tr>
+			<tr>
+				<th>DRun</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					try{
+						if(data.getDRun().equals(chakuBetsuList.getSelectRankDrun(1))){
+						%>
+							<td><span class="drun backRed bold"><% out.print(data.getDRun()); %></span></td>
+						<%
+						}else if(data.getDRun().equals(chakuBetsuList.getSelectRankDrun(2))){
+						%>
+							<td><span class="drun backBlue bold"><% out.print(data.getDRun()); %></span></td>
+						<%
+						}else if(data.getDRun().equals(chakuBetsuList.getSelectRankDrun(3))){
+						%>
+							<td><span class="drun backGreen bold"><% out.print(data.getDRun()); %></span></td>
+						<%
+						}else{
+						%>
+						<td><% out.print(data.getDRun()); %></td>
+						<%
+						}
+					}catch(NullPointerException e){
+					%>
+					<td>***</td>
+					<%
+					}
+				}
+				%>
+			</tr>
+			<tr>
+				<th>これまでの脚質</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					switch(data.getKakoKyakushitsu()){
+					case "逃げ":
+				%>
+						<td><span class="underRed"><% out.print(data.getKakoKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "先行":
+				%>
+						<td><span class="underOrange"><% out.print(data.getKakoKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "差し":
+				%>
+						<td><span class="underYellow"><% out.print(data.getKakoKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "追込":
+				%>
+						<td><span class="underBlue"><% out.print(data.getKakoKyakushitsu()); %></span></td>
+				<%
+					break;
+					default:
+				%>
+						<td><span class="underGray"><% out.print(data.getKakoKyakushitsu()); %></span></td>
+				<%
+					}
+				}
+				%>
+			</tr>
+			<tr>
+				<th>実際の脚質</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					switch(data.getNowKyakushitsu()){
+					case "逃げ":
+				%>
+						<td><span class="underRed"><% out.print(data.getNowKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "先行":
+				%>
+						<td><span class="underOrange"><% out.print(data.getNowKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "差し":
+				%>
+						<td><span class="underYellow"><% out.print(data.getNowKyakushitsu()); %></span></td>
+				<%
+					break;
+					case "追込":
+				%>
+						<td><span class="underBlue"><% out.print(data.getNowKyakushitsu()); %></span></td>
+				<%
+					break;
+					default:
+				%>
+						<td><span class="underGray"><% out.print(data.getNowKyakushitsu()); %></span></td>
+				<%
+					}
+				}
+				%>
+			</tr>
+			<tr>
+				<th>上がり3F</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					if(data.getKohan3f().equals(chakuBetsuList.getSelectRankKohan3f(1))){
+					%>
+						<td><span class="kohan3f backRed bold"><% out.print(data.getKohan3f()); %></span></td>
+					<%
+					}else if(data.getKohan3f().equals(chakuBetsuList.getSelectRankKohan3f(2))){
+					%>
+						<td><span class="kohan3f backBlue bold"><% out.print(data.getKohan3f()); %></span></td>
+					<%
+					}else if(data.getKohan3f().equals(chakuBetsuList.getSelectRankKohan3f(3))){
+					%>
+						<td><span class="kohan3f backGreen bold"><% out.print(data.getKohan3f()); %></span></td>
+					<%
+					}else{
+				%>
+					<td><% out.print(data.getKohan3f()); %></td>
+				<%
+					}
+				}
+				%>
+			</tr>
+			<tr>
+				<th>ジリ脚</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					BigDecimal ziriAshi = analysisList.stream()
+													  .filter(s -> s.getUmaData().getKettoTorokuBango().equals(data.getKettoTorokuBango()))
+													  .map(s -> s.getEscapeCompare())
+													  .findFirst()
+													  .get();
+				%>
+				<td><% out.print(ziriAshi); %></td>
+				<%
+				}
+				%>
+			</tr>
+			<tr>
+				<th>詰脚</th>
+				<%
+				for(UmaNowChakujunBetsu data : chakuBetsuList){
+					BigDecimal tsumeAshi = analysisList.stream()
+													  .filter(s -> s.getUmaData().getKettoTorokuBango().equals(data.getKettoTorokuBango()))
+													  .map(s -> s.getTsumeAshi())
+													  .findFirst()
+													  .get();
+				%>
+				<td><% out.print(tsumeAshi); %></td>
+				<%
+				}
+				%>
+			</tr>
+		</table>
+		<h2>ラップから</h2>
+		<table>
+			<tr>
+				<th>距離1</th>
+				<%
+				for(int i = 200; i <= 2400;){
+				%>
+					<th><% out.print(i + "m"); %></th>
+				<%
+				i = i + 200;
+				}
+				%>
+			</tr>
+			<tr>
+				<th>ラップ1</th>
+				<%
+				for(int i = 0; i < 12; i++){
+					BigDecimal lap = raceData.getLapTime()[i];
+					if(raceData.getLapTime()[i].equals(BigDecimal.valueOf(0.0))){
+						break;
+					}
+					//ラップタイムの値によってフォントの色を変更します
+					if(lap.compareTo(BigDecimal.valueOf(11.5)) <= 0){
+			%>
+						<td><span class="underRed"><% out.print(lap); %></span></td>
+			<%
+					}else if(lap.compareTo(BigDecimal.valueOf(12)) < 0){
+			%>
+						<td><span class="underOrange"><% out.print(lap); %></span></td>
+			<%
+					}else if(lap.compareTo(BigDecimal.valueOf(12.5)) > 0){
+			%>
+						<td><span class="underBlue"><% out.print(lap); %></span></td>
+			<%
+					}else{
+			%>
+					<td><span class="underYellow"><% out.print(lap); %></span></td>
+			<%
+					}
+				}
+			%>
+			</tr>
+			<tr>
+				<th>距離2</th>
+				<%
+				for(int i = 2600; i <= 3600;){
+				%>
+					<th><% out.print(i + "m"); %></th>
+				<%
+				i = i + 200;
+				}
+				%>
+			</tr>
+			<tr>
+				<th>ラップ2</th>
+				<%
+				if(raceData.getLapTime().length > 12){
+					for(int i = 12; i < 18; i++){
+						BigDecimal lap = raceData.getLapTime()[i];
+						if(lap.equals(BigDecimal.valueOf(0.0))){
+							break;
+						}
+						//ラップタイムの値によってフォントの色を変更します
+						if(lap.compareTo(BigDecimal.valueOf(11.5)) <= 0){
+				%>
+							<td><span class="underRed"><% out.print(lap); %></span></td>
+				<%
+						}else if(lap.compareTo(BigDecimal.valueOf(12)) < 0){
+				%>
+							<td><span class="underOrange"><% out.print(lap); %></span></td>
+				<%
+						}else if(lap.compareTo(BigDecimal.valueOf(12.5)) > 0){
+				%>
+							<td><span class="underBlue"><% out.print(lap); %></span></td>
+				<%
+						}else{
+				%>
+							<td><span class="underYellow"><% out.print(lap); %></span></td>
+				<%
+						}
+					}
+				}
+				%>
+			</tr>
+		</table>
+	</div>
+<%
+	}
+%>
 
 	<!-- *****************************************************************************************
 *********************************							**********************************
@@ -543,7 +887,7 @@
 							%>
 						</td>
 						<td><a
-							href="/JockeysLink/DanceTableGraph?racecode=<%out.print(result.getRaceCode());%>&mode=result">
+							href="/JockeysLink/DanceTableGraph?racecode=<%out.print(result.getRaceCode());%>&mode=dance">
 								<%
 									out.print(result.getKyosomeiHondai());
 								%>
@@ -578,7 +922,13 @@
 					<tr>
 						<th>枠番</th>
 						<th>馬番</th>
+						<%
+						if(Integer.valueOf(raceData.getDataKubun()) > 2){
+						%>
 						<th class="chakujun">着順</th>
+						<%
+						}
+						%>
 						<th>印</th>
 						<th class="bamei">馬名</th>
 						<th>人気</th>
@@ -590,12 +940,22 @@
 						</th>
 					</tr>
 					<%
-						Comparator<UmagotoDataSet> comparator = new Comparator<UmagotoDataSet>() {
+					Comparator<UmagotoDataSet> comparator;
+					if(dataKubun < 3){
+						comparator = new Comparator<UmagotoDataSet>() {
 							@Override
 							public int compare(UmagotoDataSet o1, UmagotoDataSet o2) {
 								return Integer.valueOf(o1.getUmaban()).compareTo(Integer.valueOf(o2.getUmaban()));
 							}
 						};
+					}else{
+						comparator = new Comparator<UmagotoDataSet>() {
+							@Override
+							public int compare(UmagotoDataSet o1, UmagotoDataSet o2) {
+								return Integer.valueOf(o1.getKakuteiChakujun()).compareTo(Integer.valueOf(o2.getKakuteiChakujun()));
+							}
+						};
+					}
 						Collections.sort(umaNowData, comparator);
 						for (int i = 0; i < umaNowData.size(); i++) {
 							int umaban = i + 1;
@@ -606,22 +966,28 @@
 							int previousWakuban = 0;
 							int nextWakuban = 0;
 							int thirdWakuban = 0;
-							if (i > 0)
-								previousWakuban = umaNowData.get(i - 1).getWakuban();
-							try {
-								nextWakuban = umaNowData.get(i + 1).getWakuban();
+							boolean wakuHantei = true;
+							String key;
+							if(dataKubun < 3){
+								if (i > 0)
+									previousWakuban = umaNowData.get(i - 1).getWakuban();
 								try {
-									thirdWakuban = umaNowData.get(i + 2).getWakuban();
-								} catch (IndexOutOfBoundsException e2) {
-									thirdWakuban = 0;
+									nextWakuban = umaNowData.get(i + 1).getWakuban();
+									try {
+										thirdWakuban = umaNowData.get(i + 2).getWakuban();
+									} catch (IndexOutOfBoundsException e2) {
+										thirdWakuban = 0;
+									}
+								} catch (IndexOutOfBoundsException e) {
+									nextWakuban = 0;
 								}
-							} catch (IndexOutOfBoundsException e) {
-								nextWakuban = 0;
+								key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\""
+										: wakuban == nextWakuban ? " rowspan=\"2\"" : "";
+								wakuHantei = wakuban == previousWakuban;
+							}else{
+								key = "";
+								wakuHantei = false;
 							}
-							String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"6\""
-									: wakuban == nextWakuban ? " rowspan=\"4\"" : " rowspan=\"2\"";
-							boolean wakuHantei = wakuban == previousWakuban;
-
 							//着順ごとに色を指定します
 							String chakujunColor = "";
 							switch (data.getKakuteiChakujun()) {
@@ -649,17 +1015,17 @@
 						</td>
 						<%
 							} else {
-									out.print(data.getWakuban() == 0 ? "<td rowspan=\"2\">仮</td>" : "");
+									out.print(data.getWakuban() == 0 ? "仮</td>" : "");
 								}
 						%>
 						<!-- 馬番 -->
-						<td class="bottom" rowspan="2">
+						<td class="bottom">
 							<%
 								out.print(data.getUmaban() == 0 ? umaban : data.getUmaban());
 							%>
 						</td>
 						<!-- 着順 -->
-						<td class="bottom" rowspan="2" <%out.print(chakujunColor);%>>
+						<td class="bottom" <%out.print(chakujunColor);%>>
 							<%
 								switch(data.getKakuteiChakujun()){
 								case 0:
@@ -671,7 +1037,7 @@
 							%>
 						</td>
 						<!-- 馬印 -->
-						<td class="bottom" rowspan="2"><select name="shirushi" class="shirushi">
+						<td class="bottom"><select name="shirushi" class="shirushi">
 								<%
 									if (srunMapper.get(data.getKettoTorokuBango()) == true) {
 								%>
@@ -710,7 +1076,7 @@
 
 						</select></td>
 						<!-- 馬名 -->
-						<td class="bottom" rowspan="2" class="left bamei"><a
+						<td class="bottom" class="left bamei"><a
 							href="<%out.print(jrdbUmaData + data.getKettoTorokuBango().subSequence(2, 10));%>"
 							target="_blank">
 								<%
@@ -718,7 +1084,7 @@
 								%>
 						</a></td>
 						<!-- 人気 -->
-						<td class="bottom" rowspan="2">
+						<td class="bottom">
 							<%
 								out.print(data.getTanshoNinkijun());
 							%>
@@ -779,6 +1145,9 @@
 						<td class="left kyosomei">
 							<%
 								}
+							%>
+							<a href="/JockeysLink/DanceTableGraph?racecode=<% out.print(uma.getRaceCode()); %>&mode=dance">
+							<%
 											String baba = "";
 											String fontColor = "";
 											chakujunColor = "";
@@ -912,6 +1281,11 @@
  				}
  				lapAveTime.append(lapList.getKohan3fAverageLap().toString());
  				lapAveTime.append("</span>");
+
+ 				RaceDataSet raceDataKako = new RaceDataLoad(uma.getRaceCode()).getRaceDataSet();
+				HomestretchAnalysis stretch = new HomestretchAnalysis(uma, raceDataKako);
+				BigDecimal kohan3fTopSa = stretch.getKohan3fDistanceFromTheBeginning().divide(BigDecimal.valueOf(2.4), 1, BigDecimal.ROUND_HALF_UP);
+
  %>
 							<div class="lapTime">
 								<p>
@@ -947,6 +1321,42 @@
 								<p>
 									<span>
 										<%
+											out.print("道中：" + stretch.getBeginsForm() + "km/時");
+										%>
+										<br>
+										<%
+											out.print("(" + stretch.getBeginsForm_s() + "m/s)");
+										%>
+									</span>
+									<span>
+										<%
+											out.print("トップフォーム：" + stretch.getTopForm() + "km/時");
+										%>
+										<br>
+										<%
+											out.print("(" + stretch.getTopForm_s() + "m/s)");
+										%>
+									</span>
+									<p>
+									<span>
+										<%
+											out.print("勝負位置：" + kohan3fTopSa + "馬身");
+										%>
+									</span>
+									<span>
+										<%
+											out.print("詰脚：" + stretch.getTsumeAshi() + "m");
+										%>
+									</span>
+									<span>
+										<%
+											out.print("ジリ脚：" + stretch.getEscapeCompare());
+										%>
+									</span>
+								</p>
+								<p>
+									<span>
+										<%
 											out.print("最も速いのは" + lapList.getHiSpeedPoint() * 200 + "m地点");
 										%>
 									</span> <span>
@@ -961,9 +1371,16 @@
 									%>
 								</p>
 								<p>
+									<span>
+									<%
+									out.print(lapList.getRaceType());
+									%>
+									</span>
+									<span>
 									<%
 									out.print(lapAveTime.toString());
 									%>
+									</span>
 								</p>
 							</div>
 							<div class="sideBy subTitle">
@@ -988,7 +1405,13 @@
 										out.print(baba == "turf" ? uma.getShibaBabaJotai() : uma.getDirtBabaJotai());
 									%>
 								</div>
+								<p>
 							</div>
+								<span class="smallFont rpci">
+									<%
+										out.print("RPCI" + uma.getRPCI());
+									%>
+								</span>
 							<div class="title">
 								<div>
 									<span class="grade<%out.print(fontColor);%>">
@@ -1002,6 +1425,7 @@
 									%>
 								</div>
 							</div>
+						</a>
 						</td>
 						<!-- **** < 着順 > **** -->
 						<td class="chakujun<%out.print(chakujunColor);%>">
@@ -1010,17 +1434,55 @@
 							%>
 						</td>
 						<!-- **** < SRun > **** -->
-						<td>
-							<%
-								if (uma.getIjoKubun().length() == 0) {
-												try {
-													out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5))
-															.setScale(2, BigDecimal.ROUND_HALF_UP));
-												} catch (NullPointerException e) {
-													out.print("****");
+						<td class="smallFont srunCell">
+							<div>
+								<span>
+									SRun
+								</span>
+								<p>
+								<span>
+								<%
+									if (uma.getIjoKubun().length() == 0) {
+													try {
+														out.print(uma.getSrun().add(BigDecimal.valueOf(12)).multiply(BigDecimal.valueOf(4.5))
+																.setScale(2, BigDecimal.ROUND_HALF_UP));
+													} catch (NullPointerException e) {
+														out.print("****");
+													}
 												}
-											}
-							%>
+								%>
+								</span>
+							</div>
+							<p>
+							<div>
+								<span>
+									ジリ脚
+									<p>
+									<%
+										out.print(stretch.getEscapeCompare());
+									%>
+								</span>
+							</div>
+							<p>
+							<div>
+								<span>
+									詰脚
+									<p>
+									<%
+										out.print(stretch.getTsumeAshi());
+									%>
+								</span>
+							</div>
+							<p>
+							<div>
+								<span>
+									PCI
+									<p>
+									<%
+										out.print(uma.getPCI());
+									%>
+								</span>
+							</div>
 						</td>
 						<%
 							} catch (NullPointerException e) {
@@ -1057,13 +1519,6 @@
 							}
 						%>
 					</tr>
-					<tr class="bottom">
-						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
-						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
-						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
-						<td colspan="3"><textarea name="memo" rows="2" style="width:90%"></textarea></td>
-						<td></td>
-					</tr>
 					<%
 						}
 					%>
@@ -1090,10 +1545,23 @@
 						<th class="desctop">ｵｯｽﾞ</th>
 						<th class="desctop">馬体重</th>
 						<th class="desctop">調教師</th>
-						<th class="desctop">毛色</th>
+						<%
+						if(dataKubun > 2){
+						%>
+							<th class="desctop">道中スピード</th>
+							<th class="desctop">トップフォーム</th>
+							<th class="desctop">後半3F地点位置</th>
+							<th class="desctop">着差</th>
+							<th class="desctop">詰脚</th>
+						<%
+						}
+						%>
 					</tr>
 					<%
 						for (int i = 0; i < umaNowData.size(); i++) {
+							if(umaNowData.get(i).getTanshoNinkijun() <= 0 | !umaNowData.get(i).getIjoKubun().equals("")){
+								continue;
+							}
 							int umaban = i + 1;
 							UmagotoDataSet data = umaNowData.get(i);
 							String kettoTorokuBango = data.getKettoTorokuBango();
@@ -1102,21 +1570,28 @@
 							int previousWakuban = 0;
 							int nextWakuban = 0;
 							int thirdWakuban = 0;
-							if (i > 0)
-								previousWakuban = umaNowData.get(i - 1).getWakuban();
-							try {
-								nextWakuban = umaNowData.get(i + 1).getWakuban();
+							boolean wakuHantei = true;
+							String key;
+							if(dataKubun < 3){
+								if (i > 0)
+									previousWakuban = umaNowData.get(i - 1).getWakuban();
 								try {
-									thirdWakuban = umaNowData.get(i + 2).getWakuban();
-								} catch (IndexOutOfBoundsException e2) {
-									thirdWakuban = 0;
+									nextWakuban = umaNowData.get(i + 1).getWakuban();
+									try {
+										thirdWakuban = umaNowData.get(i + 2).getWakuban();
+									} catch (IndexOutOfBoundsException e2) {
+										thirdWakuban = 0;
+									}
+								} catch (IndexOutOfBoundsException e) {
+									nextWakuban = 0;
 								}
-							} catch (IndexOutOfBoundsException e) {
-								nextWakuban = 0;
+								key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\""
+										: wakuban == nextWakuban ? " rowspan=\"2\"" : "";
+								wakuHantei = wakuban == previousWakuban;
+							}else{
+								key = "";
+								wakuHantei = false;
 							}
-							String key = (wakuban * wakuban) == (nextWakuban * thirdWakuban) ? " rowspan=\"3\""
-									: wakuban == nextWakuban ? " rowspan=\"2\"" : "";
-							boolean wakuHantei = wakuban == previousWakuban;
 					%>
 					<tr>
 						<%
@@ -1161,6 +1636,7 @@
 						<td class="desctop">
 							<%
 								out.print(analysis.getPredictionKyakushitsu(kettoTorokuBango));
+
 							%>
 
 						<td class="desctop">
@@ -1171,7 +1647,11 @@
 
 						<td>
 							<%
+							try{
 								out.print(data.getKishumei().replace("　", ""));
+							}catch(NullPointerException e){
+								e.getStackTrace();
+							}
 							%>
 						</td>
 						<td class="desctop">
@@ -1199,19 +1679,58 @@
 								out.print("（" + data.getTozaiShozoku().substring(0, 1) + "）" + data.getChokyoshi().replace("　", ""));
 							%>
 						</td>
+						<%
+						if(dataKubun > 2){
+						HomestretchAnalysis stretch = new HomestretchAnalysis(data, raceData);
+						BigDecimal kohan3fTopSa = stretch.getKohan3fDistanceFromTheBeginning().divide(BigDecimal.valueOf(2.4), 1, BigDecimal.ROUND_HALF_UP);
+
+						%>
 						<td class="desctop">
 							<%
-								out.print(data.getMoshoku());
+								out.print(stretch.getBeginsForm() + "km/時");
+							%>
+							<br>
+							<%
+								out.print("(" + stretch.getBeginsForm_s() + "m/s)");
 							%>
 						</td>
+						<td class="desctop">
+							<%
+								out.print(stretch.getTopForm() + "km/時");
+							%>
+							<br>
+							<%
+								out.print("(" + stretch.getTopForm_s() + "m/s)");
+							%>
+						</td>
+						<td class="desctop">
+							<%
+								out.print(kohan3fTopSa + "馬身");
+							%>
+							<br>
+							<%
+								out.print("(" + stretch.getKohan3fDistanceFromTheBeginning() + "m)");
+							%>
+						</td>
+						<td class="desctop">
+							<%
+								out.print(stretch.getChakusa_m() + "m");
+							%>
+						</td>
+						<td class="desctop">
+							<%
+								out.print(stretch.getTsumeAshi() + "m");
+							%>
+						</td>
+						<% %>
 					</tr>
 					<%
+						}
 						}
 					%>
 				</table>
 				</div>
 			</div>
-
 		</div>
 </body>
 </html>

@@ -17,6 +17,15 @@ body {
 }
 
 /*******************************************
+*************共通文字設定*******************
+********************************************/
+
+.smallFont {
+	font-size: 10px;
+	line-height: 5px;
+}
+
+/*******************************************
 *************共通文字色*******************
 ********************************************/
 
@@ -31,6 +40,61 @@ body {
 }
 .chaDarkRed{
 	color: rgb(210, 22, 22);
+}
+
+
+/*******************************************
+*************共通文字背景色*******************
+********************************************/
+span.backRed {
+	background-color: rgba(235, 63, 18, 0.7);
+	color: #ffffff;
+}
+
+span.backBlue {
+	background-color: rgba(20, 9, 227, 0.7);
+	color: #ffffff;
+}
+
+span.backGreen {
+	background-color: rgba(37, 204, 34, 0.7);
+	color: #ffffff;
+}
+
+span.backYellow {
+	background-color: rgba(237, 242, 0, 0.7);
+}
+
+span.backOrenge {
+	background-color: rgba(241, 132, 18, 0.7);
+	color: #ffffff;
+}
+
+/*******************************************
+*************文字下線色*******************
+********************************************/
+span.underRed {
+	background: linear-gradient(transparent 80%, rgba(228, 3, 3, 0.8) 80%);
+}
+
+span.underBlue {
+	background: linear-gradient(transparent 80%, Blue 80%);
+}
+
+span.underGreen {
+	background: linear-gradient(transparent 80%, Green 80%);
+}
+
+span.underYellow {
+	background: linear-gradient(transparent 80%, Yellow 80%);
+}
+
+span.underOrange {
+	background: linear-gradient(transparent 80%, Orange 80%);
+}
+
+span.underGray {
+	background: linear-gradient(transparent 70%, Gray 70%);
 }
 
 /*******************************************
@@ -174,6 +238,10 @@ body {
 	text-decoration: none;
 }
 
+.courseData.desctop {
+    min-width: 330px;
+}
+
 /********************************************************
 ******************																******************
 ******************		チャートスタイル			******************
@@ -210,7 +278,7 @@ body {
 		  margin: 0.5em 15px 0 auto;
 }
 #dance div#timeChart {
-    width: 80%;
+    width: 1240px;
     margin: 8.5em auto 2.5em auto;
 }
 
@@ -300,11 +368,17 @@ th,td {
 
 .tableTitle {
     margin: auto;
-    width: 90%;
+    width: 1240px;
 			font-size: 0.9em;
+}
+.datails {
+	width: 90%;
+	margin: 0 auto;
 }
 table {
 	width: 100%;
+}
+table.danceIndex {
 	margin-bottom: 200px;
 }
 
@@ -356,6 +430,7 @@ table .center {
 
 #dance table .subTitle {
     font-size: 10.5px;
+		line-height: 5px;
 }
 
 td.bamei {
@@ -379,6 +454,10 @@ td.bamei {
 	margin-top: 0.3em;
 }
 
+#kako4sou td {
+	height: 100px;
+}
+
 #kako4sou .title {
 	padding-left: 1em;
 }
@@ -387,12 +466,77 @@ td.bamei {
 		margin: 0 1px;
 }
 
+span.smallFont.rpci {
+    padding-left: 15px;
+}
+
+td.chakujun {
+    width: 20px;
+}
+
+td.smallFont {
+    padding: 5px 0;
+}
+
+td.srunCell {
+	width: 40px;
+}
+
 		/****テーブルの幅を調整する****/
 				th.chakujun {
 					width: 3em;
 				}
 
 /****枠番で色を設定する****/
+
+
+span.waku {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+span.waku1 {
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px inset #000000;
+}
+
+span.waku2 {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+span.waku3 {
+	background-color: rgba(255, 59, 28, 0.8);
+}
+
+span.waku4 {
+	background-color: rgba(25, 36, 255, 0.8);
+	color: #ffffff;
+}
+
+span.waku5 {
+	background-color: rgba(217, 255, 32, 0.8);
+}
+
+span.waku6 {
+	background-color: rgba(26, 200, 54, 0.8);
+}
+
+span.waku7 {
+	background-color: rgba(237, 148, 30, 0.8);
+	color: #ffffff;
+}
+
+span.waku8 {
+	background-color: rgba(237, 32, 149, 0.8);
+	color: #ffffff;
+}
+
+/*****************************************/
 
 .waku1 {
 	box-shadow: 0 0 0 0;
@@ -430,6 +574,46 @@ td.bamei {
 .waku8 {
 	background-color: #ed52a4;
 }
+
+/************************************************/
+/********Racing Result Detailsのスタイル**********/
+/************************************************/
+
+span.ninki {
+	display: inline-block;
+	padding: 4px;
+	width: 15px;
+	height: 18px;
+	border-radius: 2px;
+}
+
+span.drun {
+	display: inline-block;
+	padding: 4px;
+	width: 50px;
+	height: 18px;
+	border-radius: 2px;
+}
+
+span.kohan3f {
+	display: inline-block;
+	padding: 4px;
+	width: 40px;
+	height: 18px;
+	border-radius: 2px;
+}
+
+.datails th.cell {
+    width: 5em;
+}
+
+table.datails {
+	table-layout: fixed;
+}
+
+/********************************/
+/********************************/
+
 
 /****index部のstyle設定***/
 
